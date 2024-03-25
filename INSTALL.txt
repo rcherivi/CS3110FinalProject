@@ -1,3 +1,4 @@
+1. Download and extract the zip file into the directory of your choosing..
 2. In terminal, run dune build.
 3. To play the game run dune exec ./bin/main.exe
   To feed the garden press "1" and view the garden press "2" The user only has 6 times to select an option from the menu. 
