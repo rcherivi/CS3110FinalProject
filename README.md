@@ -5,3 +5,4 @@ Joanna Andrews (jda242)
 Jessica Andrews (jaa375)
 
 dune exec ./bin/main.exe
+git config pull.rebase false
