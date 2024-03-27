@@ -1,6 +1,7 @@
 1. Download and extract the zip file into the directory of your choosing.
-2. Navigate to the CS3110FinalProject directory 
-3. In terminal, run dune build.
-4. To play the game run dune exec ./bin/main.exe
+2. In the terminal, install opam packages by using the commands: opam update and opam upgrade
+3. Navigate to the CS3110FinalProject directory 
+4. In terminal, run dune build.
+5. To play the game run dune exec ./bin/main.exe
   To feed the garden press "1" and to view the garden press "2" The user only has 6 times to select an option from the menu. 
-5. Enjoy our garden game!
+6. Enjoy our garden game!
