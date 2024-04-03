@@ -1,4 +1,4 @@
 (executable
  (public_name CS3110FinalProject)
  (name main)
- (libraries CS3110FinalProject))
+ (libraries CS3110FinalProject unix))

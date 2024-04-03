@@ -31,12 +31,21 @@ let harvest plant_type inv garden =
 
 (*control how much you sell*)
 (*sell more than what you have *)
-let sell plant_type inv garden =
+let sell plant_type quantity inv garden =
   match inv with
   | Inv lst ->
       if List.mem_assoc plant_type lst then
-        ( Inv ((plant_type, 0) :: List.remove_assoc plant_type lst),
-          Garden.inc_money plant_type garden )
+        let current_quantity = lookup plant_type inv in
+        if current_quantity >= quantity then
+          let new_quantity = current_quantity - quantity in
+          let updated_inventory =
+            Inv ((plant_type, new_quantity) :: List.remove_assoc plant_type lst)
+          in
+          let updated_garden = Garden.inc_money plant_type garden in
+          (updated_inventory, updated_garden)
+        else
+          let () = print_endline "Not enough items in inventory" in
+          (inv, garden)
       else
         let () = print_endline "This plant is not in inventory" in
         (inv, garden)
