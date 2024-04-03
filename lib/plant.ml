@@ -10,6 +10,20 @@ type t =
   | Strawberry of plant_type
   | Cactus of plant_type
 
+let get_type plant =
+  match plant with
+  | Flower { height = _; life = _; hydration = _ } -> "Flower"
+  | Peach { height = _; life = _; hydration = _ } -> "Peach"
+  | Strawberry { height = _; life = _; hydration = _ } -> "Strawberry"
+  | Cactus { height = _; life = _; hydration = _ } -> "Cactus"
+
+let get_height plant =
+  match plant with
+  | Flower { height = h; life = _; hydration = _ } -> h
+  | Peach { height = h; life = _; hydration = _ } -> h
+  | Strawberry { height = h; life = _; hydration = _ } -> h
+  | Cactus { height = h; life = _; hydration = _ } -> h
+
 let feed plant =
   match plant with
   | Flower { height = x; life = true; hydration = hydro } ->
