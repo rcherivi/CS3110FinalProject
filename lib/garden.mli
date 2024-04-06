@@ -1,6 +1,6 @@
 type t
 
-val create_garden : t
+val create_garden : unit -> t
 val add_plant : string -> string -> t -> t
 val feed_plants : t -> t
 val print : t -> unit

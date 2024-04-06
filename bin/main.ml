@@ -4,7 +4,7 @@
 (**)
 open CS3110FinalProject
 
-let my_garden = Garden.create_garden
+let my_garden = Garden.create_garden ()
 let my_inventory = Inventory.create_inventory
 (* let my_garden = A800.Garden.add_plant "Flower" my_garden let my_garden =
    A800.Garden.add_plant "Peach" my_garden
