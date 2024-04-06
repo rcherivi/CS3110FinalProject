@@ -11,43 +11,75 @@ let my_inventory = Inventory.create_inventory
 
    let my_garden = A800.Garden.add_plant "Peach" my_garden *)
 
+let menu_options =
+  "\n\
+   1. Feed Garden\n\
+   2. Add Plant\n\
+   3. Harvest\n\
+   4. Observe Garden\n\
+   5. View Inventory"
+
+let feed_garden_helper func n inv garden =
+  let new_garden = Garden.feed_plants garden in
+  Garden.print new_garden;
+  func (n + 1) inv new_garden
+
+let add_plant_helper func n inv garden =
+  let () =
+    print_endline "Type of plant? Flower / Peach / Strawberry / Cactus"
+  in
+  let plant_name = read_line () in
+  let new_garden = Garden.add_plant plant_name garden in
+  Garden.print new_garden;
+  func (n + 1) inv new_garden
+
+let harvest_helper func n inv garden =
+  let () =
+    print_endline
+      "Type of plant to harvest? Flower / Peach / Strawberry / Cactus"
+  in
+  let plant_name = read_line () in
+  let new_inv, new_garden = Inventory.harvest plant_name inv garden in
+  Garden.print new_garden;
+  func (n + 1) new_inv new_garden
+
+let observe_menu_options = "\n1. View Flowers\n2. View Fruits\n3. View Garden"
+
+let observe_garden_helper func n inv garden =
+  let print_menu = print_endline observe_menu_options in
+  print_menu;
+  let choice = read_line () in
+  print_string "";
+  if choice = "1" then (
+    let new_garden = Garden.get_flowers garden in
+    Garden.print new_garden;
+    func (n + 1) inv garden)
+  else if choice = "2" then (
+    let new_garden = Garden.get_fruits garden in
+    Garden.print new_garden;
+    func (n + 1) inv garden)
+  else if choice = "3" then (
+    let new_garden = garden in
+    Garden.print new_garden;
+    func (n + 1) inv garden)
+
+(* let view_inventory_helper func n inv garden = let inventory = Inventory.print
+   in print_endline inventory *)
+
 let rec func n inv garden =
   match n with
-  | 6 -> print_endline "\nEnd of Garden Game"
+  | 15 -> print_endline "\nEnd of Garden Game"
   | _ ->
       (* if Garden.broke garden then func 6 inv garden else *)
-      let print_menu =
-        print_endline
-          "\n1. Feed Garden\n2. Add Plant\n3. Harvest\n4. Observe Garden"
-      in
+      let print_menu = print_endline menu_options in
       print_menu;
       let choice = read_line () in
       print_string "";
-      if choice = "1" then (
-        let new_garden = Garden.feed_plants garden in
-        Garden.print new_garden;
-        func (n + 1) inv new_garden)
-      else if choice = "2" then (
-        let () =
-          print_endline "Type of plant? Flower / Peach / Strawberry / Cactus"
-        in
-        let plant_name = read_line () in
-        let new_garden = Garden.add_plant plant_name garden in
-        Garden.print new_garden;
-        func (n + 1) inv new_garden)
-      else if choice = "3" then (
-        let () =
-          print_endline
-            "Type of plant to harvest? Flower / Peach / Strawberry / Cactus"
-        in
-        let plant_name = read_line () in
-        let new_inv, new_garden = Inventory.harvest plant_name inv garden in
-        Garden.print new_garden;
-        func (n + 1) new_inv new_garden)
-      else
-        let new_garden = garden in
-        Garden.print new_garden;
-        func (n + 1) inv new_garden
+      if choice = "1" then feed_garden_helper func n inv garden
+      else if choice = "2" then add_plant_helper func n inv garden
+      else if choice = "3" then harvest_helper func n inv garden
+      else if choice = "4" then observe_garden_helper func n inv garden
+
 (* let new_garden = garden in A800.Garden.list_view garden; func (n + 1)
    new_garden *)
 

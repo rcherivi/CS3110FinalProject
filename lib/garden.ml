@@ -53,6 +53,35 @@ let remove_plant plant_type garden =
           money = m;
         }
 
+let get_flowers garden =
+  match garden with
+  | Garden { plants = lst; money = m } ->
+      let new_garden =
+        Garden
+          {
+            plants = List.filter (fun x -> Plant.get_type x = "Flower") lst;
+            money = m;
+          }
+      in
+      new_garden
+
+let get_fruits garden =
+  match garden with
+  | Garden { plants = lst; money = m } ->
+      let new_garden =
+        Garden
+          {
+            plants =
+              List.filter
+                (fun x ->
+                  let plant_type = Plant.get_type x in
+                  plant_type = "Peach" || plant_type = "Strawberry")
+                lst;
+            money = m;
+          }
+      in
+      new_garden
+
 let printable garden =
   match garden with
   | Garden { plants = lst; money = _ } ->
