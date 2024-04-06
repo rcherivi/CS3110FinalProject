@@ -16,10 +16,10 @@ let inc_money plant_type garden =
       | "Cactus" -> Garden { plants = p; money = m +. 3.00 }
       | _ -> Garden { plants = p; money = m +. 0.00 })
 
-let add_plant plant_name garden =
+let add_plant plant_name name garden =
   match garden with
   | Garden { plants = lst; money = m } ->
-      Garden { plants = Plant.create_plant plant_name :: lst; money = m }
+      Garden { plants = Plant.create_plant plant_name name :: lst; money = m }
 
 let feed_plants garden =
   match garden with

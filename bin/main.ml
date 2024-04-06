@@ -29,7 +29,9 @@ let add_plant_helper func n inv garden =
     print_endline "Type of plant? Flower / Peach / Strawberry / Cactus"
   in
   let plant_name = read_line () in
-  let new_garden = Garden.add_plant plant_name garden in
+  let () = print_endline "Name your type of plant: " in
+  let name = read_line () in
+  let new_garden = Garden.add_plant plant_name name garden in
   Garden.print new_garden;
   func (n + 1) inv new_garden
 
