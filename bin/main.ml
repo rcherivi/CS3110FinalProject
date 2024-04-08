@@ -26,7 +26,10 @@ let feed_garden_helper func n inv garden =
 
 let add_plant_helper func n inv garden =
   let () =
-    print_endline "Type of plant? Flower / Peach / Strawberry / Cactus"
+    print_endline
+      "Type of plant? Daisy / Sunflower / Rose / Tulip\n\
+       Tomato / Corn / Carrot / Onion / Potato / Wheat\n\
+       Apple / Peach / Strawberry / Orange / Cactus"
   in
   let plant_name = read_line () in
   let () = print_endline "Name your type of plant: " in
@@ -38,12 +41,18 @@ let add_plant_helper func n inv garden =
 let harvest_helper func n inv garden =
   let () =
     print_endline
-      "Type of plant to harvest? Flower / Peach / Strawberry / Cactus"
+      "Type of plant to harvest? Daisy / Sunflower / Rose / Tulip\n\
+       Tomato / Corn / Carrot / Onion / Potato / Wheat\n\
+       Apple / Peach / Strawberry / Orange / Cactus"
   in
   let plant_name = read_line () in
   let new_inv, new_garden = Inventory.harvest plant_name inv garden in
   Garden.print new_garden;
   func (n + 1) new_inv new_garden
+
+let view_inv_helper func n inv garden =
+  let () = Inventory.print inv in
+  func (n + 1) inv garden
 
 let observe_menu_options = "\n1. View Flowers\n2. View Fruits\n3. View Garden"
 
@@ -70,7 +79,7 @@ let observe_garden_helper func n inv garden =
 
 let rec func n inv garden =
   match n with
-  | 15 -> print_endline "\nEnd of Garden Game"
+  | 20 -> print_endline "\nEnd of Garden Game"
   | _ ->
       (* if Garden.broke garden then func 6 inv garden else *)
       let print_menu = print_endline menu_options in
@@ -81,6 +90,7 @@ let rec func n inv garden =
       else if choice = "2" then add_plant_helper func n inv garden
       else if choice = "3" then harvest_helper func n inv garden
       else if choice = "4" then observe_garden_helper func n inv garden
+      else if choice = "5" then view_inv_helper func n inv garden
 
 (* let new_garden = garden in A800.Garden.list_view garden; func (n + 1)
    new_garden *)

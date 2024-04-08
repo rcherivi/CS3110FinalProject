@@ -78,7 +78,7 @@ let remove_plant plant_type garden =
                match x with
                | Plant plant
                  when Plant.get_type plant = plant_type
-                      && Plant.get_height plant < 5 -> Empty
+                      && Plant.get_height plant > 5 -> Empty
                | _ -> x))
           cells
       in
@@ -91,7 +91,13 @@ let get_flowers garden =
         Array.map
           (Array.map (fun cell ->
                match cell with
-               | Plant plant when Plant.get_type plant = "Flower" -> cell
+               | Plant plant ->
+                   let plant_type = Plant.get_type plant in
+                   if
+                     plant_type = "Daisy" || plant_type = "Sunflower"
+                     || plant_type = "Rose" || plant_type = "Tulip"
+                   then cell
+                   else Empty
                | _ -> Empty))
           cells
       in
