@@ -112,8 +112,10 @@ let get_fruits garden =
                match cell with
                | Plant plant ->
                    let plant_type = Plant.get_type plant in
-                   if plant_type = "Peach" || plant_type = "Strawberry" then
-                     cell
+                   if
+                     plant_type = "Peach" || plant_type = "Strawberry"
+                     || plant_type = "Apple"
+                   then cell
                    else Empty
                | _ -> Empty))
           cells
