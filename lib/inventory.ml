@@ -57,4 +57,11 @@ let print inv =
   match inv with
   | Inv lst ->
       List.iter (fun (x, y) -> print_endline (x ^ ": " ^ string_of_int y)) lst
+
 (* let sell inv = *)
+let add item inv =
+  match inv with
+  | Inv lst ->
+      if List.mem_assoc item lst then
+        Inv ((item, lookup item (Inv lst) + 1) :: List.remove_assoc item lst)
+      else insert item 1 inv

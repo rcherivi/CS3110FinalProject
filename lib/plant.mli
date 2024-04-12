@@ -8,3 +8,5 @@ val check_life : t -> t
 val get_type : t -> string
 val get_height : t -> int
 val neglect : t -> t
+val get_price : t -> float
+val apply_discount : t -> t

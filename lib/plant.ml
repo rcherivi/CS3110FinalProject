@@ -23,6 +23,103 @@ type t =
   | Orange of plant_type
   | Cactus of plant_type
 
+let get_price plant =
+  match plant with
+  | Daisy { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Sunflower { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Rose { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Tulip { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Tomato { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Corn { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Carrot { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Onion { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Potato { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Wheat { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Apple { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Peach { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Strawberry { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Orange { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | Cactus { height = _; life = _; hydration = _; name = _; price = p } -> p
+
+let apply_discount plant =
+  let rand_val = Random.float 1.0 in
+  match plant with
+  | Daisy { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Daisy
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Daisy { height = h; life = a; hydration = w; name = n; price = p }
+  | Peach { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Peach
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Peach { height = h; life = a; hydration = w; name = n; price = p }
+  | Sunflower { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Sunflower
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else
+        Sunflower { height = h; life = a; hydration = w; name = n; price = p }
+  | Rose { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Rose { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Rose { height = h; life = a; hydration = w; name = n; price = p }
+  | Tulip { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Tulip
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Tulip { height = h; life = a; hydration = w; name = n; price = p }
+  | Tomato { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Tomato
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Tomato { height = h; life = a; hydration = w; name = n; price = p }
+  | Corn { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Corn { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Corn { height = h; life = a; hydration = w; name = n; price = p }
+  | Carrot { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Carrot
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Carrot { height = h; life = a; hydration = w; name = n; price = p }
+  | Onion { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Onion
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Onion { height = h; life = a; hydration = w; name = n; price = p }
+  | Potato { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Potato
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Potato { height = h; life = a; hydration = w; name = n; price = p }
+  | Wheat { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Wheat
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Wheat { height = h; life = a; hydration = w; name = n; price = p }
+  | Apple { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Apple
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Apple { height = h; life = a; hydration = w; name = n; price = p }
+  | Strawberry { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Strawberry
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else
+        Strawberry { height = h; life = a; hydration = w; name = n; price = p }
+  | Orange { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Orange
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Orange { height = h; life = a; hydration = w; name = n; price = p }
+  | Cactus { height = h; life = a; hydration = w; name = n; price = p } ->
+      if rand_val < 0.5 then
+        Cactus
+          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
+      else Cactus { height = h; life = a; hydration = h; name = n; price = p }
+
 let get_type plant =
   match plant with
   | Daisy { height = _; life = _; hydration = _; name = _; price = _ } ->

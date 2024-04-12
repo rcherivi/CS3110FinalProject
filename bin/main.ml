@@ -14,29 +14,36 @@ let my_inventory = Inventory.create_inventory
 let menu_options =
   "\n\
    1. Feed Garden\n\
-   2. Add Plant\n\
+   2. Buy Plant/Item\n\
    3. Harvest\n\
    4. Observe Garden\n\
-   5. View Inventory"
+   5. View Inventory\n\
+   6. Sell "
 
 let feed_garden_helper func n inv garden =
   let new_garden = Garden.feed_plants garden in
   Garden.print new_garden;
   func (n + 1) inv new_garden
 
-let add_plant_helper func n inv garden =
+let buy_plant_helper func n inv garden =
+  let new_store = Store.create_store in
+  let () = print_endline (Store.print_store new_store) in
+  let () = print_endline "Name of Item to buy?" in
   let () =
     print_endline
-      "Type of plant? Daisy / Sunflower / Rose / Tulip\n\
-       Tomato / Corn / Carrot / Onion / Potato / Wheat\n\
-       Apple / Peach / Strawberry / Orange / Cactus"
+      "Plants will be added to garden, and other items will be added to the \
+       inventory"
   in
-  let plant_name = read_line () in
-  let () = print_endline "Name your type of plant: " in
-  let name = read_line () in
-  let new_garden = Garden.add_plant plant_name name garden in
+  let item = read_line () in
+  let new_inv, new_garden = Store.buy_item item new_store inv garden in
   Garden.print new_garden;
-  func (n + 1) inv new_garden
+  func (n + 1) new_inv new_garden
+(* let () = print_endline "Type of plant? Daisy / Sunflower / Rose / Tulip\n\
+   Tomato / Corn / Carrot / Onion / Potato / Wheat\n\ Apple / Peach / Strawberry
+   / Orange / Cactus" in let plant_name = read_line () in let () = print_endline
+   "Name your type of plant: " in let name = read_line () in let new_garden =
+   Garden.add_plant plant_name name garden in Garden.print new_garden; func (n +
+   1) inv new_garden *)
 
 let harvest_helper func n inv garden =
   let () =
@@ -47,6 +54,20 @@ let harvest_helper func n inv garden =
   in
   let plant_name = read_line () in
   let new_inv, new_garden = Inventory.harvest plant_name inv garden in
+  Garden.print new_garden;
+  func (n + 1) new_inv new_garden
+
+let sell_helper func n inv garden =
+  let () =
+    print_endline
+      "Type of item to sell? Daisy / Sunflower / Rose / Tulip\n\
+       Tomato / Corn / Carrot / Onion / Potato / Wheat\n\
+       Apple / Peach / Strawberry / Orange / Cactus / Eggs / Milk / Cheese"
+  in
+  let plant_name = read_line () in
+  let () = print_endline "Quantity to sell?" in
+  let qty = int_of_string (read_line ()) in
+  let new_inv, new_garden = Inventory.sell plant_name qty inv garden in
   Garden.print new_garden;
   func (n + 1) new_inv new_garden
 
@@ -87,10 +108,11 @@ let rec func n inv garden =
       let choice = read_line () in
       print_string "";
       if choice = "1" then feed_garden_helper func n inv garden
-      else if choice = "2" then add_plant_helper func n inv garden
+      else if choice = "2" then buy_plant_helper func n inv garden
       else if choice = "3" then harvest_helper func n inv garden
       else if choice = "4" then observe_garden_helper func n inv garden
       else if choice = "5" then view_inv_helper func n inv garden
+      else if choice = "6" then sell_helper func n inv garden
 
 (* let new_garden = garden in A800.Garden.list_view garden; func (n + 1)
    new_garden *)

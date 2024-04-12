@@ -17,7 +17,15 @@ let inc_money plant_type garden =
       | "Peach" -> { cells; money = m +. 7.00 }
       | "Strawberry" -> { cells; money = m +. 5.00 }
       | "Cactus" -> { cells; money = m +. 3.00 }
-      | _ -> { cells; money = m +. 0.00 })
+      | _ -> { cells; money = m +. 7.00 })
+
+let inc_money_amt amt garden =
+  match garden with
+  | { cells; money = m } -> { cells; money = m +. amt }
+
+let show_money garden =
+  match garden with
+  | { cells = _; money = m } -> print_endline ("$ " ^ string_of_float m)
 
 (*adapted from ChatGPT*)
 let add_plant plant_name name garden =
@@ -49,7 +57,7 @@ let feed_plants garden =
                | Empty -> Empty))
           cells
       in
-      { cells = new_cells; money = m -. 10.0 }
+      { cells = new_cells; money = m -. 0.1 }
 
 (*adapted from ChatGPT*)
 let count_plant plant_type garden =
@@ -123,6 +131,7 @@ let get_fruits garden =
       { cells = new_cells; money = m }
 
 let print garden =
+  show_money garden;
   for i = 0 to 4 do
     print_string "| ";
     for j = 0 to 9 do
