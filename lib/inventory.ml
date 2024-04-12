@@ -9,6 +9,12 @@ let rec lookup key assoc_list =
   | Inv [] -> failwith "Not found"
   | Inv ((k, v) :: lst) -> if key = k then v else lookup key (Inv lst)
 
+let rec lookup_option key assoc_list =
+  match assoc_list with
+  | Inv [] -> None
+  | Inv ((k, v) :: lst) ->
+      if key = k then Some v else lookup_option key (Inv lst)
+
 let create_inventory = Inv []
 
 let harvest plant_type inv garden =
