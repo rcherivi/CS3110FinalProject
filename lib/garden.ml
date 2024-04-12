@@ -130,6 +130,87 @@ let get_fruits garden =
       in
       { cells = new_cells; money = m }
 
+let get_vegetables garden =
+  match garden with
+  | { cells; money = m } ->
+      let new_cells =
+        Array.map
+          (Array.map (fun cell ->
+               match cell with
+               | Plant plant ->
+                   let plant_type = Plant.get_type plant in
+                   if
+                     plant_type = "Corn" || plant_type = "Carrot"
+                     || plant_type = "Onion" || plant_type = "Potato"
+                     || plant_type = "Eggplant" || plant_type = "Cucumber"
+                     || plant_type = "Mushroom" || plant_type = "Beans"
+                     || plant_type = "Sweet Potato"
+                     || plant_type = "Peas" || plant_type = "Peanuts"
+                     || plant_type = "Broccoli" || plant_type = "Garlic"
+                     || plant_type = "Pepper" || plant_type = "Bell Pepper"
+                     || plant_type = "Ginger"
+                   then cell
+                   else Empty
+               | _ -> Empty))
+          cells
+      in
+      { cells = new_cells; money = m }
+
+let get_grains garden =
+  match garden with
+  | { cells; money = m } ->
+      let new_cells =
+        Array.map
+          (Array.map (fun cell ->
+               match cell with
+               | Plant plant ->
+                   let plant_type = Plant.get_type plant in
+                   if plant_type = "Wheat" then cell else Empty
+               | _ -> Empty))
+          cells
+      in
+      { cells = new_cells; money = m }
+
+let get_trees garden =
+  match garden with
+  | { cells; money = m } ->
+      let new_cells =
+        Array.map
+          (Array.map (fun cell ->
+               match cell with
+               | Plant plant ->
+                   let plant_type = Plant.get_type plant in
+                   if
+                     plant_type = "Evergreen Tree"
+                     || plant_type = "Palm Tree"
+                     || plant_type = "Deciduous Tree"
+                   then cell
+                   else Empty
+               | _ -> Empty))
+          cells
+      in
+      { cells = new_cells; money = m }
+
+let get_other_plants garden =
+  match garden with
+  | { cells; money = m } ->
+      let new_cells =
+        Array.map
+          (Array.map (fun cell ->
+               match cell with
+               | Plant plant ->
+                   let plant_type = Plant.get_type plant in
+                   if
+                     plant_type = "Cactus" || plant_type = "Herb"
+                     || plant_type = "Clover" || plant_type = "Shamrock"
+                     || plant_type = "Chestnut"
+                   then cell
+                   else Empty
+               | _ -> Empty))
+          cells
+      in
+      { cells = new_cells; money = m }
+
 let print garden =
   show_money garden;
   for i = 0 to 4 do
