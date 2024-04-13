@@ -21,17 +21,26 @@ type t = {
   cheese_price : float;
   eggs_price : float;
   milk_price : float;
+  water_price : float;
 }
 
 type prices = {
   cheese_price : float;
   eggs_price : float;
   milk_price : float;
+  water_price : float;
 }
 
 let create_store =
   let rand_val = Random.float 1.0 in
-  let usual = { cheese_price = 5.0; eggs_price = 3.0; milk_price = 5.0 } in
+  let usual =
+    {
+      cheese_price = 5.0;
+      eggs_price = 3.0;
+      milk_price = 5.0;
+      water_price = 1.0;
+    }
+  in
   {
     daisy_price =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Daisy" ""));
@@ -47,9 +56,9 @@ let create_store =
     tomato_price =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Tomato" ""));
     lemon_price =
-      Plant.get_price (Plant.apply_discount (Plant.create_plant "Orange" ""));
+      Plant.get_price (Plant.apply_discount (Plant.create_plant "Lemon" ""));
     pineapple_price =
-      Plant.get_price (Plant.apply_discount (Plant.create_plant "Carrot" ""));
+      Plant.get_price (Plant.apply_discount (Plant.create_plant "Pineapple" ""));
     onion_price =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Onion" ""));
     potato_price =
@@ -70,6 +79,8 @@ let create_store =
       (if rand_val < 0.5 then usual.eggs_price else usual.eggs_price *. 0.5);
     milk_price =
       (if rand_val < 0.5 then usual.milk_price else usual.milk_price *. 0.5);
+    water_price =
+      Plant.get_price (Plant.apply_discount (Plant.create_plant "Water" ""));
   }
 
 let discount_plant price plant_name =
@@ -78,7 +89,14 @@ let discount_plant price plant_name =
   else ""
 
 let discount_general price name =
-  let usual = { cheese_price = 5.0; eggs_price = 3.0; milk_price = 5.0 } in
+  let usual =
+    {
+      cheese_price = 5.0;
+      eggs_price = 3.0;
+      milk_price = 5.0;
+      water_price = 1.0;
+    }
+  in
   match name with
   | "Cheese" -> if price < usual.cheese_price then "[DISCOUNT!!]" else ""
   | "Eggs" -> if price < usual.eggs_price then "[DISCOUNT!!]" else ""
@@ -150,6 +168,10 @@ let print_store store =
   ^ string_of_float store.cheese_price
   ^ ") "
   ^ discount_general store.cheese_price "Cheese"
+  ^ "\n" ^ "Water: ($"
+  ^ string_of_float store.water_price
+  ^ ") "
+  ^ discount_general store.water_price "Water"
   ^ "\n" ^ "Eggs: ($"
   ^ string_of_float store.eggs_price
   ^ ") "
@@ -203,7 +225,7 @@ let buy_item item_name store inv garden =
       ( inv,
         Garden.add_plant item_name name
           (Garden.inc_money_amt (-1.0 *. store.corn_price) garden) )
-  | "Carrot" ->
+  | "Lemon" ->
       let () = print_endline "Name of Plant? (i.e. Benjamin)" in
       let name = read_line () in
       ( inv,
@@ -233,7 +255,7 @@ let buy_item item_name store inv garden =
       ( inv,
         Garden.add_plant item_name name
           (Garden.inc_money_amt (-1.0 *. store.apple_price) garden) )
-  | "Orange" ->
+  | "Pineapple" ->
       let () = print_endline "Name of Plant? (i.e. Benjamin)" in
       let name = read_line () in
       ( inv,
@@ -266,4 +288,7 @@ let buy_item item_name store inv garden =
   | "Cheese" ->
       ( Inventory.add item_name inv,
         Garden.inc_money_amt (-1.0 *. store.cheese_price) garden )
+  | "Water" ->
+      ( Inventory.add item_name inv,
+        Garden.inc_money_amt (-1.0 *. store.water_price) garden )
   | _ -> (Inventory.add item_name inv, garden)
