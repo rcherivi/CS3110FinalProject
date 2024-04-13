@@ -6,526 +6,245 @@ type plant_type = {
   price : float;
 }
 
-type t =
-  | Daisy of plant_type
-  | Sunflower of plant_type
-  | Rose of plant_type
-  | Tulip of plant_type
-  | Tomato of plant_type
-  | Corn of plant_type
-  | Carrot of plant_type
-  | Onion of plant_type
-  | Potato of plant_type
-  | Wheat of plant_type
-  | Apple of plant_type
-  | Peach of plant_type
-  | Strawberry of plant_type
-  | Orange of plant_type
-  | Cactus of plant_type
+type species =
+  | Daisy
+  | Sunflower
+  | Rose
+  | Tulip
+  | Tomato
+  | Potato
+  | Onion
+  | Wheat
+  | Apple
+  | Peach
+  | Strawberry
+  | Mango
+  | Cactus  (**New *)
+  | Lemon
+  | Pineapple
+  | Clover
+  | Rice
+  | Lettuce
+  | Bell_Pepper
+  | Corn
 
-let get_price plant =
+type t = plant_type * species
+
+let get_name (plant : t) =
   match plant with
-  | Daisy { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Sunflower { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Rose { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Tulip { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Tomato { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Corn { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Carrot { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Onion { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Potato { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Wheat { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Apple { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Peach { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Strawberry { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Orange { height = _; life = _; hydration = _; name = _; price = p } -> p
-  | Cactus { height = _; life = _; hydration = _; name = _; price = p } -> p
+  | plant_type, _ -> plant_type.name
 
-let apply_discount plant =
+let get_height (plant : t) =
+  match plant with
+  | plant_type, _ -> plant_type.height
+
+let get_life (plant : t) =
+  match plant with
+  | plant_type, _ -> plant_type.life
+
+let get_hydration (plant : t) =
+  match plant with
+  | plant_type, _ -> plant_type.hydration
+
+let get_price (plant : t) =
+  match plant with
+  | plant_type, _ -> plant_type.price
+
+let get_sale_price (plant : t) (plant_name : string) : float =
+  match plant with
+  | { name = n; price = p; _ }, _ -> if plant_name = n then p else 0.0
+
+let apply_discount (plant : t) : t =
   let rand_val = Random.float 1.0 in
   match plant with
-  | Daisy { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Daisy
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Daisy { height = h; life = a; hydration = w; name = n; price = p }
-  | Peach { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Peach
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Peach { height = h; life = a; hydration = w; name = n; price = p }
-  | Sunflower { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Sunflower
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else
-        Sunflower { height = h; life = a; hydration = w; name = n; price = p }
-  | Rose { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Rose { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Rose { height = h; life = a; hydration = w; name = n; price = p }
-  | Tulip { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Tulip
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Tulip { height = h; life = a; hydration = w; name = n; price = p }
-  | Tomato { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Tomato
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Tomato { height = h; life = a; hydration = w; name = n; price = p }
-  | Corn { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Corn { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Corn { height = h; life = a; hydration = w; name = n; price = p }
-  | Carrot { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Carrot
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Carrot { height = h; life = a; hydration = w; name = n; price = p }
-  | Onion { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Onion
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Onion { height = h; life = a; hydration = w; name = n; price = p }
-  | Potato { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Potato
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Potato { height = h; life = a; hydration = w; name = n; price = p }
-  | Wheat { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Wheat
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Wheat { height = h; life = a; hydration = w; name = n; price = p }
-  | Apple { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Apple
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Apple { height = h; life = a; hydration = w; name = n; price = p }
-  | Strawberry { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Strawberry
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else
-        Strawberry { height = h; life = a; hydration = w; name = n; price = p }
-  | Orange { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Orange
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Orange { height = h; life = a; hydration = w; name = n; price = p }
-  | Cactus { height = h; life = a; hydration = w; name = n; price = p } ->
-      if rand_val < 0.5 then
-        Cactus
-          { height = h; life = a; hydration = w; name = n; price = p *. 0.5 }
-      else Cactus { height = h; life = a; hydration = h; name = n; price = p }
+  | plant_type, species ->
+      let new_price =
+        if rand_val < 0.5 then plant_type.price *. 0.5 else plant_type.price
+      in
+      ({ plant_type with price = new_price }, species)
 
-let get_type plant =
+let get_type (plant : t) =
   match plant with
-  | Daisy { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Daisy"
-  | Sunflower { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Sunflower"
-  | Rose { height = _; life = _; hydration = _; name = _; price = _ } -> "Rose"
-  | Tulip { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Tulip"
-  | Tomato { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Tomato"
-  | Corn { height = _; life = _; hydration = _; name = _; price = _ } -> "Corn"
-  | Carrot { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Carrot"
-  | Onion { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Onion"
-  | Potato { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Potato"
-  | Wheat { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Wheat"
-  | Apple { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Apple"
-  | Peach { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Peach"
-  | Strawberry { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Strawberry"
-  | Orange { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Orange"
-  | Cactus { height = _; life = _; hydration = _; name = _; price = _ } ->
-      "Cactus"
+  | _, species -> (
+      match species with
+      | Daisy -> "Daisy"
+      | Sunflower -> "Sunflower"
+      | Rose -> "Rose"
+      | Tulip -> "Tulip"
+      | Tomato -> "Tomato"
+      | Potato -> "Potato"
+      | Onion -> "Onion"
+      | Wheat -> "Wheat"
+      | Apple -> "Apple"
+      | Peach -> "Peach"
+      | Strawberry -> "Strawberry"
+      | Mango -> "Mango"
+      | Cactus -> "Cactus"
+      | Lemon -> "Lemon"
+      | Pineapple -> "Pineapple"
+      | Clover -> "Clover"
+      | Rice -> "Rice"
+      | Lettuce -> "Lettuce"
+      | Bell_Pepper -> "Bell Pepper"
+      | Corn -> "Corn")
 
-let get_height plant =
+let feed (type_of_plant : t) plant_name : t =
+  match type_of_plant with
+  | plant_type, species ->
+      let new_price =
+        if plant_name = plant_type.name then plant_type.price *. 1.0
+        else plant_type.price
+      in
+      let new_height =
+        if plant_name = plant_type.name then plant_type.height + 1
+        else plant_type.height
+      in
+      ({ plant_type with price = new_price; height = new_height }, species)
+
+let water (type_of_plant : t) plant_name : t =
+  match type_of_plant with
+  | plant_type, species ->
+      let new_hydration =
+        if plant_name = plant_type.name then plant_type.hydration + 1
+        else plant_type.hydration
+      in
+      ({ plant_type with hydration = new_hydration }, species)
+
+let neglect (type_of_plant : t) plant_name : t =
+  match type_of_plant with
+  | plant_type, species ->
+      let new_hydration =
+        if plant_name = plant_type.name then plant_type.hydration - 1
+        else plant_type.hydration
+      in
+      ({ plant_type with hydration = new_hydration }, species)
+
+let get_plant_emoji (height : int) threshold emoji_if_true emoji_if_false =
+  if height < threshold then emoji_if_true else emoji_if_false
+
+let print_plant (plant : t) : string =
   match plant with
-  | Daisy { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Sunflower { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Rose { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Tulip { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Tomato { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Corn { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Carrot { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Onion { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Potato { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Wheat { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Apple { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Peach { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Strawberry { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Orange { height = h; life = _; hydration = _; name = _; price = _ } -> h
-  | Cactus { height = h; life = _; hydration = _; name = _; price = _ } -> h
+  | _, species -> (
+      let height =
+        match species with
+        | Daisy -> 3
+        | Sunflower -> 6
+        | Rose -> 4
+        | Tulip -> 5
+        | Tomato -> 3
+        | Lettuce -> 4
+        | Onion -> 4
+        | Potato -> 6
+        | Wheat -> 5
+        | Apple -> 3
+        | Mango -> 6
+        | Peach -> 3
+        | Strawberry -> 2
+        | Cactus -> 7
+        | Lemon -> 4
+        | Pineapple -> 4
+        | Rice -> 4
+        | Clover -> 1
+        | Bell_Pepper -> 4
+        | Corn -> 4
+      in
+      match species with
+      | Daisy -> get_plant_emoji height 3 "🌱" "🌼"
+      | Sunflower -> get_plant_emoji height 6 "🌱" "🌻"
+      | Rose -> get_plant_emoji height 4 "🌱" "🌹"
+      | Tulip -> get_plant_emoji height 5 "🌱" "🌷"
+      | Tomato -> get_plant_emoji height 3 "🌱" (if height < 7 then "🪴" else "🍅")
+      | Lettuce -> get_plant_emoji height 4 "🌱" "🥬"
+      | Onion -> get_plant_emoji height 4 "🌱" "🧅"
+      | Potato -> get_plant_emoji height 6 "🌱" "🥔"
+      | Wheat -> get_plant_emoji height 5 "🌱" "🌾"
+      | Apple -> get_plant_emoji height 3 "🌱" (if height < 7 then "🌳" else "🍎")
+      | Mango -> get_plant_emoji height 6 "🌱" "🥭"
+      | Peach -> get_plant_emoji height 3 "🌱" (if height < 7 then "🌳" else "🍑")
+      | Strawberry ->
+          get_plant_emoji height 2 "🌱" (if height < 7 then "🪴" else "🍓")
+      | Cactus -> get_plant_emoji height 7 "🌿" "🌵"
+      | Lemon -> get_plant_emoji height 4 "🌱" "🍋"
+      | Pineapple -> get_plant_emoji height 4 "🌱" "🍍"
+      | Rice -> get_plant_emoji height 4 "🎍" "🍚"
+      | Clover -> get_plant_emoji height 1 "🌱" "🍀"
+      | Bell_Pepper -> get_plant_emoji height 4 "🌱" "🫑"
+      | Corn -> get_plant_emoji height 4 "🌱" (if height < 7 then "🪴" else "🌽"))
 
-let feed plant =
-  match plant with
-  | Daisy { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Daisy
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Daisy { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Daisy { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Sunflower
-      { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Sunflower
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Sunflower { height = _; life = false; hydration = _; name = n; price = _ }
-    ->
-      Sunflower
-        { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Rose { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Rose
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Rose { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Rose { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Tulip { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Tulip
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Tulip { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Tulip { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Tomato { height = h; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Tomato
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Tomato { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Tomato { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Corn { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Corn
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Corn { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Corn { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Carrot { height = h; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Carrot
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Carrot { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Carrot { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Onion { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Onion
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Onion { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Onion { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Potato { height = h; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Potato
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Potato { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Potato { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Wheat { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Wheat
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Wheat { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Wheat { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Apple { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Apple
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Apple { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Apple { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Peach { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Peach
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Peach { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Peach { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Strawberry
-      { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      Strawberry
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Strawberry { height = _; life = false; hydration = _; name = n; price = _ }
-    ->
-      Strawberry
-        { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Orange { height = h; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Orange
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Orange { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Orange { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Cactus { height = h; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Cactus
-        { height = h + 1; life = true; hydration = hydro; name = n; price = p }
-  | Cactus { height = _; life = false; hydration = _; name = n; price = _ } ->
-      Cactus { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-
-(** could have false case in water, neglect, and print for more lines ASK
-    BRENDEN if func can have more than 20*)
-let water plant =
-  match plant with
-  | Daisy { height = x; life = true; hydration = h; name = n; price = p } ->
-      Daisy { height = x; life = true; hydration = h + 1; name = n; price = p }
-  | Daisy { height = _; life = false; hydration = _; name = n; price = p } ->
-      Daisy { height = 0; life = false; hydration = 0; name = n; price = p }
-  | Sunflower { height = h; life = b; hydration = hydro; name = n; price = p }
-    ->
-      Sunflower
-        { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Rose { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Rose { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Tulip { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Tulip { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Tomato { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Tomato
-        { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Corn { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Corn { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Carrot { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Carrot
-        { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Onion { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Onion { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Potato { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Potato
-        { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Wheat { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Wheat { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Apple { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Apple { height = h; life = b; hydration = hydro + 1; name = n; price = p }
-  | Peach { height = x; life = true; hydration = h; name = n; price = p } ->
-      Peach { height = x; life = true; hydration = h + 1; name = n; price = p }
-  | Peach { height = x; life = false; hydration = _; name = n; price = p } ->
-      Peach { height = x; life = false; hydration = 0; name = n; price = p }
-  | Strawberry { height = x; life = true; hydration = h; name = n; price = p }
-    ->
-      Strawberry
-        { height = x; life = true; hydration = h + 1; name = n; price = p }
-  | Strawberry { height = x; life = false; hydration = _; name = n; price = p }
-    ->
-      Strawberry
-        { height = x; life = false; hydration = 0; name = n; price = p }
-  | Orange { height = h; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Orange
-        { height = h; life = true; hydration = hydro + 1; name = n; price = p }
-  | Orange { height = _h; life = false; hydration = _; name = n; price = _ } ->
-      Orange { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Cactus { height = x; life = true; hydration = h; name = n; price = p } ->
-      Cactus { height = x; life = true; hydration = h + 1; name = n; price = p }
-  | Cactus { height = x; life = false; hydration = _; name = n; price = p } ->
-      Cactus { height = x; life = false; hydration = 0; name = n; price = p }
-
-let neglect plant =
-  match plant with
-  | Daisy { height = x; life = true; hydration = hydro; name = n; price = p } ->
-      Daisy
-        { height = x; life = true; hydration = hydro - 1; name = n; price = p }
-  | Daisy { height = _; life = false; hydration = _; name = n; price = p } ->
-      Daisy { height = 0; life = false; hydration = 0; name = n; price = p }
-  | Sunflower { height = h; life = b; hydration = hydro; name = n; price = p }
-    ->
-      Sunflower
-        { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Rose { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Rose { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Tulip { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Tulip { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Tomato { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Tomato
-        { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Corn { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Corn { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Carrot { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Carrot
-        { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Onion { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Onion { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Potato { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Potato
-        { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Wheat { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Wheat { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Apple { height = h; life = b; hydration = hydro; name = n; price = p } ->
-      Apple { height = h; life = b; hydration = hydro - 1; name = n; price = p }
-  | Peach { height = x; life = true; hydration = hydro; name = n; price = p } ->
-      Peach
-        { height = x; life = true; hydration = hydro - 1; name = n; price = p }
-  | Peach { height = _; life = false; hydration = _; name = n; price = p } ->
-      Peach { height = 0; life = false; hydration = 0; name = n; price = p }
-  | Strawberry
-      { height = x; life = true; hydration = hydro; name = n; price = p } ->
-      Strawberry
-        { height = x; life = true; hydration = hydro - 1; name = n; price = p }
-  | Strawberry { height = _; life = false; hydration = _; name = n; price = p }
-    ->
-      Strawberry
-        { height = 0; life = false; hydration = 0; name = n; price = p }
-  | Orange { height = h; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Orange
-        { height = h; life = true; hydration = hydro + 1; name = n; price = p }
-  | Orange { height = _h; life = false; hydration = _; name = n; price = _ } ->
-      Orange { height = 0; life = false; hydration = 0; name = n; price = 0.0 }
-  | Cactus { height = x; life = true; hydration = hydro; name = n; price = p }
-    ->
-      Cactus
-        { height = x; life = true; hydration = hydro - 1; name = n; price = p }
-  | Cactus { height = _; life = false; hydration = _; name = n; price = p } ->
-      Cactus { height = 0; life = false; hydration = 0; name = n; price = p }
-
-let print_plant plant =
-  match plant with
-  | Daisy { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 3 then "🌱" else "🌹"
-  | Daisy { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Sunflower { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 6 then "🌱" else "🌻"
-  | Sunflower { height = _; life = false; hydration = _; name = _; price = _ }
-    -> ""
-  | Rose { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 4 then "🌱" else "🌹"
-  | Rose { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Tulip { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 5 then "🌱" else "🌷"
-  | Tulip { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Tomato { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 3 then "🌱" else if h >= 3 && h < 7 then "🪴" else "🍅"
-  | Tomato { height = _; life = false; hydration = _; name = _; price = _ } ->
-      ""
-  | Corn { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 4 then "🌱" else "🌽"
-  | Corn { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Carrot { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 5 then "🌱" else "🥕"
-  | Carrot { height = _; life = false; hydration = _; name = _; price = _ } ->
-      ""
-  | Onion { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 4 then "🌱" else "🧅"
-  | Onion { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Potato { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 6 then "🌱" else "🥔"
-  | Potato { height = _; life = false; hydration = _; name = _; price = _ } ->
-      ""
-  | Wheat { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 5 then "🌱" else "🌾"
-  | Wheat { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Apple { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 3 then "🌱" else if h >= 3 && h < 7 then "🌳" else "🍏"
-  | Apple { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Orange { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 6 then "🌱" else "🍊"
-  | Orange { height = _; life = false; hydration = _; name = _; price = _ } ->
-      ""
-  | Peach { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 5 then "🌱" else "🍑"
-  | Peach { height = _; life = false; hydration = _; name = _; price = _ } -> ""
-  | Strawberry { height = h; life = true; hydration = _; name = _; price = _ }
-    -> if h < 2 then "🍂" else "🍓"
-  | Strawberry { height = _; life = false; hydration = _; name = _; price = _ }
-    -> ""
-  | Cactus { height = h; life = true; hydration = _; name = _; price = _ } ->
-      if h < 7 then "🌿" else "🌵"
-  | Cactus { height = _; life = false; hydration = _; name = _; price = _ } ->
-      ""
-
-let create_plant plant_name n =
+let create_plant plant_name n : t =
   match plant_name with
   | "Daisy" ->
-      Daisy { height = 0; life = true; hydration = 25; name = n; price = 3.0 }
+      ({ height = 0; life = true; hydration = 25; name = n; price = 3.0 }, Daisy)
   | "Sunflower" ->
-      Sunflower
-        { height = 0; life = true; hydration = 25; name = n; price = 2.0 }
+      ( { height = 0; life = true; hydration = 25; name = n; price = 2.0 },
+        Sunflower )
   | "Rose" ->
-      Rose { height = 0; life = true; hydration = 25; name = n; price = 8.0 }
+      ({ height = 0; life = true; hydration = 25; name = n; price = 8.0 }, Rose)
   | "Tulip" ->
-      Tulip { height = 0; life = true; hydration = 25; name = n; price = 5.0 }
+      ({ height = 0; life = true; hydration = 25; name = n; price = 5.0 }, Tulip)
   | "Tomato" ->
-      Tomato { height = 0; life = true; hydration = 25; name = n; price = 5.0 }
+      ( { height = 0; life = true; hydration = 25; name = n; price = 5.0 },
+        Tomato )
   | "Apple" ->
-      Apple { height = 0; life = true; hydration = 25; name = n; price = 7.0 }
-  | "Corn" ->
-      Corn { height = 0; life = true; hydration = 25; name = n; price = 2.0 }
-  | "Carrot" ->
-      Carrot { height = 0; life = true; hydration = 25; name = n; price = 3.0 }
+      ({ height = 0; life = true; hydration = 25; name = n; price = 7.0 }, Apple)
   | "Onion" ->
-      Onion { height = 0; life = true; hydration = 25; name = n; price = 5.0 }
+      ({ height = 0; life = true; hydration = 25; name = n; price = 5.0 }, Onion)
   | "Potato" ->
-      Potato { height = 0; life = true; hydration = 25; name = n; price = 7.0 }
+      ( { height = 0; life = true; hydration = 25; name = n; price = 7.0 },
+        Potato )
   | "Wheat" ->
-      Wheat { height = 0; life = true; hydration = 25; name = n; price = 4.0 }
-  | "Orange" ->
-      Orange { height = 0; life = true; hydration = 25; name = n; price = 2.0 }
+      ({ height = 0; life = true; hydration = 25; name = n; price = 4.0 }, Wheat)
+  | "Rice" ->
+      ({ height = 0; life = true; hydration = 25; name = n; price = 5.0 }, Rice)
   | "Peach" ->
-      Peach { height = 0; life = true; hydration = 25; name = n; price = 3.5 }
+      ({ height = 0; life = true; hydration = 25; name = n; price = 3.5 }, Peach)
   | "Strawberry" ->
-      Strawberry
-        { height = 0; life = true; hydration = 25; name = n; price = 4.0 }
+      ( { height = 0; life = true; hydration = 25; name = n; price = 4.0 },
+        Strawberry )
+  | "Corn" ->
+      ({ height = 0; life = true; hydration = 25; name = n; price = 4.0 }, Corn)
   | "Cactus" ->
-      Cactus { height = 0; life = true; hydration = 10; name = n; price = 8.0 }
+      ( { height = 0; life = true; hydration = 10; name = n; price = 30.0 },
+        Cactus )
+  | "Lettuce" ->
+      ( { height = 0; life = true; hydration = 25; name = n; price = 6.0 },
+        Lettuce )
+  | "Lemon" ->
+      ({ height = 0; life = true; hydration = 25; name = n; price = 3.2 }, Lemon)
+  | "Mango" ->
+      ({ height = 0; life = true; hydration = 25; name = n; price = 6.0 }, Mango)
+  | "Pineapple" ->
+      ( { height = 0; life = true; hydration = 25; name = n; price = 5.8 },
+        Pineapple )
+  | "Clover" ->
+      ( { height = 0; life = true; hydration = 25; name = n; price = 1.0 },
+        Clover )
+  | "Bell_Pepper" ->
+      ( { height = 0; life = true; hydration = 25; name = n; price = 2.0 },
+        Bell_Pepper )
   | _ ->
       failwith
         "Our store doesn't have this plant yet. Please try to buy a plant we \
          have."
 
-let check_life plant =
-  match plant with
-  | Daisy { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 20 || y < 0 then
-        Daisy { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Sunflower
-      { height = h; life = true; hydration = hydro; name = n; price = p } ->
-      if hydro > 20 || hydro < 0 then
-        Sunflower
-          { height = h; life = false; hydration = hydro; name = n; price = p }
-      else plant
-  | Peach { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 10 || y < 0 then
-        Peach { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Strawberry { height = _; life = true; hydration = y; name = n; price = p }
-    ->
-      if y > 10 || y < 0 then
-        Strawberry
-          { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Cactus { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 5 || y < 0 then
-        Cactus { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Rose { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Rose { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Tulip { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Tulip { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Carrot { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Carrot { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Onion { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Onion { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Potato { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Potato { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Wheat { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Wheat { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Apple { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Apple { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Orange { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Orange { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | Corn { height = _; life = true; hydration = y; name = n; price = p } ->
-      if y > 15 || y < 0 then
-        Corn { height = 0; life = false; hydration = y; name = n; price = p }
-      else plant
-  | _ -> plant
+let check_life (type_of_plant : t) plant_name : t =
+  match type_of_plant with
+  | plant_type, species ->
+      let new_life =
+        if
+          plant_name = plant_type.name
+          && (plant_type.hydration > 20 || plant_type.hydration < 0)
+        then plant_type.life = false
+        else plant_type.life
+      in
+      ({ plant_type with life = new_life }, species)
+
+let get_category (type_of_plant : t) =
+  match type_of_plant with
+  | _, Daisy | _, Sunflower | _, Rose | _, Tulip -> "Flowers"
+  | _, Tomato | _, Lettuce | _, Bell_Pepper | _, Onion | _, Potato ->
+      "Vegetables"
+  | _, Lemon | _, Pineapple | _, Apple | _, Peach | _, Strawberry | _, Mango ->
+      "Fruit"
+  | _, Clover | _, Cactus -> "Defense Item"
+  | _, Rice | _, Wheat | _, Corn -> "Grains"
