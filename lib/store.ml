@@ -9,14 +9,14 @@ type t = {
   rose_price : float;
   tulip_price : float;
   tomato_price : float;
-  carrot_price : float;
+  lemon_price : float;
   potato_price : float;
   onion_price : float;
   wheat_price : float;
   apple_price : float;
   corn_price : float;
   peach_price : float;
-  orange_price : float;
+  pineapple_price : float;
   cactus_price : float;
   cheese_price : float;
   eggs_price : float;
@@ -46,9 +46,9 @@ let create_store =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Tulip" ""));
     tomato_price =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Tomato" ""));
-    orange_price =
+    lemon_price =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Orange" ""));
-    carrot_price =
+    pineapple_price =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Carrot" ""));
     onion_price =
       Plant.get_price (Plant.apply_discount (Plant.create_plant "Onion" ""));
@@ -110,10 +110,10 @@ let print_store store =
   ^ string_of_float store.corn_price
   ^ ") "
   ^ discount_plant store.corn_price "Corn"
-  ^ "\n" ^ "Carrot: ($"
-  ^ string_of_float store.carrot_price
+  ^ "\n" ^ "Lemon: ($"
+  ^ string_of_float store.lemon_price
   ^ ") "
-  ^ discount_plant store.carrot_price "Carrot"
+  ^ discount_plant store.lemon_price "Lemon"
   ^ "\n" ^ "Onion: ($"
   ^ string_of_float store.onion_price
   ^ ") "
@@ -135,9 +135,9 @@ let print_store store =
   ^ ") "
   ^ discount_plant store.peach_price "Peach"
   ^ "\n" ^ "Orange: ($"
-  ^ string_of_float store.orange_price
+  ^ string_of_float store.pineapple_price
   ^ ") "
-  ^ discount_plant store.orange_price "Orange"
+  ^ discount_plant store.pineapple_price "Pineapple"
   ^ "\n" ^ "Strawberry: ($"
   ^ string_of_float store.strawberry_price
   ^ ") "
@@ -208,7 +208,7 @@ let buy_item item_name store inv garden =
       let name = read_line () in
       ( inv,
         Garden.add_plant item_name name
-          (Garden.inc_money_amt (-1.0 *. store.carrot_price) garden) )
+          (Garden.inc_money_amt (-1.0 *. store.lemon_price) garden) )
   | "Onion" ->
       let () = print_endline "Name of Plant? (i.e. Benjamin)" in
       let name = read_line () in
@@ -238,7 +238,7 @@ let buy_item item_name store inv garden =
       let name = read_line () in
       ( inv,
         Garden.add_plant item_name name
-          (Garden.inc_money_amt (-1.0 *. store.orange_price) garden) )
+          (Garden.inc_money_amt (-1.0 *. store.pineapple_price) garden) )
   | "Peach" ->
       let () = print_endline "Name of Plant? (i.e. Benjamin)" in
       let name = read_line () in
