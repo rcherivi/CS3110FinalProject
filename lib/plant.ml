@@ -19,7 +19,7 @@ type species =
   | Peach
   | Strawberry
   | Mango
-  | Cactus  (**New *)
+  | Cactus
   | Lemon
   | Pineapple
   | Clover
