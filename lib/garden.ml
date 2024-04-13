@@ -265,12 +265,12 @@ let print_plants_in_category category garden =
   in
   let print_plant plant =
     let name = Plant.get_name plant in
-    let visual = Plant.print_plant plant in
+    let visual_rep = Plant.print_plant plant in
     let ptype = Plant.get_type plant in
     let height = Plant.get_height plant in
     let price = Plant.get_price plant in
     let hydration = Plant.get_hydration plant in
-    Printf.printf "| %-10s| %-8s| %-11s| %-7d| %-8.2f| %-9d |\n" name visual
+    Printf.printf "| %-10s| %-8s| %-11s| %-7d| %-8.2f| %-9d |\n" name visual_rep
       ptype height price hydration;
     ()
   in
