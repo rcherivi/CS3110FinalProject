@@ -248,3 +248,40 @@ let get_category (type_of_plant : t) =
       "Fruit"
   | _, Clover | _, Cactus -> "Defense Item"
   | _, Rice | _, Wheat | _, Corn -> "Grains"
+
+let check_status (plant : t) =
+  match plant with
+  | { height = _; life = _; hydration = y; name = n; price = p }, species ->
+      if y > 20 || y < 0 then
+        ( { height = 0; life = false; hydration = y; name = n; price = p },
+          species )
+      else plant
+
+let stampede (plant : t) : t =
+  let rand_val = Random.float 1.0 in
+  match plant with
+  | { height = h; life = _; hydration = w; name = n; price = p }, species ->
+      if rand_val < 0.2 then
+        ( { height = h; life = false; hydration = w; name = n; price = p },
+          species )
+      else
+        ( { height = h; life = true; hydration = w; name = n; price = p },
+          species )
+
+let pollinate (plant : t) : t =
+  match plant with
+  | { height = h; life = l; hydration = w; name = n; price = p }, species ->
+      check_status
+        ( { height = h + 5; life = l; hydration = w; name = n; price = p },
+          species )
+
+let drought (plant : t) : t =
+  match plant with
+  | { height = h; life = l; hydration = w; name = n; price = p }, species ->
+      check_status
+        ( { height = h; life = l; hydration = w - 3; name = n; price = p },
+          species )
+
+let is_alive (plant : t) =
+  match plant with
+  | { life = l; _ }, _ -> l = true
