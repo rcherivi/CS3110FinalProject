@@ -80,7 +80,7 @@ let create_store =
     milk_price =
       (if rand_val < 0.5 then usual.milk_price else usual.milk_price *. 0.5);
     water_price =
-      Plant.get_price (Plant.apply_discount (Plant.create_plant "Water" ""));
+      (if rand_val < 0.5 then usual.water_price else usual.water_price *. 0.5);
   }
 
 let discount_plant price plant_name =
