@@ -1,5 +1,102 @@
 type t = (string * int) list
 
+type recipe_type =
+  | ApplePie
+  | TomatoSoup
+  | Bread
+  | AppleJuice
+  | Popcorn
+  | FrenchFries
+  | Cookie
+  | Sandwich
+  | Salad
+  | StrawberryCake
+  | Bouquet
+  | Curry
+  | ChickenSoup
+  | Hamburger
+  | Smoothie
+
+let recipe_type_of_string = function
+  | "Apple Pie" -> Some ApplePie
+  | "Tomato Soup" -> Some TomatoSoup
+  | "Bread" -> Some Bread
+  | "Apple Juice" -> Some AppleJuice
+  | "Popcorn" -> Some Popcorn
+  | "French Fries" -> Some FrenchFries
+  | "Cookie" -> Some Cookie
+  | "Sandwich" -> Some Sandwich
+  | "Salad" -> Some Salad
+  | "Strawberry Cake" -> Some StrawberryCake
+  | "Bouquet" -> Some Bouquet
+  | "Curry" -> Some Curry
+  | "Chicken Soup" -> Some ChickenSoup
+  | "Hamburger" -> Some Hamburger
+  | "Smoothie" -> Some Smoothie
+  | _ -> None
+
+let recipe_ingredients = function
+  | ApplePie -> [ ("Apple", 5); ("Water", 1); ("Eggs", 2); ("Butter", 1) ]
+  | TomatoSoup -> [ ("Tomato", 3); ("Water", 1) ]
+  | Bread -> [ ("Wheat", 3); ("Water", 1) ]
+  | AppleJuice -> [ ("Apple", 2); ("Sugar", 2); ("Water", 4) ]
+  | Popcorn -> [ ("Corn", 3); ("Butter", 1); ("Salt", 1) ]
+  | FrenchFries -> [ ("Potato", 3); ("Butter", 1); ("Salt", 1) ]
+  | Cookie ->
+      [
+        ("Milk", 2);
+        ("Egg", 1);
+        ("Butter", 1);
+        ("Chocolate", 1);
+        ("Sugar", 1);
+        ("Wheat", 2);
+      ]
+  | Sandwich -> [ ("Bread", 1); ("Tomato", 1); ("Lettuce", 2); ("Cheese", 1) ]
+  | Salad -> [ ("Lettuce", 4); ("Tomato", 2); ("Bell Pepper", 1); ("Onion", 1) ]
+  | StrawberryCake ->
+      [ ("Strawberry", 4); ("Butter", 1); ("Sugar", 2); ("Milk", 2) ]
+  | Bouquet ->
+      [ ("Yellow Flower", 2); ("Rose", 2); ("Tulip", 3); ("Sunflower", 2) ]
+  | Curry -> [ ("Rice", 2); ("Curry Powder", 2); ("Water", 2) ]
+  | ChickenSoup ->
+      [
+        ("Bell Pepper", 2);
+        ("Salt", 1);
+        ("Chicken", 1);
+        ("Milk", 1);
+        ("Tomato", 2);
+        ("Water", 5);
+      ]
+  | Hamburger ->
+      [
+        ("Bread", 1); ("Tomato", 1); ("Lettuce", 1); ("Cheese", 1); ("Beef", 1);
+      ]
+  | Smoothie ->
+      [
+        ("Strawberry", 2);
+        ("Peach", 2);
+        ("Lemon", 1);
+        ("Pineapple", 1);
+        ("Mango", 3);
+      ]
+
+let price = function
+  | ApplePie -> 10.0
+  | TomatoSoup -> 5.0
+  | Bread -> 3.0
+  | AppleJuice -> 2.0
+  | Popcorn -> 1.0
+  | FrenchFries -> 2.50
+  | Cookie -> 3.0
+  | Sandwich -> 7.0
+  | Salad -> 6.0
+  | StrawberryCake -> 15.0
+  | Bouquet -> 20.0
+  | Curry -> 11.0
+  | ChickenSoup -> 14.0
+  | Hamburger -> 7.70
+  | Smoothie -> 5.0
+
 let rec get_missing_ingredients missing (recipe : t) (inventory : Inventory.t) =
   match recipe with
   | [] -> missing
@@ -14,14 +111,57 @@ let rec get_missing_ingredients missing (recipe : t) (inventory : Inventory.t) =
 let have_ingredients (inventory : Inventory.t) (recipe : t) =
   let missing_ingredients = get_missing_ingredients [] recipe inventory in
   if missing_ingredients = [] then
-    print_endline "We have all the ingredients necessary for the recipe."
+    "We have all the ingredients necessary for the recipe."
   else
-    print_endline
-      ("Do not have enough ingredients. Missing ingredients: "
-      ^ String.concat ", "
-          (List.map
-             (fun (ingredient, qty) -> ingredient ^ ": " ^ string_of_int qty)
-             missing_ingredients))
+    "Do not have enough ingredients. Missing ingredients: "
+    ^ String.concat ", "
+        (List.map
+           (fun (ingredient, qty) -> ingredient ^ ": " ^ string_of_int qty)
+           missing_ingredients)
+
+let create_recipe recipe_name (inventory : Inventory.t) =
+  match recipe_type_of_string recipe_name with
+  | Some recipe_type -> (
+      let recipe = recipe_ingredients recipe_type in
+      match have_ingredients inventory recipe with
+      | "We have all the ingredients necessary for the recipe." ->
+          let updated_inventory =
+            List.fold_left
+              (fun inv (ingredient, qty) -> Inventory.insert ingredient qty inv)
+              inventory recipe
+          in
+          let updated_inventory_with_recipe =
+            Inventory.insert recipe_name 1 updated_inventory
+          in
+          Printf.printf "%s created successfully!\n" recipe_name;
+          updated_inventory_with_recipe
+      | msg ->
+          print_endline msg;
+          inventory)
+  | None ->
+      print_endline "Unknown recipe name";
+      inventory
+
+let sell_recipe recipe_name (quantity : int) (inv : Inventory.t)
+    (garden : Garden.t) =
+  match recipe_type_of_string recipe_name with
+  | Some recipe_type -> (
+      match Inventory.lookup_option recipe_name inv with
+      | Some current_quantity when current_quantity >= quantity ->
+          let new_quantity = current_quantity - quantity in
+          let updated_inventory =
+            if new_quantity = 0 then inv
+            else Inventory.insert recipe_name new_quantity inv
+          in
+          let revenue = price recipe_type *. float_of_int quantity in
+          let updated_garden = Garden.inc_money_amt revenue garden in
+          (updated_inventory, updated_garden)
+      | _ ->
+          print_endline "Not enough items in inventory";
+          (inv, garden))
+  | None ->
+      print_endline "Unknown recipe name";
+      (inv, garden)
 
 let tomato_soup_recipe =
   "\n\
