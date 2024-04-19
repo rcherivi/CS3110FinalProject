@@ -119,57 +119,33 @@ let neglect (type_of_plant : t) plant_name : t =
       in
       ({ plant_type with hydration = new_hydration }, species)
 
-let get_plant_emoji (height : int) threshold emoji_if_true emoji_if_false =
+let get_plant_emoji height threshold emoji_if_true emoji_if_false =
   if height < threshold then emoji_if_true else emoji_if_false
 
-let print_plant (plant : t) : string =
+let print_plant (plant : t) =
   match plant with
-  | _, species -> (
-      let height =
-        match species with
-        | Daisy -> 3
-        | Sunflower -> 6
-        | Rose -> 4
-        | Tulip -> 5
-        | Tomato -> 3
-        | Lettuce -> 4
-        | Onion -> 4
-        | Potato -> 6
-        | Wheat -> 5
-        | Apple -> 3
-        | Mango -> 6
-        | Peach -> 3
-        | Strawberry -> 2
-        | Cactus -> 7
-        | Lemon -> 4
-        | Pineapple -> 4
-        | Rice -> 4
-        | Clover -> 1
-        | Bell_Pepper -> 4
-        | Corn -> 4
-      in
+  | { height = h; life = _; hydration = _; name = _; price = _ }, species -> (
       match species with
-      | Daisy -> get_plant_emoji height 3 "🌱" "🌼"
-      | Sunflower -> get_plant_emoji height 6 "🌱" "🌻"
-      | Rose -> get_plant_emoji height 4 "🌱" "🌹"
-      | Tulip -> get_plant_emoji height 5 "🌱" "🌷"
-      | Tomato -> get_plant_emoji height 3 "🌱" (if height < 7 then "🪴" else "🍅")
-      | Lettuce -> get_plant_emoji height 4 "🌱" "🥬"
-      | Onion -> get_plant_emoji height 4 "🌱" "🧅"
-      | Potato -> get_plant_emoji height 6 "🌱" "🥔"
-      | Wheat -> get_plant_emoji height 5 "🌱" "🌾"
-      | Apple -> get_plant_emoji height 3 "🌱" (if height < 7 then "🌳" else "🍎")
-      | Mango -> get_plant_emoji height 6 "🌱" "🥭"
-      | Peach -> get_plant_emoji height 3 "🌱" (if height < 7 then "🌳" else "🍑")
-      | Strawberry ->
-          get_plant_emoji height 2 "🌱" (if height < 7 then "🪴" else "🍓")
-      | Cactus -> get_plant_emoji height 7 "🌿" "🌵"
-      | Lemon -> get_plant_emoji height 4 "🌱" "🍋"
-      | Pineapple -> get_plant_emoji height 4 "🌱" "🍍"
-      | Rice -> get_plant_emoji height 4 "🎍" "🍚"
-      | Clover -> get_plant_emoji height 1 "🌱" "🍀"
-      | Bell_Pepper -> get_plant_emoji height 4 "🌱" "🫑"
-      | Corn -> get_plant_emoji height 4 "🌱" (if height < 7 then "🪴" else "🌽"))
+      | Daisy -> get_plant_emoji h 3 "🌱" "��"
+      | Sunflower -> get_plant_emoji h 6 "🌱" "��"
+      | Rose -> get_plant_emoji h 4 "🌱" "��"
+      | Tulip -> get_plant_emoji h 5 "🌱" "��"
+      | Tomato -> get_plant_emoji h 3 "🌱" (if h < 7 then "��" else "🍅")
+      | Lettuce -> get_plant_emoji h 4 "🌱" "��"
+      | Onion -> get_plant_emoji h 4 "🌱" "��"
+      | Potato -> get_plant_emoji h 6 "🌱" "��"
+      | Wheat -> get_plant_emoji h 5 "🌱" "��"
+      | Apple -> get_plant_emoji h 3 "🌱" (if h < 7 then "��" else "🍎")
+      | Mango -> get_plant_emoji h 6 "🌱" "��"
+      | Peach -> get_plant_emoji h 3 "🌱" (if h < 7 then "��" else "🍑")
+      | Strawberry -> get_plant_emoji h 2 "🌱" (if h < 7 then "��" else "🍓")
+      | Cactus -> get_plant_emoji h 7 "🌿" "��"
+      | Lemon -> get_plant_emoji h 4 "🌱" "��"
+      | Pineapple -> get_plant_emoji h 4 "🌱" "��"
+      | Rice -> get_plant_emoji h 4 "🎍" "��"
+      | Clover -> get_plant_emoji h 1 "🌱" "��"
+      | Bell_Pepper -> get_plant_emoji h 4 "🌱" "��"
+      | Corn -> get_plant_emoji h 4 "🌱" (if h < 7 then "��" else "🌽"))
 
 let create_plant plant_name n : t =
   match plant_name with
