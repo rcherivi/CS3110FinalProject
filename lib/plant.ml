@@ -195,7 +195,7 @@ let create_plant plant_name n : t =
   | "Clover" ->
       ( { height = 0; life = true; hydration = 25; name = n; price = 1.0 },
         Clover )
-  | "Bell_Pepper" ->
+  | "Bell Pepper" ->
       ( { height = 0; life = true; hydration = 25; name = n; price = 2.0 },
         Bell_Pepper )
   | _ ->
