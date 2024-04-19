@@ -212,6 +212,7 @@ let rec func n inv garden count day =
   | 50 -> print_endline "\nEnd of Garden Game"
   | _ ->
       if !count = 10 then (
+        let garden = Garden.night_change day garden in
         print_endline ("\nIt's Day " ^ string_of_int (!day + 1) ^ "!");
         count := 0;
         day := !day + 1;

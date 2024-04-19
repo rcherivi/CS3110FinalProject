@@ -226,7 +226,7 @@ let print garden =
     print_string "| ";
     for j = 0 to 9 do
       match garden.cells.(i).(j) with
-      | Empty -> print_string " "
+      | Empty -> print_string "  "
       | Plant plant -> print_string (Plant.print_plant plant)
     done;
     print_endline "|"
@@ -288,3 +288,87 @@ let print_plants_in_category category garden =
   print_header ();
   print_plants filtered_plants;
   print_footer ()
+
+let filter_dead garden =
+  for i = 0 to Array.length garden.cells - 1 do
+    for j = 0 to Array.length garden.cells.(0) - 1 do
+      match garden.cells.(i).(j) with
+      | Empty -> ()
+      | Plant plant ->
+          if Plant.is_alive plant then () else garden.cells.(i).(j) <- Empty
+    done
+  done;
+  garden
+
+let pollinate garden =
+  let () =
+    print_endline
+      "\nSome bees came through and pollinated your plants, helping them grow."
+  in
+  for i = 0 to Array.length garden.cells - 1 do
+    for j = 0 to Array.length garden.cells.(0) - 1 do
+      match garden.cells.(i).(j) with
+      | Empty -> ()
+      | Plant plant -> garden.cells.(i).(j) <- Plant (Plant.pollinate plant)
+    done
+  done;
+  filter_dead garden
+
+let nothing (garden : t) = garden
+
+let drought garden =
+  let () =
+    print_endline "\nThere has been a drought!! Plants have lost water. "
+  in
+
+  for i = 0 to Array.length garden.cells - 1 do
+    for j = 0 to Array.length garden.cells.(0) - 1 do
+      match garden.cells.(i).(j) with
+      | Empty -> ()
+      | Plant plant -> garden.cells.(i).(j) <- Plant (Plant.drought plant)
+    done
+  done;
+  filter_dead garden
+
+let stampede garden =
+  let () =
+    print_endline
+      "\n\
+       There has been a stampede of buffallo! Some plants may have been \
+       trampled."
+  in
+
+  for i = 0 to Array.length garden.cells - 1 do
+    for j = 0 to Array.length garden.cells.(0) - 1 do
+      match garden.cells.(i).(j) with
+      | Empty -> ()
+      | Plant plant -> garden.cells.(i).(j) <- Plant (Plant.stampede plant)
+    done
+  done;
+  filter_dead garden
+
+let apply_event event_name garden =
+  match event_name with
+  | "stampede" -> stampede garden
+  | "pollinate" -> pollinate garden
+  | "drought" -> drought garden
+  | _ -> nothing garden
+
+let night_change n garden =
+  if !n = 0 then apply_event "nothing" garden
+  else
+    let () = print_endline "⋆⁺₊⋆ ☾⋆⁺₊⋆ Overnight ⋆⁺₊⋆ ☾⋆⁺₊⋆ " in
+    let rand_val = Random.float 1.0 in
+    if rand_val < 0.6 then apply_event "nothing" garden
+    else
+      let bad_events_lst = [ "stampede"; "drought" ] in
+      let good_events_lst = [ "pollinate" ] in
+      let event_type = Random.float 1.0 in
+      if event_type < 0.5 then
+        let rand_int = Random.int (List.length bad_events_lst) in
+        let chosen_event = List.nth bad_events_lst rand_int in
+        apply_event chosen_event garden
+      else
+        let rand_int = Random.int (List.length good_events_lst) in
+        let chosen_event = List.nth good_events_lst rand_int in
+        apply_event chosen_event garden
