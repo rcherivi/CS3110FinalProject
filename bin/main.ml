@@ -69,9 +69,8 @@ let buy_plant_helper func n inv garden =
   let () = print_endline "Name of Item to buy?" in
   let () =
     print_endline
-      "Plants\n\
-      \ will\n\
-      \  be added to garden, and other items will be added to the inventory"
+      "Plants will be added to garden, and other items will be added to the \
+       inventory"
   in
   let item = read_line () in
   let new_inv, new_garden = Store.buy_item item new_store inv garden in

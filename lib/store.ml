@@ -109,7 +109,7 @@ let create_store =
 
 let discount_plant price plant_name =
   if price < Plant.get_price (Plant.create_plant plant_name "") then
-    "[DISCOUNT!!]"
+    "[DISCOUNT] 💸"
   else ""
 
 let discount_general price name =
@@ -118,13 +118,13 @@ let discount_general price name =
      3.20; plant_food_price = 2.0; ladybug_price = 8.0; beef_price = 6.0;
      chicken_price = 5.50; } in *)
   match name with
-  | "Cheese" -> if price < usual.cheese_price then "[DISCOUNT] 💸" else ""
+  | "Cheese" -> if price < usual.cheese_price then "[DISCOUNT] " else ""
   | "Eggs" -> if price < usual.eggs_price then "[DISCOUNT] 💸" else ""
   | "Milk" -> if price < usual.milk_price then "[DISCOUNT] 💸" else ""
   | "Water" -> if price < usual.water_price then "[DISCOUNT] 💸" else ""
   | "Butter" -> if price < usual.butter_price then "[[DISCOUNT] 💸" else ""
   | "Sugar" -> if price < usual.sugar_price then "[DISCOUNT] 💸" else ""
-  | "Chocolate" -> if price < usual.chocolate_price then "[DISCOUNT] 💸]" else ""
+  | "Chocolate" -> if price < usual.chocolate_price then "[DISCOUNT] 💸" else ""
   | "Plant Food" ->
       if price < usual.plant_food_price then "[DISCOUNT] 💸" else ""
   | "Lady Bug" -> if price < usual.ladybug_price then "[DISCOUNT] 💸" else ""
