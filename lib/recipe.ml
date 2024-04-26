@@ -122,24 +122,27 @@ let have_ingredients (inventory : Inventory.t) (recipe : t) =
 let create_recipe recipe_name (inventory : Inventory.t) =
   match recipe_type_of_string recipe_name with
   | Some recipe_type -> (
-      let recipe = recipe_ingredients recipe_type in
-      match have_ingredients inventory recipe with
+      let ingredients = recipe_ingredients recipe_type in
+      match have_ingredients inventory ingredients with
       | "We have all the ingredients necessary for the recipe." ->
-          let updated_inventory =
+          let updated_inv =
             List.fold_left
-              (fun inv (ingredient, qty) -> Inventory.insert ingredient qty inv)
-              inventory recipe
+              (fun inv (ingred, quantity) ->
+                let current_quantity = Inventory.lookup ingred inv in
+                let new_qty = current_quantity - quantity in
+                Inventory.insert ingred new_qty inv)
+              inventory ingredients
           in
-          let updated_inventory_with_recipe =
-            Inventory.insert recipe_name 1 updated_inventory
+          let updated_inv_with_recipe =
+            Inventory.insert recipe_name 1 updated_inv
           in
-          Printf.printf "%s created successfully!\n" recipe_name;
-          updated_inventory_with_recipe
+          Printf.printf "You have crafted 1 %s!\n" recipe_name;
+          updated_inv_with_recipe
       | msg ->
           print_endline msg;
           inventory)
   | None ->
-      print_endline "Unknown recipe name";
+      print_endline "We don't have that recipe in our store.";
       inventory
 
 let sell_recipe recipe_name (quantity : int) (inv : Inventory.t)

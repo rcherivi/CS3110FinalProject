@@ -65,7 +65,25 @@ let test_get_height_and_feed _ =
 
 let test_get_life _ =
   assert_equal true (Plant.get_life daisy);
-  assert_equal true (Plant.get_life rose)
+  assert_equal true (Plant.get_life sunflower);
+  assert_equal true (Plant.get_life rose);
+  assert_equal true (Plant.get_life tulip);
+  assert_equal true (Plant.get_life tomato);
+  assert_equal true (Plant.get_life potato);
+  assert_equal true (Plant.get_life onion);
+  assert_equal true (Plant.get_life wheat);
+  assert_equal true (Plant.get_life apple);
+  assert_equal true (Plant.get_life peach);
+  assert_equal true (Plant.get_life strawberry);
+  assert_equal true (Plant.get_life mango);
+  assert_equal true (Plant.get_life cactus);
+  assert_equal true (Plant.get_life lemon);
+  assert_equal true (Plant.get_life pineapple);
+  assert_equal true (Plant.get_life clover);
+  assert_equal true (Plant.get_life rice);
+  assert_equal true (Plant.get_life lettuce);
+  assert_equal true (Plant.get_life bell_pepper);
+  assert_equal true (Plant.get_life corn)
 
 let test_get_hydration _ =
   assert_equal 25 (Plant.get_hydration daisy);
@@ -127,14 +145,6 @@ let test_get_type _ =
   assert_equal "Bell Pepper" (Plant.get_type bell_pepper);
   assert_equal "Corn" (Plant.get_type corn)
 
-let test_water _ =
-  let daisy_watered = Plant.water daisy "Sam" in
-  assert_equal 26 (Plant.get_hydration daisy_watered);
-  let rose_watered = Plant.water rose "Julie" in
-  assert_equal 26 (Plant.get_hydration rose_watered);
-  let corn_watered = Plant.water corn "Matthew" in
-  assert_equal 26 (Plant.get_hydration corn_watered)
-
 let test_apply_discount _ =
   let discounted_daisy = Plant.apply_discount daisy in
   let discounted_rose = Plant.apply_discount rose in
@@ -146,11 +156,408 @@ let test_apply_discount _ =
     "Discounted price should be less than or equal to\n   original price"
     (Plant.get_price discounted_rose <= Plant.get_price rose)
 
-(* let test_neglect _ = let neglected_daisy = Plant.neglect daisy "Daisy" in let
-   neglected_rose = Plant.neglect rose "Rose" in (* Check if hydration has been
-   reduced by 1 *) assert_equal (Plant.get_hydration daisy - 1)
-   (Plant.get_hydration neglected_daisy); assert_equal (Plant.get_hydration rose
-   - 1) (Plant.get_hydration neglected_rose) *)
+(* Test feed function *)
+let test_feed_daisy _ =
+  let feed_plant = Plant.feed daisy "Sam" in
+  assert_equal 1 (Plant.get_height feed_plant);
+  assert_equal 3.0 (Plant.get_price feed_plant)
+
+let test_feed_sunflower _ =
+  let feed1 = Plant.feed sunflower "Emily" in
+  let feed2 = Plant.feed feed1 "Emily" in
+  assert_equal 2 (Plant.get_height feed2);
+  assert_equal 2.0 (Plant.get_price feed2)
+
+let test_feed_rose _ =
+  let feed1 = Plant.feed rose "Julie" in
+  let feed2 = Plant.feed feed1 "Julie" in
+  let feed3 = Plant.feed feed2 "Julie" in
+  assert_equal 3 (Plant.get_height feed3);
+  assert_equal 8.0 (Plant.get_price feed3)
+
+let test_feed_tulip _ =
+  let feed1 = Plant.feed tulip "Michael" in
+  let feed2 = Plant.feed feed1 "Michael" in
+  assert_equal 2 (Plant.get_height feed2);
+  assert_equal 5.0 (Plant.get_price feed2)
+
+let test_feed_tomato _ =
+  let feed1 = Plant.feed tomato "Sophia" in
+  let feed2 = Plant.feed feed1 "Sophia" in
+  let feed3 = Plant.feed feed2 "Sophia" in
+  let feed4 = Plant.feed feed3 "Sophia" in
+  assert_equal 4 (Plant.get_height feed4);
+  assert_equal 5.0 (Plant.get_price feed4)
+
+let test_feed_apple _ =
+  let feed_plant = Plant.feed apple "Isabella" in
+  assert_equal 1 (Plant.get_height feed_plant);
+  assert_equal 7.0 (Plant.get_price feed_plant)
+
+let test_feed_onion _ =
+  let feed1 = Plant.feed onion "Olivia" in
+  let feed2 = Plant.feed feed1 "Olivia" in
+  assert_equal 2 (Plant.get_height feed2);
+  assert_equal 5.0 (Plant.get_price feed2)
+
+let test_feed_potato _ =
+  let feed1 = Plant.feed potato "Daniel" in
+  let feed2 = Plant.feed feed1 "Daniel" in
+  let feed3 = Plant.feed feed2 "Daniel" in
+  let feed4 = Plant.feed feed3 "Daniel" in
+  assert_equal 4 (Plant.get_height feed4);
+  assert_equal 7.0 (Plant.get_price feed4)
+
+let test_feed_wheat _ =
+  let feed1 = Plant.feed wheat "William" in
+  assert_equal 1 (Plant.get_height feed1);
+  assert_equal 4.0 (Plant.get_price feed1)
+
+let test_feed_rice _ =
+  let feed1 = Plant.feed rice "Abigail" in
+  assert_equal 1 (Plant.get_height feed1);
+  assert_equal 5.0 (Plant.get_price feed1)
+
+let test_feed_peach _ =
+  let feed1 = Plant.feed peach "Alexander" in
+  let feed2 = Plant.feed feed1 "Alexander" in
+  let feed3 = Plant.feed feed2 "Alexander" in
+  let feed4 = Plant.feed feed3 "Alexander" in
+  assert_equal 4 (Plant.get_height feed4);
+  assert_equal 3.5 (Plant.get_price feed4)
+
+let test_feed_strawberry _ =
+  let feed_plant = Plant.feed strawberry "Mia" in
+  assert_equal 1 (Plant.get_height feed_plant);
+  assert_equal 4.0 (Plant.get_price feed_plant)
+
+let test_feed_corn _ =
+  let feed1 = Plant.feed corn "Matthew" in
+  let feed2 = Plant.feed feed1 "Matthew" in
+  assert_equal 2 (Plant.get_height feed2);
+  assert_equal 4.0 (Plant.get_price feed2)
+
+let test_feed_cactus _ =
+  let feed_plant = Plant.feed cactus "Charlotte" in
+  assert_equal 1 (Plant.get_height feed_plant);
+  assert_equal 30.0 (Plant.get_price feed_plant)
+
+let test_feed_lettuce _ =
+  let feed1 = Plant.feed lettuce "Henry" in
+  let feed2 = Plant.feed feed1 "Henry" in
+  let feed3 = Plant.feed feed2 "Henry" in
+  assert_equal 3 (Plant.get_height feed3);
+  assert_equal 6.0 (Plant.get_price feed3)
+
+let test_feed_lemon _ =
+  let feed1 = Plant.feed lemon "Benjamin" in
+  let feed2 = Plant.feed feed1 "Benjamin" in
+  let feed3 = Plant.feed feed2 "Benjamin" in
+  assert_equal 3 (Plant.get_height feed3);
+  assert_equal 3.2 (Plant.get_price feed3)
+
+let test_feed_mango _ =
+  let feed1 = Plant.feed mango "James" in
+  let feed2 = Plant.feed feed1 "James" in
+  assert_equal 2 (Plant.get_height feed2);
+  assert_equal 6.0 (Plant.get_price feed2)
+
+let test_feed_pineapple _ =
+  let feed1 = Plant.feed pineapple "Amelia" in
+  let feed2 = Plant.feed feed1 "Amelia" in
+  let feed3 = Plant.feed feed2 "Amelia" in
+  let feed4 = Plant.feed feed3 "Amelia" in
+  assert_equal 4 (Plant.get_height feed4);
+  assert_equal 5.8 (Plant.get_price feed4)
+
+let test_feed_clover _ =
+  let feed1 = Plant.feed clover "Ethan" in
+  assert_equal 1 (Plant.get_height feed1);
+  assert_equal 1.0 (Plant.get_price feed1)
+
+let test_feed_bellpepper _ =
+  let feed1 = Plant.feed bell_pepper "Ella" in
+  let feed2 = Plant.feed feed1 "Ella" in
+  assert_equal 2 (Plant.get_height feed2);
+  assert_equal 2.0 (Plant.get_price feed2)
+
+(* Test water function *)
+let test_water_daisy _ =
+  let water1 = Plant.water daisy "Sam" in
+  assert_equal 26 (Plant.get_hydration water1)
+
+let test_water_sunflower _ =
+  let water1 = Plant.water sunflower "Emily" in
+  let water2 = Plant.water water1 "Emily" in
+  assert_equal 27 (Plant.get_hydration water2)
+
+let test_water_rose _ =
+  let water1 = Plant.water rose "Julie" in
+  let water2 = Plant.water water1 "Julie" in
+  assert_equal 27 (Plant.get_hydration water2)
+
+let test_water_tulip _ =
+  let water1 = Plant.water tulip "Michael" in
+  let water2 = Plant.water water1 "Michael" in
+  assert_equal 27 (Plant.get_hydration water2)
+
+let test_water_tomato _ =
+  let water1 = Plant.water tomato "Sophia" in
+  let water2 = Plant.water water1 "Sophia" in
+  let water3 = Plant.water water2 "Sophia" in
+  let water4 = Plant.water water3 "Sophia" in
+  assert_equal 29 (Plant.get_hydration water4)
+
+let test_water_apple _ =
+  let water1 = Plant.water apple "Isabella" in
+  assert_equal 26 (Plant.get_hydration water1)
+
+let test_water_onion _ =
+  let water1 = Plant.water onion "Olivia" in
+  let water2 = Plant.water water1 "Olivia" in
+  assert_equal 27 (Plant.get_hydration water2)
+
+let test_water_potato _ =
+  let water1 = Plant.water potato "Daniel" in
+  let water2 = Plant.water water1 "Daniel" in
+  let water3 = Plant.water water2 "Daniel" in
+  let water4 = Plant.water water3 "Daniel" in
+  assert_equal 29 (Plant.get_hydration water4)
+
+let test_water_wheat _ =
+  let water1 = Plant.water wheat "William" in
+  let hydration = Plant.get_hydration water1 in
+  assert_equal 26 hydration
+
+let test_water_rice _ =
+  let water1 = Plant.water rice "Abigail" in
+  assert_equal 26 (Plant.get_hydration water1)
+
+let test_water_peach _ =
+  let water1 = Plant.water peach "Alexander" in
+  let water2 = Plant.water water1 "Alexander" in
+  let water3 = Plant.water water2 "Alexander" in
+  let water4 = Plant.water water3 "Alexander" in
+  assert_equal 29 (Plant.get_hydration water4)
+
+let test_water_strawberry _ =
+  let water1 = Plant.water strawberry "Mia" in
+  assert_equal 26 (Plant.get_hydration water1)
+
+let test_water_corn _ =
+  let water1 = Plant.water corn "Matthew" in
+  let water2 = Plant.water water1 "Matthew" in
+  assert_equal 27 (Plant.get_hydration water2)
+
+let test_water_cactus _ =
+  let water1 = Plant.water cactus "Charlotte" in
+  assert_equal 11 (Plant.get_hydration water1)
+
+let test_water_lettuce _ =
+  let water1 = Plant.water lettuce "Henry" in
+  let water2 = Plant.water water1 "Henry" in
+  let water3 = Plant.water water2 "Henry" in
+  assert_equal 28 (Plant.get_hydration water3)
+
+let test_water_mango _ =
+  let water1 = Plant.water mango "James" in
+  let water2 = Plant.water water1 "James" in
+  assert_equal 27 (Plant.get_hydration water2)
+
+let test_water_pineapple _ =
+  let water1 = Plant.water pineapple "Amelia" in
+  let water2 = Plant.water water1 "Amelia" in
+  let water3 = Plant.water water2 "Amelia" in
+  let water4 = Plant.water water3 "Amelia" in
+  assert_equal 29 (Plant.get_hydration water4)
+
+let test_water_clover _ =
+  let water1 = Plant.water clover "Ethan" in
+  let hydration = Plant.get_hydration water1 in
+  assert_equal 26 hydration
+
+let test_water_bellpepper _ =
+  let water1 = Plant.water bell_pepper "Ella" in
+  let water2 = Plant.water water1 "Ella" in
+  let water3 = Plant.water water2 "Ella" in
+  assert_equal 28 (Plant.get_hydration water3)
+
+(* Test neglect function*)
+let test_neglect_daisy _ =
+  let water1 = Plant.neglect daisy "Sam" in
+  assert_equal 24 (Plant.get_hydration water1)
+
+let test_neglect_sunflower _ =
+  let water1 = Plant.neglect sunflower "Emily" in
+  let water2 = Plant.neglect water1 "Emily" in
+  assert_equal 23 (Plant.get_hydration water2)
+
+let test_neglect_rose _ =
+  let water1 = Plant.neglect rose "Julie" in
+  let water2 = Plant.neglect water1 "Julie" in
+  assert_equal 23 (Plant.get_hydration water2)
+
+let test_neglect_tulip _ =
+  let water1 = Plant.neglect tulip "Michael" in
+  let water2 = Plant.neglect water1 "Michael" in
+  assert_equal 23 (Plant.get_hydration water2)
+
+let test_neglect_tomato _ =
+  let water1 = Plant.neglect tomato "Sophia" in
+  let water2 = Plant.neglect water1 "Sophia" in
+  let water3 = Plant.neglect water2 "Sophia" in
+  let water4 = Plant.neglect water3 "Sophia" in
+  assert_equal 21 (Plant.get_hydration water4)
+
+let test_neglect_apple _ =
+  let water1 = Plant.neglect apple "Isabella" in
+  assert_equal 24 (Plant.get_hydration water1)
+
+let test_neglect_onion _ =
+  let water1 = Plant.neglect onion "Olivia" in
+  let water2 = Plant.neglect water1 "Olivia" in
+  assert_equal 23 (Plant.get_hydration water2)
+
+let test_neglect_potato _ =
+  let water1 = Plant.neglect potato "Daniel" in
+  let water2 = Plant.neglect water1 "Daniel" in
+  let water3 = Plant.neglect water2 "Daniel" in
+  let water4 = Plant.neglect water3 "Daniel" in
+  assert_equal 21 (Plant.get_hydration water4)
+
+let test_neglect_wheat _ =
+  let water1 = Plant.neglect wheat "William" in
+  assert_equal 24 (Plant.get_hydration water1)
+
+let test_neglect_rice _ =
+  let water1 = Plant.neglect rice "Abigail" in
+  assert_equal 24 (Plant.get_hydration water1)
+
+let test_neglect_peach _ =
+  let water1 = Plant.neglect peach "Alexander" in
+  let water2 = Plant.neglect water1 "Alexander" in
+  let water3 = Plant.neglect water2 "Alexander" in
+  let water4 = Plant.neglect water3 "Alexander" in
+  assert_equal 21 (Plant.get_hydration water4)
+
+let test_neglect_strawberry _ =
+  let water1 = Plant.neglect strawberry "Mia" in
+  assert_equal 24 (Plant.get_hydration water1)
+
+let test_neglect_corn _ =
+  let water1 = Plant.neglect corn "Matthew" in
+  let water2 = Plant.neglect water1 "Matthew" in
+  assert_equal 23 (Plant.get_hydration water2)
+
+let test_neglect_cactus _ =
+  let water1 = Plant.neglect cactus "Charlotte" in
+  assert_equal 9 (Plant.get_hydration water1)
+
+let test_neglect_lettuce _ =
+  let water1 = Plant.neglect lettuce "Henry" in
+  let water2 = Plant.neglect water1 "Henry" in
+  let water3 = Plant.neglect water2 "Henry" in
+  assert_equal 22 (Plant.get_hydration water3)
+
+let test_neglect_mango _ =
+  let water1 = Plant.neglect mango "James" in
+  let water2 = Plant.neglect water1 "James" in
+  assert_equal 23 (Plant.get_hydration water2)
+
+let test_neglect_pineapple _ =
+  let water1 = Plant.neglect pineapple "Amelia" in
+  let water2 = Plant.neglect water1 "Amelia" in
+  let water3 = Plant.neglect water2 "Amelia" in
+  let water4 = Plant.neglect water3 "Amelia" in
+  assert_equal 21 (Plant.get_hydration water4)
+
+let test_neglect_clover _ =
+  let water1 = Plant.neglect clover "Ethan" in
+  assert_equal 24 (Plant.get_hydration water1)
+
+let test_neglect_bellpepper _ =
+  let water1 = Plant.neglect bell_pepper "Ella" in
+  let water2 = Plant.neglect water1 "Ella" in
+  let water3 = Plant.neglect water2 "Ella" in
+  assert_equal 22 (Plant.get_hydration water3)
+
+(* Test stampede function *)
+let test_stampede_life_true _ =
+  let stampeded_sunflower = Plant.stampede sunflower in
+  assert_equal true (Plant.get_life stampeded_sunflower)
+
+let feed_tests =
+  "feed test suite"
+  >::: [
+         "test feed daisy" >:: test_feed_daisy;
+         "test feed sunflower" >:: test_feed_sunflower;
+         "test feed rose" >:: test_feed_rose;
+         "test feed tulip" >:: test_feed_tulip;
+         "test feed tomato" >:: test_feed_tomato;
+         "test feed apple" >:: test_feed_apple;
+         "test feed onion" >:: test_feed_onion;
+         "test feed potato" >:: test_feed_potato;
+         "test feed wheat" >:: test_feed_wheat;
+         "test feed rice" >:: test_feed_rice;
+         "test feed peach" >:: test_feed_peach;
+         "test feed strawberry" >:: test_feed_strawberry;
+         "test feed corn" >:: test_feed_corn;
+         "test feed cactus" >:: test_feed_cactus;
+         "test feed lettuce" >:: test_feed_lettuce;
+         "test feed lemon" >:: test_feed_lemon;
+         "test feed mango" >:: test_feed_mango;
+         "test feed pineapple" >:: test_feed_pineapple;
+         "test feed clover" >:: test_feed_clover;
+         "test feed bellpepper" >:: test_feed_bellpepper;
+       ]
+
+let water_tests =
+  "water test suite"
+  >::: [
+         "test water daisy" >:: test_water_daisy;
+         "test water sunflower" >:: test_water_sunflower;
+         "test water rose" >:: test_water_rose;
+         "test water tulip" >:: test_water_tulip;
+         "test water tomato" >:: test_water_tomato;
+         "test water apple" >:: test_water_apple;
+         "test water onion" >:: test_water_onion;
+         "test water potato" >:: test_water_potato;
+         "test water wheat" >:: test_water_wheat;
+         "test water rice" >:: test_water_rice;
+         "test water peach" >:: test_water_peach;
+         "test water strawberry" >:: test_water_strawberry;
+         "test water corn" >:: test_water_corn;
+         "test water cactus" >:: test_water_cactus;
+         "test water lettuce" >:: test_water_lettuce;
+         "test water mango" >:: test_water_mango;
+         "test water pineapple" >:: test_water_pineapple;
+         "test water clover" >:: test_water_clover;
+         "test water bellpepper" >:: test_water_bellpepper;
+       ]
+
+let neglect_tests =
+  "neglect test suite"
+  >::: [
+         "test neglect daisy" >:: test_neglect_daisy;
+         "test neglect sunflower" >:: test_neglect_sunflower;
+         "test neglect rose" >:: test_neglect_rose;
+         "test neglect tulip" >:: test_neglect_tulip;
+         "test neglect tomato" >:: test_neglect_tomato;
+         "test neglect apple" >:: test_neglect_apple;
+         "test neglect onion" >:: test_neglect_onion;
+         "test neglect potato" >:: test_neglect_potato;
+         "test neglect wheat" >:: test_neglect_wheat;
+         "test neglect rice" >:: test_neglect_rice;
+         "test neglect peach" >:: test_neglect_peach;
+         "test neglect strawberry" >:: test_neglect_strawberry;
+         "test neglect corn" >:: test_neglect_corn;
+         "test neglect cactus" >:: test_neglect_cactus;
+         "test neglect lettuce" >:: test_neglect_lettuce;
+         "test neglect mango" >:: test_neglect_mango;
+         "test neglect pineapple" >:: test_neglect_pineapple;
+         "test neglect clover" >:: test_neglect_clover;
+         "test neglect bellpepper" >:: test_neglect_bellpepper;
+       ]
 
 let suite =
   "Test Suite for Plant Module"
@@ -168,9 +575,11 @@ let suite =
          >:: test_get_category_defensive_items;
          "test_get_category_grains" >:: test_get_category_grains;
          "test_get_type" >:: test_get_type;
-         "test_water" >:: test_water;
+         water_tests;
          "test_apply_discount" >:: test_apply_discount;
-         (* "test_neglect" >:: test_neglect; *)
+         feed_tests;
+         neglect_tests;
+         "test stampede" >:: test_stampede_life_true;
        ]
 
 let () = run_test_tt_main suite
