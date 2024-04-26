@@ -221,8 +221,8 @@ let get_category (type_of_plant : t) =
   | _, Tomato | _, Lettuce | _, Bell_Pepper | _, Onion | _, Potato ->
       "Vegetables"
   | _, Lemon | _, Pineapple | _, Apple | _, Peach | _, Strawberry | _, Mango ->
-      "Fruit"
-  | _, Clover | _, Cactus -> "Defense Item"
+      "Fruits"
+  | _, Clover | _, Cactus -> "Defensive Items"
   | _, Rice | _, Wheat | _, Corn -> "Grains"
 
 let check_status (plant : t) =

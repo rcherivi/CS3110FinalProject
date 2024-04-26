@@ -372,3 +372,16 @@ let night_change n garden =
         let rand_int = Random.int (List.length good_events_lst) in
         let chosen_event = List.nth good_events_lst rand_int in
         apply_event chosen_event garden
+
+let has_plant garden name =
+  match garden with
+  | { cells; _ } ->
+      Array.exists
+        (fun row ->
+          Array.exists
+            (fun cell ->
+              match cell with
+              | Plant plant -> Plant.get_name plant = name
+              | _ -> false)
+            row)
+        cells

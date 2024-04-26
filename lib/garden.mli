@@ -19,3 +19,4 @@ val get_defensive_items : t -> t
 val count_plant : string -> t -> int
 val print_plants_in_category : string -> t -> unit
 val night_change : int ref -> t -> t
+val has_plant : t -> string -> bool

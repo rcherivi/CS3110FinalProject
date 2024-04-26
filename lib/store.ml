@@ -235,3 +235,38 @@ let buy_item item_name store inv garden =
         (new_inv, Garden.add_plant item_name name new_money)
   in
   (new_inv, new_money)
+
+let has_item item_name =
+  match item_name with
+  | "Daisy" -> true
+  | "Strawberry" -> true
+  | "Sunflower" -> true
+  | "Rose" -> true
+  | "Tulip" -> true
+  | "Tomato" -> true
+  | "Lemon" -> true
+  | "Pineapple" -> true
+  | "Onion" -> true
+  | "Potato" -> true
+  | "Wheat" -> true
+  | "Apple" -> true
+  | "Corn" -> true
+  | "Peach" -> true
+  | "Cactus" -> true
+  | "Clover" -> true
+  | "Rice" -> true
+  | "Lettuce" -> true
+  | "Mango" -> true
+  | "Cheese" -> true
+  | "Eggs" -> true
+  | "Milk" -> true
+  | "Water" -> true
+  | "Butter" -> true
+  | "Chicken" -> true
+  | "Sugar" -> true
+  | "Chocolate" -> true
+  | "Plant Food" -> true
+  | "Lady Bug" -> true
+  | "Beef" -> true
+  | "Bell Pepper" -> true
+  | _ -> false
