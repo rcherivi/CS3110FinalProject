@@ -233,11 +233,12 @@ let check_status (plant : t) =
           species )
       else plant
 
-let stampede (plant : t) : t =
-  let rand_val = Random.float 1.0 in
+let stampede rand_val (plant : t) : t =
+  (* let rand_val = Random.float 1.0 in *)
   match plant with
   | { height = h; life = _; hydration = w; name = n; price = p }, species ->
       if rand_val < 0.2 then
+        (*0.5 - defense_val*)
         ( { height = h; life = false; hydration = w; name = n; price = p },
           species )
       else
@@ -256,6 +257,39 @@ let drought (plant : t) : t =
   | { height = h; life = l; hydration = w; name = n; price = p }, species ->
       check_status
         ( { height = h; life = l; hydration = w - 3; name = n; price = p },
+          species )
+
+let dragon (plant : t) : t =
+  let rand_val = Random.float 1.0 in
+  match plant with
+  | { height = h; life = _; hydration = w; name = n; price = p }, species ->
+      if rand_val < 0.3 then
+        (*0.5 - defense_val*)
+        ( { height = h; life = false; hydration = w; name = n; price = p },
+          species )
+      else
+        ( { height = h; life = true; hydration = w; name = n; price = p },
+          species )
+
+let ice (plant : t) : t =
+  match plant with
+  | { height = h; life = l; hydration = w; name = n; price = p }, species ->
+      check_status
+        ( { height = h - 2; life = l; hydration = w; name = n; price = p },
+          species )
+
+let unicorn (plant : t) : t =
+  match plant with
+  | { height = h; life = l; hydration = w; name = n; price = p }, species ->
+      check_status
+        ( { height = h + 2; life = l; hydration = w; name = n; price = p },
+          species )
+
+let fairies (plant : t) : t =
+  match plant with
+  | { height = h; life = l; hydration = w; name = n; price = p }, species ->
+      check_status
+        ( { height = h; life = l; hydration = w; name = n; price = p +. 0.1 },
           species )
 
 let is_alive (plant : t) =

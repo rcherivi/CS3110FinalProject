@@ -8,3 +8,4 @@ val harvest : string -> t -> Garden.t -> t * Garden.t
 val sell : string -> int -> t -> Garden.t -> t * Garden.t
 val print : t -> unit
 val add : string -> t -> t
+val get_length : t -> int

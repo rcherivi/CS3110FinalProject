@@ -71,3 +71,7 @@ let add item inv =
       if List.mem_assoc item lst then
         Inv ((item, lookup item (Inv lst) + 1) :: List.remove_assoc item lst)
       else insert item 1 inv
+
+let get_length inv =
+  match inv with
+  | Inv lst -> List.length lst

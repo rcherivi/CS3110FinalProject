@@ -15,7 +15,11 @@ val get_hydration : t -> int
 val get_name : t -> string
 val get_category : t -> string
 val get_life : t -> bool
-val stampede : t -> t
+val stampede : float -> t -> t
 val drought : t -> t
 val pollinate : t -> t
+val dragon : t -> t
+val ice : t -> t
+val unicorn : t -> t
+val fairies : t -> t
 val is_alive : t -> bool

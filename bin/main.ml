@@ -10,16 +10,14 @@ let menu_options =
   \ Menu:\n\
   \  1. Buy Plant/Item\n\
   \  2. Feed Plants\n\
-  \ 3. Water Plants\n\
+  \  3. Water Plants\n\
   \  4. Neglect Plants\n\
   \  5. Harvest\n\
-  \  6. Observe\n\
-  \   Garden\n\
+  \  6. Observe Garden\n\
   \  7. View Inventory\n\
   \  8. Sell \n\
   \  9. Recipes\n\
-  \  10. Create\n\
-  \   Recipe\n\
+  \  10. Create Recipe\n\
   \ Enter your option number: "
 
 let check_attempts attempts =
@@ -285,6 +283,9 @@ let rec print_recipe_helper func n inv garden count day =
 (* let view_inventory_helper func n inv garden = let inventory = Inventory.print
    in print_endline inventory *)
 
+(* let get_action_limit plant_count = if plant_count = 0 then 10 else 5 *
+   plant_count *)
+
 let create_recipe_helper func n inv garden =
   let () = print_endline recipe_menu in
 
@@ -301,6 +302,7 @@ let rec func n inv garden count day =
   match !day with
   | 50 -> print_endline "\nEnd of Garden Game"
   | _ ->
+      (*if count = get_action_limit (Garden.get_plant_count garden) *)
       if !count = 10 then (
         let garden = Garden.night_change day garden in
         print_endline ("\nIt's Day " ^ string_of_int (!day + 1) ^ "!");

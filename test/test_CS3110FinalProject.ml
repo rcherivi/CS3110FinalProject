@@ -2,6 +2,18 @@ open OUnit2
 open CS3110FinalProject
 (* open Plant open Garden open Store open Inventory open Recipe *)
 
+let new_inv = Inventory.create_inventory
+let garden = Garden.create_garden ()
+let add_eggs = Inventory.add "Eggs" new_inv
+let add_milk = Inventory.add "Milk" new_inv
+let add_cheese = Inventory.add "Cheese" new_inv
+let add_daisy = Inventory.harvest "Daisy" new_inv garden
+let add_apple = Inventory.harvest "Apple" new_inv garden
+let add_corn = Inventory.harvest "Corn" new_inv garden
+let add_cactus = Inventory.harvest "Cactus" new_inv garden
+
+(**)
+
 let daisy = Plant.create_plant "Daisy" "Sam"
 let sunflower = Plant.create_plant "Sunflower" "Emily"
 let rose = Plant.create_plant "Rose" "Julie"
@@ -483,7 +495,7 @@ let test_neglect_bellpepper _ =
 
 (* Test stampede function *)
 let test_stampede_life_true _ =
-  let stampeded_sunflower = Plant.stampede sunflower in
+  let stampeded_sunflower = Plant.stampede 0.3 sunflower in
   assert_equal true (Plant.get_life stampeded_sunflower)
 
 let feed_tests =
@@ -559,6 +571,31 @@ let neglect_tests =
          "test neglect bellpepper" >:: test_neglect_bellpepper;
        ]
 
+let inventory_tests =
+  "inventory test suite"
+  >::: [
+         ( "a new inventory has nothing in it" >:: fun _ ->
+           assert_equal 0 (Inventory.get_length new_inv) );
+         ( "test adding a eggs" >:: fun _ ->
+           assert_equal 1 (Inventory.get_length add_eggs) );
+         ( "test adding cheese" >:: fun _ ->
+           assert_equal 1 (Inventory.get_length add_cheese) );
+         ( "test adding milk" >:: fun _ ->
+           assert_equal 1 (Inventory.get_length add_milk) );
+         ( "Harvesting short plant shouldn't add it to garden: flower"
+         >:: fun _ -> assert_equal 0 (Garden.get_plant_count (snd add_daisy)) );
+         ( "Harvesting short plant shouldn't add it to garden: fruit"
+         >:: fun _ -> assert_equal 0 (Garden.get_plant_count (snd add_apple)) );
+         ( "Harvesting short plant shouldn't add it to garden: defensive item"
+         >:: fun _ -> assert_equal 0 (Garden.get_plant_count (snd add_cactus))
+         );
+         ( "Harvesting short plant shouldn't add it to garden: grains"
+         >:: fun _ -> assert_equal 0 (Garden.get_plant_count (snd add_corn)) );
+         ( "test adding a plant increases inventory size by 1" >:: fun _ ->
+           assert_equal 1
+             (Inventory.get_length add_eggs - Inventory.get_length new_inv) );
+       ]
+
 let suite =
   "Test Suite for Plant Module"
   >::: [
@@ -579,6 +616,7 @@ let suite =
          "test_apply_discount" >:: test_apply_discount;
          feed_tests;
          neglect_tests;
+         inventory_tests;
          "test stampede" >:: test_stampede_life_true;
        ]
 

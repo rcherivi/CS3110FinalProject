@@ -7,6 +7,9 @@ val water_plants : t -> string -> t
 val neglect_plants : t -> string -> t
 val print : t -> unit
 val inc_money : string -> t -> t
+val incr_luck : t -> t
+val incr_defense : t -> t
+val get_plant_count : t -> int
 
 (* val inc_money : Plant.t -> string -> t -> t *)
 val inc_money_amt : float -> t -> t
