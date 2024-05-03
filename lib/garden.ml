@@ -180,14 +180,13 @@ let count_plant plant_type garden =
                   if
                     Plant.get_type plant = plant_type
                     && Plant.get_height plant > 5
-                  then
-                    let () = print_endline "hi" in
+                  then (* let () = print_endline "hi" in *)
                     count := !count + 1
                   else ()
               | _ -> ())
             row)
         cells;
-      print_endline (string_of_int !count);
+      (* print_endline (string_of_int !count); *)
       !count
 
 let remove_plant plant_type garden =
