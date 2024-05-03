@@ -107,9 +107,9 @@ let buy_plant_helper func n inv garden =
   let new_store = Store.create_store in
   let () = print_endline (Store.print_store new_store) in
   print_endline
-    "Plants will be added to garden, and other items will be added to the \
+    "\n\
+     Plants will be added to garden, and other items will be added to the \
      inventory";
-  print_endline "";
   print_string "What is the name of item you want to buy: ";
   let item = read_line () in
   let acc_item = get_valid_item item in
@@ -159,35 +159,14 @@ let view_inv_helper func n inv garden =
   let () = Inventory.print inv in
   func (n + 1) inv garden
 
-let recipe_menu =
-  "\n\
-  \  Select which recipe you would like to view:\n\
-  \  1.\n\
-  \   Tomato Soup 🥫 \n\
-  \  2. Bread 🍞 \n\
-  \  3. Apple Pie 🥧 \n\
-  \  4. Apple Juice 🧃\n\
-  \ 5. Popcorn 🍿 \n\
-  \  6. French Fries 🍟 \n\
-  \  7. Chocolate Chip Cookie 🍪 \n\
-  \ 8. Sandwich 🥪 \n\
-  \  9. Salad 🥗 \n\
-  \  10. Strawberry Cake 🍰 \n\
-  \  11. Flower\n\
-  \   Bouqet 💐\n\
-  \  12. Curry 🍛 \n\
-  \  13. Chicken Soup 🥘 \n\
-  \  14. Hamburger 🍔 \n\
-  \ 15. Smoothie 🍹"
-
 let observe_menu_options =
   "\n\
   \  1. View Flowers \n\
   \  2. View Fruits \n\
-  \ 3. View Vegetables \n\
+  \  3. View Vegetables \n\
   \  4. View Grains \n\
   \  5. View Defensive Items \n\
-  \ 6. View Garden"
+  \  6. View Garden"
 
 let observe_garden_helper func n inv garden count day =
   let print_menu = print_endline observe_menu_options in
@@ -214,86 +193,126 @@ let observe_garden_helper func n inv garden count day =
   else func (n + 1) inv garden count day;
   func (n + 1) inv garden count day
 
-let recipe_or_menu_message recipe_func func n inv garden count day =
-  let print_message =
-    print_endline
-      "\n\
-      \  Press 1 to go back to your Recipe Book\n\
-      \   or Press 2 to go back to the  menu."
-  in
-  print_message;
-  let recipe_or_menu = read_line () in
-  print_string "";
-  if recipe_or_menu = "1" then recipe_func func n inv garden count day
-  else if recipe_or_menu = "2" then func n inv garden count day
-  else func (n + 1) inv garden count day
+let recipe_menu =
+  "\n\
+  \  Select which recipe you would like to view:\n\
+  \  1. Tomato Soup 🥫 \n\
+  \  2. Bread 🍞 \n\
+  \  3. Apple Pie 🥧 \n\
+  \  4. Apple Juice 🧃\n\
+  \  5. Popcorn 🍿 \n\
+  \  6. French Fries 🍟 \n\
+  \  7. Chocolate Chip Cookie 🍪 \n\
+  \  8. Sandwich 🥪 \n\
+  \  9. Salad 🥗 \n\
+  \  10. Strawberry Cake 🍰 \n\
+  \  11. Flower Bouqet 💐\n\
+  \  12. Curry 🍛 \n\
+  \  13. Chicken Soup 🥘 \n\
+  \  14. Hamburger 🍔 \n\
+  \  15. Smoothie 🍹"
 
+let missing_ingredient_message recipe_function func n inv garden count day =
+  print_endline
+    "Choose the following number to proceed:  \n\
+    \  1. Go back to Recipe \n\
+    \  2. Go back to menu";
+  match read_line () with
+  | "1" -> recipe_function func n inv garden count day
+  | "2" -> func n inv garden count day
+  | _ -> print_endline "Invalid option"
+
+let display_and_handle_recipe recipe_func food_name recipe_name func n inv
+    garden count day =
+  print_endline recipe_name;
+  print_endline
+    "\n\
+    \  Choose the following number to proceed: \n\
+    \    1. Create this recipe \n\
+    \    2. Go back to Recipe \n\
+    \    3. Go back to menu ";
+  match read_line () with
+  | "1" ->
+      ignore (Recipe.create_recipe food_name inv);
+      missing_ingredient_message recipe_func func n inv garden count day
+  | "2" -> recipe_func func n inv garden count day
+  | "3" -> func n inv garden count day
+  | _ ->
+      print_endline "Invalid option";
+      recipe_func func n inv garden count day
+
+let all_recipes =
+  [
+    (1, "Tomato Soup", Recipe.tomato_soup_recipe);
+    (2, "Bread", Recipe.bread_recipe);
+    (3, "Apple Pie", Recipe.apple_pie_recipe);
+    (4, "Apple Juice", Recipe.apple_juice_recipe);
+    (5, "Popcorn", Recipe.popcorn_recipe);
+    (6, "French Fries", Recipe.french_fries_recipe);
+    (7, "Chocolate Chip Cookie", Recipe.cookie_recipe);
+    (8, "Sandwich", Recipe.sandwich_recipe);
+    (9, "Salad", Recipe.salad_recipe);
+    (10, "Strawberry Cake", Recipe.strawberry_cake_recipe);
+    (11, "Flower Bouquet", Recipe.bouquet_recipe);
+    (12, "Curry", Recipe.curry_recipe);
+    (13, "Chicken Soup", Recipe.chicken_soup_recipe);
+    (14, "Hamburger", Recipe.hamburger_recipe);
+    (15, "Smoothie", Recipe.smoothie_recipe);
+  ]
+
+(* Adapted From: 'Create Recipe: Helper Function' ChatGPT, 3 May. version 4.0,
+   chat.openai.com. *)
 let rec print_recipe_helper func n inv garden count day =
-  let print_recipes = print_endline recipe_menu in
-  print_recipes;
+  print_endline recipe_menu;
+  print_endline "Enter the number of the recipe you want to view and/or create:";
   let choice = read_line () in
-  print_string "";
-  if choice = "1" then (
-    print_endline Recipe.tomato_soup_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "2" then (
-    print_endline Recipe.bread_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "3" then (
-    print_endline Recipe.apple_pie_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "4" then (
-    print_endline Recipe.apple_juice_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "5" then (
-    print_endline Recipe.popcorn_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "6" then (
-    print_endline Recipe.french_fries_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "7" then (
-    print_endline Recipe.cookie_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "8" then (
-    print_endline Recipe.sandwich_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "9" then (
-    print_endline Recipe.salad_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "10" then (
-    print_endline Recipe.strawberry_cake_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "11" then (
-    print_endline Recipe.bouquet_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "12" then (
-    print_endline Recipe.curry_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "13" then (
-    print_endline Recipe.chicken_soup_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "14" then (
-    print_endline Recipe.hamburger_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else if choice = "15" then (
-    print_endline Recipe.smoothie_recipe;
-    recipe_or_menu_message print_recipe_helper func n inv garden count day)
-  else func (n + 1) inv garden count day
+  try
+    let index = int_of_string choice in
+    let _, name, recipe_details =
+      List.find (fun (i, _, _) -> i = index) all_recipes
+    in
+    display_and_handle_recipe print_recipe_helper name recipe_details func n inv
+      garden count day
+  with
+  | Failure _ -> print_endline "Please enter a number."
+  | Not_found ->
+      print_endline "Invalid selection, please enter a valid number.";
+      print_recipe_helper func n inv garden count day
 
-(* let view_inventory_helper func n inv garden = let inventory = Inventory.print
-   in print_endline inventory *)
-
-(* let get_action_limit plant_count = if plant_count = 0 then 10 else 5 *
-   plant_count *)
+(* let rec print_recipe_helper func n inv garden count day = print_endline
+   recipe_menu; print_endline "Enter the number of the recipe you want to view
+   and/or create:"; let choice = read_line () in match choice with | "1" ->
+   display_and_handle_recipe print_recipe_helper "Tomato Soup"
+   Recipe.tomato_soup_recipe func n inv garden count day | "2" ->
+   display_and_handle_recipe print_recipe_helper "Bread" Recipe.bread_recipe
+   func n inv garden count day | "3" -> display_and_handle_recipe
+   print_recipe_helper "Apple Pie" Recipe.apple_pie_recipe func n inv garden
+   count day | "4" -> display_and_handle_recipe print_recipe_helper "Apple
+   Juice" Recipe.apple_juice_recipe func n inv garden count day | "5" ->
+   display_and_handle_recipe print_recipe_helper "Popcorn" Recipe.popcorn_recipe
+   func n inv garden count day | "6" -> display_and_handle_recipe
+   print_recipe_helper "French Fries" Recipe.french_fries_recipe func n inv
+   garden count day | "7" -> display_and_handle_recipe print_recipe_helper
+   "Chocolate Chip Cookie" Recipe.cookie_recipe func n inv garden count day |
+   "8" -> display_and_handle_recipe print_recipe_helper "Sandwich"
+   Recipe.sandwich_recipe func n inv garden count day | "9" ->
+   display_and_handle_recipe print_recipe_helper "Salad" Recipe.salad_recipe
+   func n inv garden count day | "10" -> display_and_handle_recipe
+   print_recipe_helper "Strawberry Cake" Recipe.strawberry_cake_recipe func n
+   inv garden count day | "11" -> display_and_handle_recipe print_recipe_helper
+   "Flower Bouquet" Recipe.bouquet_recipe func n inv garden count day | "12" ->
+   display_and_handle_recipe print_recipe_helper "Curry" Recipe.curry_recipe
+   func n inv garden count day | "13" -> display_and_handle_recipe
+   print_recipe_helper "Chicken Soup" Recipe.chicken_soup_recipe func n inv
+   garden count day | "14" -> display_and_handle_recipe print_recipe_helper
+   "Hamburger" Recipe.hamburger_recipe func n inv garden count day | "15" ->
+   display_and_handle_recipe print_recipe_helper "Smoothie"
+   Recipe.smoothie_recipe func n inv garden count day | _ -> print_endline
+   "Invalid selection, please enter a valid number."; print_recipe_helper func n
+   inv garden count day *)
 
 let create_recipe_helper func n inv garden =
-  let () = print_endline recipe_menu in
-
-  (* let menu_selction = read_line () in let () = print_recipe_helper *)
-  let () = print_endline "What recipe do you want to make?" in
-  let recipe = read_line () in
-  let new_inv = Recipe.create_recipe recipe inv in
-  func (n + 1) new_inv garden
+  print_recipe_helper func (n + 1) inv garden
 
 let count = ref 0
 let day = ref 1
@@ -326,8 +345,6 @@ let rec func n inv garden count day =
           observe_garden_helper func n inv garden count day
         else if choice = "7" then view_inv_helper func n inv garden count day
         else if choice = "8" then sell_helper func n inv garden count day
-        else if choice = "9" then
-          print_recipe_helper func n inv garden count day
         else if choice = "10" then
           create_recipe_helper func n inv garden count day
         else (

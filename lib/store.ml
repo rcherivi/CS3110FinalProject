@@ -122,7 +122,7 @@ let discount_general price name =
   | "Eggs" -> if price < usual.eggs_price then "[DISCOUNT] 💸" else ""
   | "Milk" -> if price < usual.milk_price then "[DISCOUNT] 💸" else ""
   | "Water" -> if price < usual.water_price then "[DISCOUNT] 💸" else ""
-  | "Butter" -> if price < usual.butter_price then "[[DISCOUNT] 💸" else ""
+  | "Butter" -> if price < usual.butter_price then "[DISCOUNT] 💸" else ""
   | "Sugar" -> if price < usual.sugar_price then "[DISCOUNT] 💸" else ""
   | "Chocolate" -> if price < usual.chocolate_price then "[DISCOUNT] 💸" else ""
   | "Plant Food" ->
@@ -132,46 +132,105 @@ let discount_general price name =
   | "Chicken" -> if price < usual.chicken_price then "[DISCOUNT] 💸" else ""
   | _ -> ""
 
+(* let general_discount name price = "\n" ^ name ^ ": ($" ^ string_of_float
+   price ^ ") " ^ discount_general price name
+
+   let plant_and_price name price = "\n" ^ name ^ ": ($" ^ string_of_float price
+   ^ ") " ^ discount_plant price name
+
+   let print_store store = plant_and_price "Daisy" store.daisy_price ^
+   plant_and_price "Strawberry" store.strawberry_price ^ plant_and_price
+   "Sunflower" store.sunflower_price ^ plant_and_price "Rose" store.rose_price ^
+   plant_and_price "Tulip" store.tulip_price ^ plant_and_price "Tomato"
+   store.tomato_price ^ plant_and_price "Lemon" store.lemon_price ^
+   plant_and_price "Potato" store.potato_price ^ plant_and_price "Onion"
+   store.onion_price ^ plant_and_price "Wheat" store.wheat_price ^
+   plant_and_price "Apple" store.apple_price ^ plant_and_price "Corn"
+   store.corn_price ^ plant_and_price "Peach" store.peach_price ^
+   plant_and_price "Pineapple" store.pineapple_price ^ plant_and_price "Cactus"
+   store.cactus_price ^ general_discount "Cheese" store.cheese_price ^
+   general_discount "Eggs" store.eggs_price ^ general_discount "Milk"
+   store.milk_price ^ general_discount "Water" store.water_price ^
+   general_discount "Clover" store.clover_price ^ general_discount "Rice"
+   store.rice_price ^ general_discount "Lettuce" store.lettuce_price ^
+   general_discount "Mango" store.mango_price ^ general_discount "Butter"
+   store.butter_price ^ general_discount "Sugar" store.sugar_price ^
+   general_discount "Chocolate" store.chocolate_price ^ general_discount "Plant
+   Food" store.plant_food_price ^ general_discount "Ladybug" store.ladybug_price
+   ^ general_discount "Beef" store.beef_price ^ general_discount "Chicken"
+   store.chicken_price ^ general_discount "Bell Pepper"
+   store.bell_pepper_price *)
+
 let general_discount name price =
-  "\n" ^ name ^ ": ($" ^ string_of_float price ^ ") "
-  ^ discount_general price name
+  let discount_info = discount_general price name in
+  (name, price, discount_info)
 
 let plant_and_price name price =
-  "\n" ^ name ^ ": ($" ^ string_of_float price ^ ") "
-  ^ discount_plant price name
+  let discount_info = discount_plant price name in
+  (name, price, discount_info)
+
+let print_store_helper items =
+  let max_name_length =
+    List.fold_left
+      (fun acc (name, _, _) -> max acc (String.length name))
+      0 items
+  in
+  let max_price_length =
+    List.fold_left
+      (fun acc (_, price, _) ->
+        max acc (String.length (Printf.sprintf "%.2f" price)))
+      0 items
+  in
+  let separator = String.make (max_name_length + max_price_length + 20) '-' in
+  let lines =
+    List.map
+      (fun (name, price, discount) ->
+        Printf.sprintf "%-*s %-*s %s" (max_name_length + 2) name
+          (max_price_length + 3)
+          (Printf.sprintf "$%.2f" price)
+          discount)
+      items
+  in
+  let content = String.concat ("\n" ^ separator ^ "\n") lines in
+  separator ^ "\n" ^ content ^ "\n" ^ separator
 
 let print_store store =
-  plant_and_price "Daisy" store.daisy_price
-  ^ plant_and_price "Strawberry" store.strawberry_price
-  ^ plant_and_price "Sunflower" store.sunflower_price
-  ^ plant_and_price "Rose" store.rose_price
-  ^ plant_and_price "Tulip" store.tulip_price
-  ^ plant_and_price "Tomato" store.tomato_price
-  ^ plant_and_price "Lemon" store.lemon_price
-  ^ plant_and_price "Potato" store.potato_price
-  ^ plant_and_price "Onion" store.onion_price
-  ^ plant_and_price "Wheat" store.wheat_price
-  ^ plant_and_price "Apple" store.apple_price
-  ^ plant_and_price "Corn" store.corn_price
-  ^ plant_and_price "Peach" store.peach_price
-  ^ plant_and_price "Pineapple" store.pineapple_price
-  ^ plant_and_price "Cactus" store.cactus_price
-  ^ general_discount "Cheese" store.cheese_price
-  ^ general_discount "Eggs" store.eggs_price
-  ^ general_discount "Milk" store.milk_price
-  ^ general_discount "Water" store.water_price
-  ^ general_discount "Clover" store.clover_price
-  ^ general_discount "Rice" store.rice_price
-  ^ general_discount "Lettuce" store.lettuce_price
-  ^ general_discount "Mango" store.mango_price
-  ^ general_discount "Butter" store.butter_price
-  ^ general_discount "Sugar" store.sugar_price
-  ^ general_discount "Chocolate" store.chocolate_price
-  ^ general_discount "Plant Food" store.plant_food_price
-  ^ general_discount "Ladybug" store.ladybug_price
-  ^ general_discount "Beef" store.beef_price
-  ^ general_discount "Chicken" store.chicken_price
-  ^ general_discount "Bell Pepper" store.bell_pepper_price
+  let items =
+    [
+      plant_and_price "Daisy" store.daisy_price;
+      plant_and_price "Strawberry" store.strawberry_price;
+      plant_and_price "Sunflower" store.sunflower_price;
+      plant_and_price "Rose" store.rose_price;
+      plant_and_price "Tulip" store.tulip_price;
+      plant_and_price "Tomato" store.tomato_price;
+      plant_and_price "Lemon" store.lemon_price;
+      plant_and_price "Potato" store.potato_price;
+      plant_and_price "Onion" store.onion_price;
+      plant_and_price "Wheat" store.wheat_price;
+      plant_and_price "Apple" store.apple_price;
+      plant_and_price "Corn" store.corn_price;
+      plant_and_price "Peach" store.peach_price;
+      plant_and_price "Pineapple" store.pineapple_price;
+      plant_and_price "Cactus" store.cactus_price;
+      general_discount "Cheese" store.cheese_price;
+      general_discount "Eggs" store.eggs_price;
+      general_discount "Milk" store.milk_price;
+      general_discount "Water" store.water_price;
+      general_discount "Clover" store.clover_price;
+      general_discount "Rice" store.rice_price;
+      general_discount "Lettuce" store.lettuce_price;
+      general_discount "Mango" store.mango_price;
+      general_discount "Butter" store.butter_price;
+      general_discount "Sugar" store.sugar_price;
+      general_discount "Chocolate" store.chocolate_price;
+      general_discount "Plant Food" store.plant_food_price;
+      general_discount "Ladybug" store.ladybug_price;
+      general_discount "Beef" store.beef_price;
+      general_discount "Chicken" store.chicken_price;
+      general_discount "Bell Pepper" store.bell_pepper_price;
+    ]
+  in
+  print_store_helper items
 
 (* add seedling -> goes into garden *)
 (* add other item -> goes into inventory *)
