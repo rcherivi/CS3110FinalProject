@@ -35,6 +35,7 @@ let recipe_type_of_string = function
   | "Smoothie" -> Some Smoothie
   | _ -> None
 
+(**LINE COUNT OVER*)
 let recipe_ingredients = function
   | ApplePie -> [ ("Apple", 5); ("Water", 1); ("Eggs", 2); ("Butter", 1) ]
   | TomatoSoup -> [ ("Tomato", 3); ("Water", 1) ]
@@ -119,6 +120,7 @@ let have_ingredients (inventory : Inventory.t) (recipe : t) =
            (fun (ingredient, qty) -> ingredient ^ ": " ^ string_of_int qty)
            missing_ingredients)
 
+(**LINE COUNT OVER*)
 let create_recipe recipe_name (inventory : Inventory.t) =
   match recipe_type_of_string recipe_name with
   | Some recipe_type -> (

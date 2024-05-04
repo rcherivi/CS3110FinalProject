@@ -63,6 +63,7 @@ let apply_discount (plant : t) : t =
       in
       ({ plant_type with price = new_price }, species)
 
+(**OVER LINE COUNT BY 3 *)
 let get_type (plant : t) =
   match plant with
   | _, species -> (
@@ -122,6 +123,7 @@ let neglect (type_of_plant : t) plant_name : t =
 let get_plant_emoji height threshold emoji_if_true emoji_if_false =
   if height < threshold then emoji_if_true else emoji_if_false
 
+(**OVER LINE COUNT BY 3 *)
 let print_plant (plant : t) =
   match plant with
   | { height = h; life = _; hydration = _; name = _; price = _ }, species -> (
@@ -147,61 +149,33 @@ let print_plant (plant : t) =
       | Bell_Pepper -> get_plant_emoji h 4 "🌱" "��"
       | Corn -> get_plant_emoji h 4 "🌱" (if h < 7 then "��" else "🌽"))
 
+(**OVER LINE COUNT BY 5 *)
 let create_plant plant_name n : t =
+  let plant_type1 =
+    { height = 0; life = true; hydration = 25; name = n; price = 0.0 }
+  in
   match plant_name with
-  | "Daisy" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 3.0 }, Daisy)
-  | "Sunflower" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 2.0 },
-        Sunflower )
-  | "Rose" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 8.0 }, Rose)
-  | "Tulip" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 5.0 }, Tulip)
-  | "Tomato" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 5.0 },
-        Tomato )
-  | "Apple" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 7.0 }, Apple)
-  | "Onion" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 5.0 }, Onion)
-  | "Potato" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 7.0 },
-        Potato )
-  | "Wheat" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 4.0 }, Wheat)
-  | "Rice" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 5.0 }, Rice)
-  | "Peach" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 3.5 }, Peach)
-  | "Strawberry" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 4.0 },
-        Strawberry )
-  | "Corn" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 4.0 }, Corn)
-  | "Cactus" ->
-      ( { height = 0; life = true; hydration = 10; name = n; price = 30.0 },
-        Cactus )
-  | "Lettuce" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 6.0 },
-        Lettuce )
-  | "Lemon" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 3.2 }, Lemon)
-  | "Mango" ->
-      ({ height = 0; life = true; hydration = 25; name = n; price = 6.0 }, Mango)
-  | "Pineapple" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 5.8 },
-        Pineapple )
-  | "Clover" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 1.0 },
-        Clover )
-  | "Bell Pepper" ->
-      ( { height = 0; life = true; hydration = 25; name = n; price = 2.0 },
-        Bell_Pepper )
-  | _ ->
-      failwith
-        "Our store doesn't have this plant yet. Please try to buy a plant we \
-         have."
+  | "Daisy" -> ({ plant_type1 with price = 3.0 }, Daisy)
+  | "Sunflower" -> ({ plant_type1 with price = 2.0 }, Sunflower)
+  | "Rose" -> ({ plant_type1 with price = 8.0 }, Rose)
+  | "Tulip" -> ({ plant_type1 with price = 5.0 }, Tulip)
+  | "Tomato" -> ({ plant_type1 with price = 5.0 }, Tomato)
+  | "Apple" -> ({ plant_type1 with price = 7.0 }, Apple)
+  | "Onion" -> ({ plant_type1 with price = 5.0 }, Onion)
+  | "Potato" -> ({ plant_type1 with price = 7.0 }, Potato)
+  | "Wheat" -> ({ plant_type1 with price = 4.0 }, Wheat)
+  | "Rice" -> ({ plant_type1 with price = 5.0 }, Rice)
+  | "Peach" -> ({ plant_type1 with price = 3.5 }, Peach)
+  | "Strawberry" -> ({ plant_type1 with price = 4.0 }, Strawberry)
+  | "Corn" -> ({ plant_type1 with price = 4.0 }, Corn)
+  | "Cactus" -> ({ plant_type1 with price = 30.0; hydration = 10 }, Cactus)
+  | "Lettuce" -> ({ plant_type1 with price = 6.0 }, Lettuce)
+  | "Lemon" -> ({ plant_type1 with price = 3.2 }, Lemon)
+  | "Mango" -> ({ plant_type1 with price = 6.0 }, Mango)
+  | "Pineapple" -> ({ plant_type1 with price = 5.8 }, Pineapple)
+  | "Clover" -> ({ plant_type1 with price = 1.0 }, Clover)
+  | "Bell Pepper" -> ({ plant_type1 with price = 2.0 }, Bell_Pepper)
+  | _ -> failwith "Our store doesn't have this plant yet. Please try again."
 
 let check_life (type_of_plant : t) plant_name : t =
   match type_of_plant with

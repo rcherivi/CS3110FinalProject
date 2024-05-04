@@ -40,7 +40,7 @@ let rec get_valid_category plant_cat =
   | _ ->
       print_string
         "You have entered an invalid category. Please enter a valid\n\
-        \   category  here: ";
+        \           category  here: ";
       let plant_cat_1 = read_line () in
       get_valid_category plant_cat_1
 
@@ -60,6 +60,15 @@ let rec get_valid_item item =
     print_string "Invalid item. Please enter a valid item: ";
     let item = read_line () in
     get_valid_item item
+  end
+
+let rec get_valid_item_with_attempts item attempts =
+  attempts := !attempts + 1;
+  if Store.has_item item then item
+  else if check_attempts attempts then item
+  else begin
+    print_string "Invalid item. Please enter a valid item: ";
+    get_valid_item_with_attempts item attempts
   end
 
 let feed_garden_helper func n inv garden =
@@ -90,7 +99,6 @@ let water_garden_helper func n inv garden =
   if plant_cat = "X" then exit count func n inv garden
   else
     let acc_plant_cat = get_valid_category plant_cat in
-    (* let acc_plant_cat = read_valid_category () in *)
     let _ = Garden.print_plants_in_category acc_plant_cat garden in
     print_string "You only have 3 chances to type the right name";
     print_string "What is the name of the plant you want to water: ";
@@ -136,7 +144,7 @@ let buy_plant_helper func n inv garden =
     func (n + 1) new_inv new_garden
 
 let harvest_helper func n inv garden =
-  print_string "You only have 3 chances to type the right type of plant";
+  print_endline "You only have 3 chances to type the right type of plant";
   let () =
     print_endline
       "What type of plants do you want to harvest: \n\
@@ -166,10 +174,11 @@ let sell_helper func n inv garden =
        Chocolate | Plant Food | LadyBug | Beef | Chicken"
   in
   let attempts = ref 0 in
-  let item_name = get_valid_name garden attempts in
-  print_string ("How many " ^ item_name ^ "do you want to sell: ");
+  let item = read_line () in
+  let acc_item = get_valid_item_with_attempts item attempts in
+  print_string ("How many " ^ acc_item ^ "do\n you want to sell: ");
   let qty = int_of_string (read_line ()) in
-  let new_inv, new_garden = Inventory.sell item_name qty inv garden in
+  let new_inv, new_garden = Inventory.sell acc_item qty inv garden in
   Garden.print new_garden;
   func (n + 1) new_inv new_garden
 
@@ -296,38 +305,6 @@ let rec print_recipe_helper func n inv garden count day =
   | Not_found ->
       print_endline "Invalid selection, please enter a valid number.";
       print_recipe_helper func n inv garden count day
-
-(* let rec print_recipe_helper func n inv garden count day = print_endline
-   recipe_menu; print_endline "Enter the number of the recipe you want to view
-   and/or create:"; let choice = read_line () in match choice with | "1" ->
-   display_and_handle_recipe print_recipe_helper "Tomato Soup"
-   Recipe.tomato_soup_recipe func n inv garden count day | "2" ->
-   display_and_handle_recipe print_recipe_helper "Bread" Recipe.bread_recipe
-   func n inv garden count day | "3" -> display_and_handle_recipe
-   print_recipe_helper "Apple Pie" Recipe.apple_pie_recipe func n inv garden
-   count day | "4" -> display_and_handle_recipe print_recipe_helper "Apple
-   Juice" Recipe.apple_juice_recipe func n inv garden count day | "5" ->
-   display_and_handle_recipe print_recipe_helper "Popcorn" Recipe.popcorn_recipe
-   func n inv garden count day | "6" -> display_and_handle_recipe
-   print_recipe_helper "French Fries" Recipe.french_fries_recipe func n inv
-   garden count day | "7" -> display_and_handle_recipe print_recipe_helper
-   "Chocolate Chip Cookie" Recipe.cookie_recipe func n inv garden count day |
-   "8" -> display_and_handle_recipe print_recipe_helper "Sandwich"
-   Recipe.sandwich_recipe func n inv garden count day | "9" ->
-   display_and_handle_recipe print_recipe_helper "Salad" Recipe.salad_recipe
-   func n inv garden count day | "10" -> display_and_handle_recipe
-   print_recipe_helper "Strawberry Cake" Recipe.strawberry_cake_recipe func n
-   inv garden count day | "11" -> display_and_handle_recipe print_recipe_helper
-   "Flower Bouquet" Recipe.bouquet_recipe func n inv garden count day | "12" ->
-   display_and_handle_recipe print_recipe_helper "Curry" Recipe.curry_recipe
-   func n inv garden count day | "13" -> display_and_handle_recipe
-   print_recipe_helper "Chicken Soup" Recipe.chicken_soup_recipe func n inv
-   garden count day | "14" -> display_and_handle_recipe print_recipe_helper
-   "Hamburger" Recipe.hamburger_recipe func n inv garden count day | "15" ->
-   display_and_handle_recipe print_recipe_helper "Smoothie"
-   Recipe.smoothie_recipe func n inv garden count day | _ -> print_endline
-   "Invalid selection, please enter a valid number."; print_recipe_helper func n
-   inv garden count day *)
 
 let create_recipe_helper func n inv garden =
   print_recipe_helper func (n + 1) inv garden

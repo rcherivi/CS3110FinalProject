@@ -35,6 +35,7 @@ type t = {
   beef_price : float;
   chicken_price : float;
 }
+(**LINE COUNT OVER*)
 
 type prices = {
   cheese_price : float;
@@ -69,6 +70,7 @@ let usual =
     chicken_price = 5.50;
   }
 
+(**LINE COUNT OVER*)
 let create_store =
   let create_plant_and_get_price name =
     Plant.get_price (Plant.apply_discount (Plant.create_plant name ""))
@@ -113,10 +115,6 @@ let discount_plant price plant_name =
   else ""
 
 let discount_general price name =
-  (* let usual = { cheese_price = 5.0; eggs_price = 3.0; milk_price = 5.0;
-     water_price = 1.0; butter_price = 2.0; sugar_price = 1.5; chocolate_price =
-     3.20; plant_food_price = 2.0; ladybug_price = 8.0; beef_price = 6.0;
-     chicken_price = 5.50; } in *)
   match name with
   | "Cheese" -> if price < usual.cheese_price then "[DISCOUNT] " else ""
   | "Eggs" -> if price < usual.eggs_price then "[DISCOUNT] 💸" else ""
@@ -132,35 +130,6 @@ let discount_general price name =
   | "Chicken" -> if price < usual.chicken_price then "[DISCOUNT] 💸" else ""
   | _ -> ""
 
-(* let general_discount name price = "\n" ^ name ^ ": ($" ^ string_of_float
-   price ^ ") " ^ discount_general price name
-
-   let plant_and_price name price = "\n" ^ name ^ ": ($" ^ string_of_float price
-   ^ ") " ^ discount_plant price name
-
-   let print_store store = plant_and_price "Daisy" store.daisy_price ^
-   plant_and_price "Strawberry" store.strawberry_price ^ plant_and_price
-   "Sunflower" store.sunflower_price ^ plant_and_price "Rose" store.rose_price ^
-   plant_and_price "Tulip" store.tulip_price ^ plant_and_price "Tomato"
-   store.tomato_price ^ plant_and_price "Lemon" store.lemon_price ^
-   plant_and_price "Potato" store.potato_price ^ plant_and_price "Onion"
-   store.onion_price ^ plant_and_price "Wheat" store.wheat_price ^
-   plant_and_price "Apple" store.apple_price ^ plant_and_price "Corn"
-   store.corn_price ^ plant_and_price "Peach" store.peach_price ^
-   plant_and_price "Pineapple" store.pineapple_price ^ plant_and_price "Cactus"
-   store.cactus_price ^ general_discount "Cheese" store.cheese_price ^
-   general_discount "Eggs" store.eggs_price ^ general_discount "Milk"
-   store.milk_price ^ general_discount "Water" store.water_price ^
-   general_discount "Clover" store.clover_price ^ general_discount "Rice"
-   store.rice_price ^ general_discount "Lettuce" store.lettuce_price ^
-   general_discount "Mango" store.mango_price ^ general_discount "Butter"
-   store.butter_price ^ general_discount "Sugar" store.sugar_price ^
-   general_discount "Chocolate" store.chocolate_price ^ general_discount "Plant
-   Food" store.plant_food_price ^ general_discount "Ladybug" store.ladybug_price
-   ^ general_discount "Beef" store.beef_price ^ general_discount "Chicken"
-   store.chicken_price ^ general_discount "Bell Pepper"
-   store.bell_pepper_price *)
-
 let general_discount name price =
   let discount_info = discount_general price name in
   (name, price, discount_info)
@@ -169,68 +138,113 @@ let plant_and_price name price =
   let discount_info = discount_plant price name in
   (name, price, discount_info)
 
+let max_name_length items =
+  List.fold_left (fun acc (name, _, _) -> max acc (String.length name)) 0 items
+
+let max_price_length items =
+  List.fold_left
+    (fun acc (_, price, _) ->
+      max acc (String.length (Printf.sprintf "%.2f" price)))
+    0 items
+
+let make_separator max_name_length max_price_length =
+  String.make (max_name_length + max_price_length + 20) '-'
+
+let format_line max_name_length max_price_length (name, price, discount) =
+  Printf.sprintf "%-*s %-*s %s" (max_name_length + 2) name (max_price_length + 3)
+    (Printf.sprintf "$%.2f" price)
+    discount
+
 let print_store_helper items =
-  let max_name_length =
-    List.fold_left
-      (fun acc (name, _, _) -> max acc (String.length name))
-      0 items
-  in
-  let max_price_length =
-    List.fold_left
-      (fun acc (_, price, _) ->
-        max acc (String.length (Printf.sprintf "%.2f" price)))
-      0 items
-  in
-  let separator = String.make (max_name_length + max_price_length + 20) '-' in
-  let lines =
-    List.map
-      (fun (name, price, discount) ->
-        Printf.sprintf "%-*s %-*s %s" (max_name_length + 2) name
-          (max_price_length + 3)
-          (Printf.sprintf "$%.2f" price)
-          discount)
-      items
-  in
+  let max_name_len = max_name_length items in
+  let max_price_len = max_price_length items in
+  let separator = make_separator max_name_len max_price_len in
+  let lines = List.map (format_line max_name_len max_price_len) items in
   let content = String.concat ("\n" ^ separator ^ "\n") lines in
   separator ^ "\n" ^ content ^ "\n" ^ separator
 
-let print_store store =
+let print_flowers store =
   let items =
     [
       plant_and_price "Daisy" store.daisy_price;
-      plant_and_price "Strawberry" store.strawberry_price;
       plant_and_price "Sunflower" store.sunflower_price;
       plant_and_price "Rose" store.rose_price;
       plant_and_price "Tulip" store.tulip_price;
+    ]
+  in
+  print_store_helper items
+
+let print_vegetables store =
+  let items =
+    [
       plant_and_price "Tomato" store.tomato_price;
-      plant_and_price "Lemon" store.lemon_price;
       plant_and_price "Potato" store.potato_price;
       plant_and_price "Onion" store.onion_price;
-      plant_and_price "Wheat" store.wheat_price;
-      plant_and_price "Apple" store.apple_price;
-      plant_and_price "Corn" store.corn_price;
+      plant_and_price "Lettuce" store.lettuce_price;
+      plant_and_price "Bell Pepper" store.bell_pepper_price;
+    ]
+  in
+  print_store_helper items
+
+let print_fruits store =
+  let items =
+    [
+      plant_and_price "Lemon" store.lemon_price;
       plant_and_price "Peach" store.peach_price;
       plant_and_price "Pineapple" store.pineapple_price;
+      plant_and_price "Apple" store.apple_price;
+      plant_and_price "Mango" store.mango_price;
+      plant_and_price "Strawberry" store.strawberry_price;
+    ]
+  in
+  print_store_helper items
+
+let print_grains store =
+  let items =
+    [
+      plant_and_price "Rice" store.rice_price;
+      plant_and_price "Corn" store.corn_price;
+      plant_and_price "Wheat" store.wheat_price;
+    ]
+  in
+  print_store_helper items
+
+let print_defensive_items store =
+  let items =
+    [
       plant_and_price "Cactus" store.cactus_price;
+      general_discount "Clover" store.clover_price;
+      general_discount "Ladybug" store.ladybug_price;
+    ]
+  in
+  print_store_helper items
+
+let print_other (store : t) =
+  let items =
+    [
       general_discount "Cheese" store.cheese_price;
       general_discount "Eggs" store.eggs_price;
       general_discount "Milk" store.milk_price;
       general_discount "Water" store.water_price;
-      general_discount "Clover" store.clover_price;
-      general_discount "Rice" store.rice_price;
-      general_discount "Lettuce" store.lettuce_price;
-      general_discount "Mango" store.mango_price;
       general_discount "Butter" store.butter_price;
       general_discount "Sugar" store.sugar_price;
       general_discount "Chocolate" store.chocolate_price;
       general_discount "Plant Food" store.plant_food_price;
-      general_discount "Ladybug" store.ladybug_price;
       general_discount "Beef" store.beef_price;
       general_discount "Chicken" store.chicken_price;
-      general_discount "Bell Pepper" store.bell_pepper_price;
     ]
   in
   print_store_helper items
+
+let print_store store category =
+  match category with
+  | "Flowers" -> print_flowers store
+  | "Vegetables" -> print_vegetables store
+  | "Fruits" -> print_fruits store
+  | "Defensive Items" -> print_defensive_items store
+  | "Grains" -> print_grains store
+  | "Other" -> print_other store
+  | _ -> "Invalid input"
 
 (* add seedling -> goes into garden *)
 (* add other item -> goes into inventory *)
@@ -238,6 +252,7 @@ let print_store store =
 (*discounts / item of the day *)
 (* let buy_item name = Inventory. *)
 
+(**LINE COUNT OVER*)
 let buy_item item_name store inv garden =
   let price =
     match item_name with
@@ -301,6 +316,7 @@ let buy_item item_name store inv garden =
   in
   (new_inv, new_money)
 
+(**LINE COUNT OVER*)
 let has_item item_name =
   match item_name with
   | "Daisy" -> true

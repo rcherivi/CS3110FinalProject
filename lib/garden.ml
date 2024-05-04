@@ -19,7 +19,7 @@ let create_garden () =
     defense = 0;
   }
 
-(**WROTE NEW ONE BELOW*)
+(**FIX THIS*)
 let inc_money plant_type garden =
   match garden with
   | { cells; money = m; plant_count; lucky; defense } -> (
@@ -234,7 +234,8 @@ let get_fruits garden =
                    let plant_type = Plant.get_type plant in
                    if
                      plant_type = "Peach" || plant_type = "Strawberry"
-                     || plant_type = "Apple"
+                     || plant_type = "Apple" || plant_type = "Lemon"
+                     || plant_type = "Mango" || plant_type = "Pineapple"
                    then cell
                    else Empty
                | _ -> Empty))
@@ -252,15 +253,9 @@ let get_vegetables garden =
                | Plant plant ->
                    let plant_type = Plant.get_type plant in
                    if
-                     plant_type = "Corn" || plant_type = "Carrot"
-                     || plant_type = "Onion" || plant_type = "Potato"
-                     || plant_type = "Eggplant" || plant_type = "Cucumber"
-                     || plant_type = "Mushroom" || plant_type = "Beans"
-                     || plant_type = "Sweet Potato"
-                     || plant_type = "Peas" || plant_type = "Peanuts"
-                     || plant_type = "Broccoli" || plant_type = "Garlic"
-                     || plant_type = "Pepper" || plant_type = "Bell Pepper"
-                     || plant_type = "Ginger"
+                     plant_type = "Onion" || plant_type = "Potato"
+                     || plant_type = "Bell Pepper" || plant_type = "Lettuce"
+                     || plant_type = "Tomato"
                    then cell
                    else Empty
                | _ -> Empty))
@@ -277,7 +272,11 @@ let get_grains garden =
                match cell with
                | Plant plant ->
                    let plant_type = Plant.get_type plant in
-                   if plant_type = "Wheat" then cell else Empty
+                   if
+                     plant_type = "Wheat" || plant_type = "Corn"
+                     || plant_type = "Rice"
+                   then cell
+                   else Empty
                | _ -> Empty))
           cells
       in
@@ -331,6 +330,28 @@ let filter_plants_by_category category garden =
   match garden with
   | { cells; _ } -> filter_rows (Array.to_list (Array.map Array.to_list cells))
 
+let print_plant plant =
+  let name = Plant.get_name plant in
+  let visual_rep = Plant.print_plant plant in
+  let ptype = Plant.get_type plant in
+  let height = Plant.get_height plant in
+  let price = Plant.get_price plant in
+  let hydration = Plant.get_hydration plant in
+  Printf.printf "| %-10s| %-8s| %-11s| %-7d| %-8.2f| %-9d |\n" name visual_rep
+    ptype height price hydration;
+  ()
+
+let print_footer () =
+  Printf.printf
+    "+------------+---------+------------+--------+---------+-----------+\n"
+
+let rec print_plants plants =
+  match plants with
+  | [] -> ()
+  | row :: rest ->
+      List.iter (fun plant -> print_plant plant) row;
+      print_plants rest
+
 let print_plants_in_category category garden =
   let filtered_plants = filter_plants_by_category category garden in
   let print_header () =
@@ -340,28 +361,6 @@ let print_plants_in_category category garden =
       "|    Name    | Visual  |   Type     | Height |  Price  | Hydration |\n";
     Printf.printf
       "+------------+---------+------------+--------+---------+-----------+\n"
-  in
-  let print_plant plant =
-    let name = Plant.get_name plant in
-    let visual_rep = Plant.print_plant plant in
-    let ptype = Plant.get_type plant in
-    let height = Plant.get_height plant in
-    let price = Plant.get_price plant in
-    let hydration = Plant.get_hydration plant in
-    Printf.printf "| %-10s| %-8s| %-11s| %-7d| %-8.2f| %-9d |\n" name visual_rep
-      ptype height price hydration;
-    ()
-  in
-  let print_footer () =
-    Printf.printf
-      "+------------+---------+------------+--------+---------+-----------+\n"
-  in
-  let rec print_plants plants =
-    match plants with
-    | [] -> ()
-    | row :: rest ->
-        List.iter (fun plant -> print_plant plant) row;
-        print_plants rest
   in
   print_header ();
   print_plants filtered_plants;
