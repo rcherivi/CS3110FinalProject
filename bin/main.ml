@@ -8,18 +8,20 @@ let my_inventory = Inventory.create_inventory
 
 let menu_options =
   "\n\
-  \ Menu:\n\
+  \  Menu:\n\
   \  1. Buy Plant/Item\n\
   \  2. Feed Plants\n\
-  \  3. Water Plants\n\
+  \ 3. Water Plants\n\
   \  4. Neglect Plants\n\
   \  5. Harvest\n\
-  \  6. Observe Garden\n\
+  \  6. Observe\n\
+  \   Garden\n\
   \  7. View Inventory\n\
   \  8. Sell \n\
   \  9. Recipes\n\
-  \  10. Create Recipe\n\
-  \ Enter your option number: "
+  \  10. Create\n\
+  \   Recipe\n\
+  \  Enter your option number: "
 
 let check_attempts attempts =
   if !attempts >= 3 then begin
@@ -40,7 +42,7 @@ let rec get_valid_category plant_cat =
   | _ ->
       print_string
         "You have entered an invalid category. Please enter a valid\n\
-        \           category  here: ";
+        \ category here: ";
       let plant_cat_1 = read_line () in
       get_valid_category plant_cat_1
 
@@ -73,8 +75,10 @@ let rec get_valid_item_with_attempts item attempts =
 
 let feed_garden_helper func n inv garden =
   print_endline
-    "What category of plants do you want to feed?\n\
-     Flowers | Fruits | Vegetables | Grains | Defensive Items";
+    "What category of\n\
+    \   plants do you want to feed?\n\
+    \ Flowers | Fruits | Vegetables | Grains |\n\
+    \   Defensive Items";
   let plant_cat = read_line () in
   if plant_cat = "X" then exit count func n inv garden
   else
@@ -92,16 +96,17 @@ let feed_garden_helper func n inv garden =
 
 let water_garden_helper func n inv garden =
   print_endline
-    "What category of plants do you want to water?\n\
-    \ Flowers | Fruits | Vegetables | Grains | Defensive Items (Type X to \
-     return to menu)";
+    "What category of\n\
+    \   plants do you want to water?\n\
+    \  Flowers | Fruits | Vegetables | Grains |\n\
+    \   Defensive Items (Type X to  return to menu)";
   let plant_cat = read_line () in
   if plant_cat = "X" then exit count func n inv garden
   else
     let acc_plant_cat = get_valid_category plant_cat in
     let _ = Garden.print_plants_in_category acc_plant_cat garden in
-    print_string "You only have 3 chances to type the right name";
-    print_string "What is the name of the plant you want to water: ";
+    print_string "You\n   only have 3 chances to type the right name";
+    print_string "What is the name\n   of the plant you want to water: ";
     let attempts = ref 0 in
     let name = get_valid_name garden attempts in
     let new_garden = Garden.water_plants garden name in
@@ -110,49 +115,71 @@ let water_garden_helper func n inv garden =
 
 let neglect_garden_helper func n inv garden =
   print_endline
-    "What category of plants do you want to neglect?\n\
-    \ Flowers | Fruits | Vegetables | Grains | Defensive Items (Type X to \
-     return to menu)";
+    "What category of\n\
+    \   plants do you want to neglect?\n\
+    \  Flowers | Fruits | Vegetables | Grains |\n\
+    \   Defensive Items (Type X to  return to menu)";
   let plant_cat = read_line () in
   if plant_cat = "X" then exit count func n inv garden
   else
     let acc_plant_cat = get_valid_category plant_cat in
     let _ = Garden.print_plants_in_category acc_plant_cat garden in
-    print_string "You only have 3 chances to type the right name";
-    print_string "What is the name of the plant you want to neglect: ";
+    print_string "You\n   only have 3 chances to type the right name";
+    print_string "What is the name\n   of the plant you want to neglect: ";
     let attempts = ref 0 in
     let name = get_valid_name garden attempts in
     let new_garden = Garden.neglect_plants garden name in
     Garden.print new_garden;
     func (n + 1) inv new_garden
 
+(* let buy_plant_helper func n inv garden = let new_store = Store.create_store
+   in print_endline "What category of plants do you want to buy?\n\ \ Flowers
+   |\n\ \ Fruits | Vegetables | Grains | Defensive Items | Other"; let plant_cat
+   = read_line () in let acc_plant_cat = get_valid_category plant_cat in let ()
+   = print_endline (Store.print_store new_store acc_plant_cat); print_endline
+   "\n\ Plants will be added to garden, and other items will be added to the \
+   inventory"; print_endline ""; print_string "What is the name of item you want
+   to buy: (Type X to return to menu)"; let item = read_line () in if item = "X"
+   then exit count func n inv garden else let acc_item = get_valid_item item in
+   let new_inv, new_garden = Store.buy_item acc_item new_store inv garden in
+   Garden.print new_garden; func (n + 1) new_inv new_garden; *)
+
 let buy_plant_helper func n inv garden =
   let new_store = Store.create_store in
-  let () = print_endline (Store.print_store new_store) in
   print_endline
-    "\n\
-     Plants will be added to garden, and other items will be added to the \
-     inventory";
-  print_string
-    "What is the name of item you want to buy: (Type X to return to menu)";
-  let item = read_line () in
-  if item = "X" then exit count func n inv garden
+    "What category of plants do you want to buy?\n\
+    \ Flowers |\n\
+    \   Fruits | Vegetables | Grains | Defensive Items | Other";
+  let plant_cat = read_line () in
+  if plant_cat = "X" then exit count func n inv garden
   else
+    let acc_plant_cat = get_valid_category plant_cat in
+    let () = print_endline (Store.print_store new_store acc_plant_cat) in
+    print_endline
+      "Plants will be added to garden, and other items will be added\n\
+      \  to the\n\
+      \   inventory";
+    print_endline "";
+    print_string "What is the name of item you want to buy: ";
+    let item = read_line () in
     let acc_item = get_valid_item item in
     let new_inv, new_garden = Store.buy_item acc_item new_store inv garden in
     Garden.print new_garden;
     func (n + 1) new_inv new_garden
 
 let harvest_helper func n inv garden =
-  print_endline "You only have 3 chances to type the right type of plant";
+  print_endline "You only have 3 chances\n   to type the right type of plant";
   let () =
     print_endline
-      "What type of plants do you want to harvest: \n\
-       Daisy | Sunflower | Rose | Tulip |\n\
-       Lemon | Pineapple | Apple | Peach | Strawberry | Mango |\n\
-       Tomato | Lettuce | Bell Pepper |  Onion | Potato |\n\
-       Rice | Wheat | Corn |\n\
-       Clover | Cactus "
+      "What type of plants\n\
+      \   do you want to harvest: \n\
+      \ Daisy | Sunflower | Rose | Tulip |\n\
+      \ Lemon |\n\
+      \   Pineapple | Apple | Peach | Strawberry | Mango |\n\
+      \ Tomato | Lettuce | Bell\n\
+      \   Pepper | Onion | Potato |\n\
+      \ Rice | Wheat | Corn |\n\
+      \ Clover | Cactus "
   in
   let attempts = ref 0 in
   let plant_name = get_valid_name garden attempts in
@@ -161,17 +188,21 @@ let harvest_helper func n inv garden =
   func (n + 1) new_inv new_garden
 
 let sell_helper func n inv garden =
-  print_string "You only have 3 chances to type the right item";
+  print_string "You only have 3 chances to\n   type the right item";
   let () =
     print_endline
-      "What type of item do you want to sell from your inventory: \n\
-       Daisy | Sunflower | Rose | Tulip |\n\
-       Lemon | Pineapple | Apple | Peach | Strawberry | Mango |\n\
-       Tomato | Lettuce | Bell Pepper |  Onion | Potato |\n\
-       Rice | Wheat | Corn |\n\
-       Clover | Cactus |\n\
+      "What type of item do you want\n\
+      \   to sell from your inventory: \n\
+      \ Daisy | Sunflower | Rose | Tulip |\n\
+      \ Lemon\n\
+      \   | Pineapple | Apple | Peach | Strawberry | Mango |\n\
+      \ Tomato | Lettuce | Bell\n\
+      \   Pepper | Onion | Potato |\n\
+      \ Rice | Wheat | Corn |\n\
+      \ Clover | Cactus |\n\
        Cheese | Eggs | Milk | Water | Butter | Sugar |\n\
-       Chocolate | Plant Food | LadyBug | Beef | Chicken"
+      \ Chocolate | Plant Food |\n\
+      \   LadyBug | Beef | Chicken"
   in
   let attempts = ref 0 in
   let item = read_line () in
@@ -190,10 +221,10 @@ let observe_menu_options =
   "\n\
   \  1. View Flowers \n\
   \  2. View Fruits \n\
-  \  3. View Vegetables \n\
+  \ 3. View Vegetables \n\
   \  4. View Grains \n\
   \  5. View Defensive Items \n\
-  \  6. View Garden"
+  \ 6. View Garden"
 
 let observe_garden_helper func n inv garden count day =
   let print_menu = print_endline observe_menu_options in
@@ -223,26 +254,29 @@ let observe_garden_helper func n inv garden count day =
 let recipe_menu =
   "\n\
   \  Select which recipe you would like to view:\n\
-  \  1. Tomato Soup 🥫 \n\
+  \  1.\n\
+  \   Tomato Soup 🥫 \n\
   \  2. Bread 🍞 \n\
   \  3. Apple Pie 🥧 \n\
   \  4. Apple Juice 🧃\n\
-  \  5. Popcorn 🍿 \n\
+  \ 5. Popcorn 🍿 \n\
   \  6. French Fries 🍟 \n\
   \  7. Chocolate Chip Cookie 🍪 \n\
-  \  8. Sandwich 🥪 \n\
+  \ 8. Sandwich 🥪 \n\
   \  9. Salad 🥗 \n\
   \  10. Strawberry Cake 🍰 \n\
-  \  11. Flower Bouqet 💐\n\
+  \  11. Flower\n\
+  \   Bouqet 💐\n\
   \  12. Curry 🍛 \n\
   \  13. Chicken Soup 🥘 \n\
   \  14. Hamburger 🍔 \n\
-  \  15. Smoothie 🍹"
+  \ 15. Smoothie 🍹"
 
 let missing_ingredient_message recipe_function func n inv garden count day =
   print_endline
-    "Choose the following number to proceed:  \n\
-    \  1. Go back to Recipe \n\
+    "Choose the following number to proceed: \n\
+    \  1. Go back to\n\
+    \   Recipe \n\
     \  2. Go back to menu";
   match read_line () with
   | "1" -> recipe_function func n inv garden count day
@@ -254,10 +288,12 @@ let display_and_handle_recipe recipe_func food_name recipe_name func n inv
   print_endline recipe_name;
   print_endline
     "\n\
-    \  Choose the following number to proceed: \n\
-    \    1. Create this recipe \n\
-    \    2. Go back to Recipe \n\
-    \    3. Go back to menu ";
+    \  Choose the\n\
+    \   following number to proceed: \n\
+    \  1. Create this recipe \n\
+    \  2. Go back to\n\
+    \   Recipe \n\
+    \  3. Go back to menu ";
   match read_line () with
   | "1" ->
       ignore (Recipe.create_recipe food_name inv);
@@ -279,10 +315,10 @@ let all_recipes =
     (7, "Chocolate Chip Cookie", Recipe.cookie_recipe);
     (8, "Sandwich", Recipe.sandwich_recipe);
     (9, "Salad", Recipe.salad_recipe);
-    (10, "Strawberry Cake", Recipe.strawberry_cake_recipe);
+    (10, "Strawberry\n   Cake", Recipe.strawberry_cake_recipe);
     (11, "Flower Bouquet", Recipe.bouquet_recipe);
     (12, "Curry", Recipe.curry_recipe);
-    (13, "Chicken Soup", Recipe.chicken_soup_recipe);
+    (13, "Chicken\n   Soup", Recipe.chicken_soup_recipe);
     (14, "Hamburger", Recipe.hamburger_recipe);
     (15, "Smoothie", Recipe.smoothie_recipe);
   ]
@@ -291,7 +327,8 @@ let all_recipes =
    chat.openai.com. *)
 let rec print_recipe_helper func n inv garden count day =
   print_endline recipe_menu;
-  print_endline "Enter the number of the recipe you want to view and/or create:";
+  print_endline
+    "Enter the number of the\n   recipe you want to view and/or create:";
   let choice = read_line () in
   try
     let index = int_of_string choice in

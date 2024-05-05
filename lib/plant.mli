@@ -69,7 +69,6 @@ val pollinate : t -> t
 val is_alive : t -> bool
 (** [is_alive x] checks if a plant is alive*)
 
-val drought : t -> t
 val dragon : t -> t
 val ice : t -> t
 val unicorn : t -> t
