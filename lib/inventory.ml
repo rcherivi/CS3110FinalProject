@@ -31,15 +31,6 @@ let harvest plant_type inv garden =
         ( insert plant_type (Garden.count_plant plant_type garden) inv,
           Garden.remove_plant plant_type garden )
 
-(* else ( insert plant_type (Garden.count_plant plant_type garden) inv,
-   Garden.remove_plant plant_type garden ) *)
-
-(* let print inv = *)
-
-(* string -> t -> t *)
-
-(*control how much you sell*)
-(*sell more than what you have *)
 let sell plant_type quantity inv garden =
   match inv with
   | Inv lst ->
@@ -64,7 +55,6 @@ let print inv =
   | Inv lst ->
       List.iter (fun (x, y) -> print_endline (x ^ ": " ^ string_of_int y)) lst
 
-(* let sell inv = *)
 let add item inv =
   match inv with
   | Inv lst ->
