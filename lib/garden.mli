@@ -14,9 +14,6 @@ val create_garden : unit -> t
 val get_garden_cell : t -> cell array array
 (** [get_garden_cell] gets the cell of the garden*)
 
-val get_garden_money : t -> float
-(** [get_garden_money] gets the money amount of the garden.*)
-
 val get_garden_lucky : t -> int
 (** [get_garden_lucky] gets the luckiness of the garden.*)
 
@@ -81,6 +78,13 @@ val has_plant : t -> string -> bool
 (**[has_plant g s] checks if a plant with the given name exists in the garden.*)
 
 val incr_luck : t -> t
+(** [incr_luck] increases the money amount of the garden.*)
+
 val incr_defense : t -> t
+(** [incr_defense] increases the defense level of the garden.*)
+
 val get_plant_count : t -> int
+(** [get_plant_count] gets the number of plants in the garden.*)
+
 val get_money : t -> float
+(** [get_money] gets the money amount of the garden.*)

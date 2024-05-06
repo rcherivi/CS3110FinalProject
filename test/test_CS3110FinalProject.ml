@@ -618,7 +618,7 @@ let store_tests =
 let test_create_garden _ =
   assert_equal (Array.length (Garden.get_garden_cell garden)) 5;
   assert_equal (Array.length (Garden.get_garden_cell garden).(0)) 10;
-  assert_equal (Garden.get_garden_money garden) 50.0;
+  assert_equal (Garden.get_money garden) 50.0;
   assert_equal (Garden.get_plant_count garden) 0
 
 (* let test_add_plants_to_garden _ = let garden_with_plant = Garden.add_plant
@@ -641,12 +641,12 @@ let test_incr_defense _ =
 
 let test_incr_money_amt _ =
   let new_garden = Garden.inc_money_amt 10.0 garden in
-  assert_equal (Garden.get_garden_money new_garden) 60.0
+  assert_equal (Garden.get_money new_garden) 60.0
 
 let test_feed_plants _ =
   let garden_with_plant = Garden.add_plant "Sunflower" "Emily" garden in
   let new_garden = Garden.feed_plants garden_with_plant "Emily" in
-  assert_equal (Garden.get_garden_money new_garden) 49.9;
+  assert_equal (Garden.get_money new_garden) 49.9;
   assert_equal (Garden.get_plant_count new_garden) 1;
   assert_equal (Garden.get_garden_lucky new_garden) 0;
   assert_equal (Garden.get_garden_defense new_garden) 0
@@ -655,7 +655,7 @@ let test_water_plants _ =
   let garden_with_plant = Garden.add_plant "Daisy" "Sam" garden in
   let new_garden = Garden.water_plants garden_with_plant "Sam" in
   let new_garden2 = Garden.water_plants new_garden "Sam" in
-  assert_equal (Garden.get_garden_money new_garden2) 49.8;
+  assert_equal (Garden.get_money new_garden2) 49.8;
   assert_equal (Garden.get_plant_count new_garden2) 1;
   assert_equal (Garden.get_garden_lucky new_garden2) 0;
   assert_equal (Garden.get_garden_defense new_garden2) 0
@@ -664,7 +664,7 @@ let test_neglect_plants _ =
   let garden_with_plant = Garden.add_plant "Sunflower" "Emily" garden in
   let new_garden = Garden.neglect_plants garden_with_plant "Emily" in
   let new_garden2 = Garden.neglect_plants new_garden "Emily" in
-  assert_equal (Garden.get_garden_money new_garden2) 49.8;
+  assert_equal (Garden.get_money new_garden2) 49.8;
   assert_equal (Garden.get_plant_count new_garden2) 1;
   assert_equal (Garden.get_garden_lucky new_garden2) 0;
   assert_equal (Garden.get_garden_defense new_garden2) 0

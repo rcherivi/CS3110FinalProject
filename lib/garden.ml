@@ -36,7 +36,6 @@ let inc_money plant_type garden =
    7.00 } *)
 
 let get_garden_cell garden = garden.cells
-let get_garden_money garden = garden.money
 let get_garden_lucky garden = garden.lucky
 let get_garden_defense garden = garden.defense
 

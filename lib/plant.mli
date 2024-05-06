@@ -70,6 +70,13 @@ val is_alive : t -> bool
 (** [is_alive x] checks if a plant is alive*)
 
 val dragon : t -> t
+(** [dragon] returns a dead plant.*)
+
 val ice : t -> t
+(** [ice] returns a plant with a lower height.*)
+
 val unicorn : t -> t
+(** [unicorn] returns a plant with a higher height.*)
+
 val fairies : t -> t
+(** [fairies] returns a plant with a higher price.*)
