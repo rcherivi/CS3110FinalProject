@@ -1,6 +1,23 @@
 open OUnit2
 open CS3110FinalProject
+
 (* open Plant open Garden open Store open Inventory open Recipe *)
+let new_inv = Inventory.create_inventory
+let garden = Garden.create_garden ()
+let test_store = Store.create_store
+let purchased_eggs = Store.buy_item "Eggs" test_store new_inv garden
+let purchased_milk = Store.buy_item "Milk" test_store new_inv garden
+let purchased_cheese = Store.buy_item "Cheese" test_store new_inv garden
+let purchased_ladybug = Store.buy_item "Lady Bug" test_store new_inv garden
+
+let garden_size_inc_eggs =
+  Garden.get_plant_count (snd purchased_eggs) - Garden.get_plant_count garden
+
+let garden_size_inc_milk =
+  Garden.get_plant_count (snd purchased_milk) - Garden.get_plant_count garden
+
+let garden_size_inc_cheese =
+  Garden.get_plant_count (snd purchased_cheese) - Garden.get_plant_count garden
 
 let new_inv = Inventory.create_inventory
 let garden = Garden.create_garden ()
@@ -596,6 +613,19 @@ let inventory_tests =
              (Inventory.get_length add_eggs - Inventory.get_length new_inv) );
        ]
 
+let store_tests =
+  "store test suite"
+  >::: [
+         ( "buying a ladybug from store\n   does add to inventory" >:: fun _ ->
+           assert_equal 1 (Inventory.get_length (fst purchased_ladybug)) );
+         ( "buying an egg from store doesn't increase plant\n   count in garden"
+         >:: fun _ -> assert_equal 0 garden_size_inc_eggs );
+         ( "buying milk from store doesn't increase plant count in garden"
+         >:: fun _ -> assert_equal 0 garden_size_inc_milk );
+         ( "buying cheese from store doesn't\n   increase plant count in garden"
+         >:: fun _ -> assert_equal 0 garden_size_inc_cheese );
+       ]
+
 let suite =
   "Test Suite for Plant Module"
   >::: [
@@ -617,6 +647,7 @@ let suite =
          feed_tests;
          neglect_tests;
          inventory_tests;
+         store_tests;
          "test stampede" >:: test_stampede_life_true;
        ]
 

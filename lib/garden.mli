@@ -66,3 +66,4 @@ val has_plant : t -> string -> bool
 val incr_luck : t -> t
 val incr_defense : t -> t
 val get_plant_count : t -> int
+val get_money : t -> float

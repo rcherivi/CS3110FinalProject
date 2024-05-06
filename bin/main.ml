@@ -348,13 +348,18 @@ let create_recipe_helper func n inv garden =
 
 (* let count = ref 0 *)
 let day = ref 1
+let check_terminated garden = Garden.get_money garden = 0.0
 
 let rec func n inv garden count day =
   match !day with
   | 50 -> print_endline "\nEnd of Garden Game"
   | _ ->
       (*if count = get_action_limit (Garden.get_plant_count garden) *)
-      if !count = 10 then (
+      if check_terminated garden = true then
+        let () = print_endline "You ran out of money!!" in
+        let last_day = ref 50 in
+        func (n + 1) inv garden count last_day
+      else if !count = 10 then (
         let garden = Garden.night_change day garden in
         print_endline ("\nIt's Day " ^ string_of_int (!day + 1) ^ "!");
         count := 0;

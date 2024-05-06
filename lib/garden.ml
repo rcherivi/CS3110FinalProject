@@ -77,6 +77,10 @@ let show_money garden =
   | { cells = _; money = m; plant_count = _; lucky = _; defense = _ } ->
       print_endline ("$ " ^ string_of_float m)
 
+let get_money garden =
+  match garden with
+  | { cells = _; money = m; plant_count = _; lucky = _; defense = _ } -> m
+
 (*adapted from ChatGPT*)
 let add_plant plant_name name garden =
   match garden with
