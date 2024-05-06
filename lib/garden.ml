@@ -35,6 +35,11 @@ let inc_money plant_type garden =
    = m +. Plant.get_sale_price plant_type +. 2.00 } else { cells; money = m +.
    7.00 } *)
 
+let get_garden_cell garden = garden.cells
+let get_garden_money garden = garden.money
+let get_garden_lucky garden = garden.lucky
+let get_garden_defense garden = garden.defense
+
 let get_plant_count garden =
   match garden with
   | { plant_count = pc; _ } -> pc

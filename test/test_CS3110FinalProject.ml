@@ -626,6 +626,73 @@ let store_tests =
          >:: fun _ -> assert_equal 0 garden_size_inc_cheese );
        ]
 
+(* garden tests *)
+let test_create_garden _ =
+  assert_equal (Array.length (Garden.get_garden_cell garden)) 5;
+  assert_equal (Array.length (Garden.get_garden_cell garden).(0)) 10;
+  assert_equal (Garden.get_garden_money garden) 50.0;
+  assert_equal (Garden.get_plant_count garden) 0
+
+(* let test_add_plants_to_garden _ = let garden_with_plant = Garden.add_plant
+   "Daisy" "Sam" garden in assert_equal (Garden.get_plant_count
+   garden_with_plant) 1; let has_daisy = Garden.has_plant garden_with_plant
+   "Sam" in assert_equal has_daisy true; let garden_with_plant2 =
+   Garden.add_plant "Sunflower" "Emily" garden_with_plant in assert_equal
+   (Garden.get_plant_count garden_with_plant) 2; let has_sunflower =
+   Garden.has_plant garden_with_plant2 "Emily" in assert_equal has_sunflower
+   true *)
+
+let test_incr_luck _ =
+  let new_garden = Garden.incr_luck garden in
+  let new_garden2 = Garden.incr_luck new_garden in
+  assert_equal (Garden.get_garden_lucky new_garden2) 2
+
+let test_incr_defense _ =
+  let new_garden = Garden.incr_defense garden in
+  assert_equal (Garden.get_garden_defense new_garden) 1
+
+let test_incr_money_amt _ =
+  let new_garden = Garden.inc_money_amt 10.0 garden in
+  assert_equal (Garden.get_garden_money new_garden) 60.0
+
+let test_feed_plants _ =
+  let garden_with_plant = Garden.add_plant "Sunflower" "Emily" garden in
+  let new_garden = Garden.feed_plants garden_with_plant "Emily" in
+  assert_equal (Garden.get_garden_money new_garden) 49.9;
+  assert_equal (Garden.get_plant_count new_garden) 1;
+  assert_equal (Garden.get_garden_lucky new_garden) 0;
+  assert_equal (Garden.get_garden_defense new_garden) 0
+
+let test_water_plants _ =
+  let garden_with_plant = Garden.add_plant "Daisy" "Sam" garden in
+  let new_garden = Garden.water_plants garden_with_plant "Sam" in
+  let new_garden2 = Garden.water_plants new_garden "Sam" in
+  assert_equal (Garden.get_garden_money new_garden2) 49.8;
+  assert_equal (Garden.get_plant_count new_garden2) 1;
+  assert_equal (Garden.get_garden_lucky new_garden2) 0;
+  assert_equal (Garden.get_garden_defense new_garden2) 0
+
+let test_neglect_plants _ =
+  let garden_with_plant = Garden.add_plant "Sunflower" "Emily" garden in
+  let new_garden = Garden.neglect_plants garden_with_plant "Emily" in
+  let new_garden2 = Garden.neglect_plants new_garden "Emily" in
+  assert_equal (Garden.get_garden_money new_garden2) 49.8;
+  assert_equal (Garden.get_plant_count new_garden2) 1;
+  assert_equal (Garden.get_garden_lucky new_garden2) 0;
+  assert_equal (Garden.get_garden_defense new_garden2) 0
+
+(* let test_count_plant _ = let garden_with_plant = Garden.add_plant "Sunflower"
+   "Emily" garden in let garden_with_plant2 = Garden.add_plant "Daisy" "Sam"
+   garden_with_plant in let garden_with_plant3 = Garden.add_plant "Cactus"
+   "Charlotte" garden_with_plant2 in assert_equal (Garden.count_plant
+   "Sunflower" garden_with_plant3) 1 *)
+
+(* let test_remove_plant _ = let garden_with_plant = Garden.add_plant
+   "Sunflower" "Emily" garden in let garden_with_plant2 = Garden.add_plant
+   "Daisy" "Sam" garden_with_plant in let garden_with_plant3 = Garden.add_plant
+   "Cactus" "Charlotte" garden_with_plant2 in let garden_wo_plant =
+   Garden.remove_plant "Daisy" garden_with_plant3 in assert_equal
+   (Garden.has_plant "Sam" garden_wo_plant) false *)
 let suite =
   "Test Suite for Plant Module"
   >::: [
@@ -649,6 +716,15 @@ let suite =
          inventory_tests;
          store_tests;
          "test stampede" >:: test_stampede_life_true;
+         "test create garden" >:: test_create_garden;
+         (* "test add plants to garden" >:: test_add_plants_to_garden; *)
+         "test increase garden luck" >:: test_incr_luck;
+         "test increase garden defense" >:: test_incr_defense;
+         "test increase garden amt money" >:: test_incr_money_amt;
+         "test feed plants in garden" >:: test_feed_plants;
+         "test water plants in garden" >:: test_water_plants;
+         "test neglect plants in garden" >:: test_neglect_plants;
+         (* "test count plant type in garden" >:: test_count_plant; *)
        ]
 
 let () = run_test_tt_main suite

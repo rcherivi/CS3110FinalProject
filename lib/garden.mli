@@ -3,8 +3,28 @@ type t
     representation of a plant is valid if the height of the plant is
     non-negative *)
 
+type cell
+(** [cell] represents a cell in the garden. AF: Each cell is either empty or
+    contains a plant. RI: The representation of a plant is valid if the height
+    of the plant is non-negative.*)
+
 val create_garden : unit -> t
 (**[create_garden] creates a new garden with default parameters.*)
+
+val get_garden_cell : t -> cell array array
+(** [get_garden_cell] gets the cell of the garden*)
+
+val get_garden_money : t -> float
+(** [get_garden_money] gets the money amount of the garden.*)
+
+val get_garden_lucky : t -> int
+(** [get_garden_lucky] gets the luckiness of the garden.*)
+
+val get_garden_defense : t -> int
+(**[get_garden_defense] gets the defense level of the garden.*)
+
+val get_plant_count : t -> int
+(**[get_plant_count] gets the amount of plants in the garden.*)
 
 val add_plant : string -> string -> t -> t
 (**[add_plant x s] adds a plant with the given name and type to the garden.*)
