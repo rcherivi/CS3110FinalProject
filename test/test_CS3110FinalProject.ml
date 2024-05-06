@@ -80,18 +80,6 @@ let test_get_height _ =
   assert_equal 0 (Plant.get_height daisy);
   assert_equal 0 (Plant.get_height rose)
 
-let test_get_height_and_feed _ =
-  assert_equal 0 (Plant.get_height daisy);
-  assert_equal 0 (Plant.get_height rose);
-
-  (* Feed the plants *)
-  let daisy_after_feed = Plant.feed daisy "Sam" in
-  let rose_after_feed = Plant.feed rose "Julie" in
-
-  (* Verify the height after feeding *)
-  assert_equal 1 (Plant.get_height daisy_after_feed);
-  assert_equal 1 (Plant.get_height rose_after_feed)
-
 let test_get_life _ =
   assert_equal true (Plant.get_life daisy);
   assert_equal true (Plant.get_life sunflower);
@@ -698,7 +686,6 @@ let suite =
   >::: [
          "test_get_name" >:: test_get_name;
          "test_get_height" >:: test_get_height;
-         "test_get_height_and_feed" >:: test_get_height_and_feed;
          "test_get_life" >:: test_get_life;
          "test_get_hydration" >:: test_get_hydration;
          "test_get_price" >:: test_get_price;

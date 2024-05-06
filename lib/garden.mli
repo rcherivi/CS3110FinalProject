@@ -23,9 +23,6 @@ val get_garden_lucky : t -> int
 val get_garden_defense : t -> int
 (**[get_garden_defense] gets the defense level of the garden.*)
 
-val get_plant_count : t -> int
-(**[get_plant_count] gets the amount of plants in the garden.*)
-
 val add_plant : string -> string -> t -> t
 (**[add_plant x s] adds a plant with the given name and type to the garden.*)
 
