@@ -93,7 +93,7 @@ let feed (type_of_plant : t) plant_name : t =
   match type_of_plant with
   | plant_type, species ->
       let new_price =
-        if plant_name = plant_type.name then plant_type.price *. 1.0
+        if plant_name = plant_type.name then plant_type.price +. 1.0
         else plant_type.price
       in
       let new_height =
