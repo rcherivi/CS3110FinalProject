@@ -167,8 +167,8 @@ let buy_plant_helper func n inv garden =
     Garden.print new_garden;
     func (n + 1) new_inv new_garden
 
-let harvest_helper func n inv garden =
-  print_endline "You only have 3 chances\n   to type the right type of plant";
+let harvest_helper func n inv (garden : Garden.t) =
+  print_endline "You only have 3 chances to type the right type of plant";
   let () =
     print_endline
       "What type of plants\n\
@@ -182,8 +182,9 @@ let harvest_helper func n inv garden =
       \ Clover | Cactus "
   in
   let attempts = ref 0 in
-  let plant_name = get_valid_name garden attempts in
-  let new_inv, new_garden = Inventory.harvest plant_name inv garden in
+  let item = read_line () in
+  let item_name = get_valid_item_with_attempts item attempts in
+  let new_inv, new_garden = Inventory.harvest item_name inv garden in
   Garden.print new_garden;
   func (n + 1) new_inv new_garden
 
