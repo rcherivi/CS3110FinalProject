@@ -296,6 +296,7 @@ let buy_item item_name store inv garden =
     | "Water"
     | "Cheese"
     | "Butter"
+    | "Chicken"
     | "Sugar"
     | "Chocolate"
     | "Plant Food"
