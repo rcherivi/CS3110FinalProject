@@ -238,12 +238,12 @@ let print_other (store : t) =
 
 let print_store store category =
   match category with
-  | "Flowers" -> print_flowers store
-  | "Vegetables" -> print_vegetables store
-  | "Fruits" -> print_fruits store
-  | "Defensive Items" -> print_defensive_items store
-  | "Grains" -> print_grains store
-  | "Other" -> print_other store
+  | "1" -> print_flowers store
+  | "3" -> print_vegetables store
+  | "2" -> print_fruits store
+  | "5" -> print_defensive_items store
+  | "4" -> print_grains store
+  | "6" -> print_other store
   | _ -> "Invalid input"
 
 (* add seedling -> goes into garden *)

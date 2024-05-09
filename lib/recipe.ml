@@ -168,9 +168,24 @@ let sell_recipe recipe_name (quantity : int) (inv : Inventory.t)
       print_endline "Unknown recipe name";
       (inv, garden)
 
-let tomato_soup_recipe =
+let repeat_char n c = String.make n c
+
+let add_border recipe =
+  let lines = String.split_on_char '\n' recipe in
+  let max_length =
+    List.fold_left (fun acc line -> max acc (String.length line)) 0 lines
+  in
+  let border = repeat_char (max_length + 30) '-' in
+  let padded_lines =
+    List.map
+      (fun line -> line ^ repeat_char (max_length - String.length line) ' ')
+      lines
+  in
+  String.concat "\n" ([ border ] @ padded_lines @ [ border ])
+
+let string_tomato_soup_recipe =
   "\n\
-  \  Tomato Soup Recipe: \n\n\
+  \  Tomato Soup Recipe: 🥫\n\n\
   \   Ingredients: \n\
   \     • 3 Tomatoes \n\
   \     • 1 Cup of Water  \n\
@@ -180,9 +195,9 @@ let tomato_soup_recipe =
   \     2) In a pot, bring the tomatoes to a boil and add desired ingredients \n\
   \     3) Serve and enjoy!"
 
-let bread_recipe =
+let string_bread_recipe =
   "\n\
-  \  Bread Recipe: \n\n\
+  \  Bread Recipe: 🍞\n\n\
   \   Ingredients: \n\
   \     • 3 Bushels of Wheat \n\
   \     • 1 Cup of Water  \n\
@@ -193,9 +208,9 @@ let bread_recipe =
    30 minutes \n\
   \     3) Serve and enjoy!"
 
-let apple_pie_recipe =
+let string_apple_pie_recipe =
   "\n\
-  \  Apple Pie Recipe: \n\n\
+  \  Apple Pie Recipe: 🥧\n\n\
   \   Ingredients: \n\
   \     • 5 Apples \n\
   \     • 1 Cup of Water  \n\
@@ -204,13 +219,13 @@ let apple_pie_recipe =
   \  \n\
   \   Instructions: \n\
   \     1) Mix wet and dry ingredients in a bowl \n\
-  \     2) Placce mixture in a baking pan and bake in oven at 350 degrees for \
+  \     2) Place mixture in a baking pan and bake in oven at 350 degrees for \
    30 minutes \n\
   \     3) Serve and enjoy!"
 
-let apple_juice_recipe =
+let string_apple_juice_recipe =
   "\n\
-  \  Apple Juice Recipe: \n\n\
+  \  Apple Juice Recipe: 🧃\n\n\
   \   Ingredients: \n\
   \     • 2 Apples \n\
   \     • 2 Cups of Sugar  \n\
@@ -222,9 +237,9 @@ let apple_juice_recipe =
   \     3) Strain the apple puree through a strainer or cheesecloth \n\
   \     4) Chill, serve and enjoy!"
 
-let popcorn_recipe =
+let string_popcorn_recipe =
   "\n\
-  \  Popcorn Recipe: \n\n\
+  \  Popcorn Recipe: 🍿\n\n\
   \   Ingredients: \n\
   \     • 3 Cobs of Corn  \n\
   \     • 1 Stick of Butter  \n\
@@ -235,9 +250,9 @@ let popcorn_recipe =
   \     2) Cover lid and pop kernels until popping sound slows \n\
   \     3) Serve and enjoy!"
 
-let french_fries_recipe =
+let string_french_fries_recipe =
   "\n\
-  \  French Fries Recipe: \n\n\
+  \  French Fries Recipe: 🍟\n\n\
   \   Ingredients: \n\
   \     • 3 Potatoes  \n\
   \     • 1 Stick of Butter  \n\
@@ -254,9 +269,9 @@ let french_fries_recipe =
   \     7) Immediately salt the fries  \n\
   \     8) Serve and enjoy!"
 
-let cookie_recipe =
+let string_cookie_recipe =
   "\n\
-  \  Chocolate Chip Cookie Recipe: \n\n\
+  \  Chocolate Chip Cookie Recipe: 🍪\n\n\
   \   Ingredients: \n\
   \     • 2 Cups of Milk  \n\
   \     • 1 Egg  \n\
@@ -276,9 +291,9 @@ let cookie_recipe =
   \     7) Bake cookies for 9 to 11 minutes  \n\
   \     8) Cool, serve and enjoy!"
 
-let sandwich_recipe =
+let string_sandwich_recipe =
   "\n\
-  \  Sandwich Recipe: \n\n\
+  \  Sandwich Recipe: 🥪\n\n\
   \   Ingredients: \n\
   \     • 1 Loaf of Bread  \n\
   \     • 1 Tomato  \n\
@@ -291,9 +306,9 @@ let sandwich_recipe =
   \     3) Add the second slice on top  \n\
   \     4) Serve and enjoy!"
 
-let salad_recipe =
+let string_salad_recipe =
   "\n\
-  \  Salad Recipe: \n\n\
+  \  Salad Recipe: 🥗\n\n\
   \   Ingredients: \n\
   \     • 4 Pieces of Lettuce  \n\
   \     • 2 Tomatoes \n\
@@ -305,9 +320,9 @@ let salad_recipe =
   \     2) In a bowl, mix together the vegetables  \n\
   \     3) Cool, serve and enjoy!"
 
-let strawberry_cake_recipe =
+let string_strawberry_cake_recipe =
   "\n\
-  \  Strawberry Cake Recipe: \n\n\
+  \  Strawberry Cake Recipe: 🍰\n\n\
   \   Ingredients: \n\
   \     • 4 Strawberries  \n\
   \     • 1 Stick of Butter \n\
@@ -322,9 +337,9 @@ let strawberry_cake_recipe =
   \     5) Add strawberries on top of cake  \n\
   \     6) Cool, serve and enjoy!"
 
-let bouquet_recipe =
+let string_bouquet_recipe =
   "\n\
-  \  Bouquet Recipe: \n\n\
+  \  Bouquet Recipe: 💐\n\n\
   \   Ingredients: \n\
   \     • 2 Yellow Flowers  \n\
   \     • 2 Roses \n\
@@ -334,9 +349,9 @@ let bouquet_recipe =
   \   Instructions: \n\
   \     1) Gather all flowers and tie them together to create a bouquet! \n"
 
-let curry_recipe =
+let string_curry_recipe =
   "\n\
-  \  Curry Recipe: \n\n\
+  \  Curry Recipe: 🍛\n\n\
   \   Ingredients: \n\
   \     • 2 Bowls of Rice  \n\
   \     • 2 Cans of Curry Powder \n\
@@ -347,9 +362,9 @@ let curry_recipe =
   \     2) In a bowl, combine curry powder and water. Stir.  \n\
   \     3) Cool, serve and enjoy!"
 
-let chicken_soup_recipe =
+let string_chicken_soup_recipe =
   "\n\
-  \  Chicken Soup Recipe: \n\n\
+  \  Chicken Soup Recipe: 🥘\n\n\
   \   Ingredients: \n\
   \     • 2 Bell Peppers  \n\
   \     • 1 Tablespoon of Salt \n\
@@ -363,9 +378,9 @@ let chicken_soup_recipe =
   \     2) Combine all ingredients and cook for 20 minutes \n\
   \     3) Serve and enjoy!"
 
-let hamburger_recipe =
+let string_hamburger_recipe =
   "\n\
-  \  Hamburger Recipe: \n\n\
+  \  Hamburger Recipe: 🍔\n\n\
   \   Ingredients: \n\
   \     • 1 Loaf of Bread  \n\
   \     • 1 Tomato  \n\
@@ -380,9 +395,9 @@ let hamburger_recipe =
   \     4) Layer all of the ingredients  \n\
   \     5) Serve and enjoy!"
 
-let smoothie_recipe =
+let string_smoothie_recipe =
   "\n\
-  \  Smoothie Recipe: \n\n\
+  \  Smoothie Recipe: 🍹\n\n\
   \   Ingredients: \n\
   \     • 2 Strawberries  \n\
   \     • 2 Peaches  \n\
@@ -395,3 +410,19 @@ let smoothie_recipe =
   \     2) Chop all fruits  \n\
   \     3) In a blender, mix together all ingredients  \n\
   \     4) Serve and enjoy!"
+
+let tomato_soup_recipe = add_border string_tomato_soup_recipe
+let bread_recipe = add_border string_bread_recipe
+let apple_pie_recipe = add_border string_apple_pie_recipe
+let apple_juice_recipe = add_border string_apple_juice_recipe
+let popcorn_recipe = add_border string_popcorn_recipe
+let french_fries_recipe = add_border string_french_fries_recipe
+let cookie_recipe = add_border string_cookie_recipe
+let sandwich_recipe = add_border string_sandwich_recipe
+let salad_recipe = add_border string_salad_recipe
+let strawberry_cake_recipe = add_border string_strawberry_cake_recipe
+let bouquet_recipe = add_border string_bouquet_recipe
+let curry_recipe = add_border string_curry_recipe
+let chicken_soup_recipe = add_border string_chicken_soup_recipe
+let hamburger_recipe = add_border string_hamburger_recipe
+let smoothie_recipe = add_border string_smoothie_recipe

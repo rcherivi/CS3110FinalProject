@@ -128,26 +128,26 @@ let print_plant (plant : t) =
   match plant with
   | { height = h; life = _; hydration = _; name = _; price = _ }, species -> (
       match species with
-      | Daisy -> get_plant_emoji h 3 "🌱" "��"
-      | Sunflower -> get_plant_emoji h 6 "🌱" "��"
-      | Rose -> get_plant_emoji h 4 "🌱" "��"
-      | Tulip -> get_plant_emoji h 5 "🌱" "��"
-      | Tomato -> get_plant_emoji h 3 "🌱" (if h < 7 then "��" else "🍅")
-      | Lettuce -> get_plant_emoji h 4 "🌱" "��"
-      | Onion -> get_plant_emoji h 4 "🌱" "��"
-      | Potato -> get_plant_emoji h 6 "🌱" "��"
-      | Wheat -> get_plant_emoji h 5 "🌱" "��"
-      | Apple -> get_plant_emoji h 3 "🌱" (if h < 7 then "��" else "🍎")
-      | Mango -> get_plant_emoji h 6 "🌱" "��"
-      | Peach -> get_plant_emoji h 3 "🌱" (if h < 7 then "��" else "🍑")
-      | Strawberry -> get_plant_emoji h 2 "🌱" (if h < 7 then "��" else "🍓")
-      | Cactus -> get_plant_emoji h 7 "🌿" "��"
-      | Lemon -> get_plant_emoji h 4 "🌱" "��"
-      | Pineapple -> get_plant_emoji h 4 "🌱" "��"
-      | Rice -> get_plant_emoji h 4 "🎍" "��"
-      | Clover -> get_plant_emoji h 1 "🌱" "��"
-      | Bell_Pepper -> get_plant_emoji h 4 "🌱" "��"
-      | Corn -> get_plant_emoji h 4 "🌱" (if h < 7 then "��" else "🌽"))
+      | Daisy -> get_plant_emoji h 3 "🌱" "🌼"
+      | Sunflower -> get_plant_emoji h 6 "🌱" "🌻"
+      | Rose -> get_plant_emoji h 4 "🌱" "🌹tu"
+      | Tulip -> get_plant_emoji h 5 "🌱" "🌷"
+      | Tomato -> get_plant_emoji h 3 "🌱" (if h < 7 then "🪴" else "🍅")
+      | Lettuce -> get_plant_emoji h 4 "🌱" "🥬"
+      | Onion -> get_plant_emoji h 4 "🌱" "🧅"
+      | Potato -> get_plant_emoji h 6 "🌱" "🥔"
+      | Wheat -> get_plant_emoji h 5 "🌱" "🌾"
+      | Apple -> get_plant_emoji h 3 "🌱" (if h < 7 then "🌳" else "🍎")
+      | Mango -> get_plant_emoji h 6 "🌱" "🥭"
+      | Peach -> get_plant_emoji h 3 "🌱" (if h < 7 then "🌳" else "🍑")
+      | Strawberry -> get_plant_emoji h 2 "🌱" (if h < 7 then "🪴" else "🍓")
+      | Cactus -> get_plant_emoji h 7 "🌿" "🌵"
+      | Lemon -> get_plant_emoji h 4 "🌱" "🍋"
+      | Pineapple -> get_plant_emoji h 4 "🌱" "🍍"
+      | Rice -> get_plant_emoji h 4 "🎍" "🍚"
+      | Clover -> get_plant_emoji h 1 "🌱" "🍀"
+      | Bell_Pepper -> get_plant_emoji h 4 "🌱" "🫑"
+      | Corn -> get_plant_emoji h 4 "🌱" (if h < 7 then "🪴" else "🌽"))
 
 (**OVER LINE COUNT BY 5 *)
 let create_plant plant_name n : t =
