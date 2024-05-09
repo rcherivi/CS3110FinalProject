@@ -96,7 +96,7 @@ let rec feed_garden_helper func n inv garden =
     else
       let _ = Garden.print_plants_in_category name_from_numb garden in
       print_string "You only have 3 chances to type the right name.\n";
-      print_string "What is the name of the plant you want to water: ";
+      print_string "What is the name of the plant you want to feed: ";
       let attempts = ref 0 in
       let name = get_valid_name garden attempts in
       let new_garden = Garden.feed_plants garden name in
@@ -167,8 +167,8 @@ let rec neglect_garden_helper func n inv garden =
     end
     else
       let _ = Garden.print_plants_in_category name_from_numb garden in
-      print_string "You  only have 3 chances to type the right name";
-      print_string "What is the name of the plant you want to neglect: ";
+      print_string "You only have 3 chances to type the right name.\n";
+      print_string "What is the name of the plant you want to water: ";
       let attempts = ref 0 in
       let name = get_valid_name garden attempts in
       let new_garden = Garden.neglect_plants garden name in
