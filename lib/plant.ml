@@ -216,15 +216,14 @@ let stampede rand_val (plant : t) : t =
         ( { height = h; life = false; hydration = w; name = n; price = p },
           species )
       else
-        ( { height = h; life = true; hydration = w; name = n; price = p },
+        ( { height = h; life = true; hydration = w - 2; name = n; price = p },
           species )
 
 let pollinate (plant : t) : t =
   match plant with
   | { height = h; life = l; hydration = w; name = n; price = p }, species ->
-      check_status
-        ( { height = h + 5; life = l; hydration = w; name = n; price = p },
-          species )
+      ( { height = h + 2; life = l; hydration = w + 1; name = n; price = p },
+        species )
 
 let drought (plant : t) : t =
   match plant with
@@ -242,28 +241,28 @@ let dragon (plant : t) : t =
         ( { height = h; life = false; hydration = w; name = n; price = p },
           species )
       else
-        ( { height = h; life = true; hydration = w; name = n; price = p },
+        ( { height = h; life = true; hydration = w - 4; name = n; price = p },
           species )
 
 let ice (plant : t) : t =
   match plant with
   | { height = h; life = l; hydration = w; name = n; price = p }, species ->
       check_status
-        ( { height = h - 2; life = l; hydration = w; name = n; price = p },
+        ( { height = h - 2; life = l; hydration = w - 1; name = n; price = p },
           species )
 
 let unicorn (plant : t) : t =
   match plant with
   | { height = h; life = l; hydration = w; name = n; price = p }, species ->
       check_status
-        ( { height = h + 2; life = l; hydration = w; name = n; price = p },
+        ( { height = h + 2; life = l; hydration = w + 2; name = n; price = p },
           species )
 
 let fairies (plant : t) : t =
   match plant with
   | { height = h; life = l; hydration = w; name = n; price = p }, species ->
       check_status
-        ( { height = h; life = l; hydration = w; name = n; price = p +. 0.1 },
+        ( { height = h + 3; life = l; hydration = w + 1; name = n; price = p },
           species )
 
 let is_alive (plant : t) =
