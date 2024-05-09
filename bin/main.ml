@@ -37,8 +37,8 @@ let exit count func n inv garden =
 
 let rec get_valid_category plant_cat =
   match plant_cat with
-  | "Flowers" | "Fruits" | "Vegetables" | "Grains" | "Defensive Items" ->
-      plant_cat
+  | "Flowers" | "Fruits" | "Vegetables" | "Grains" | "Defensive Items" | "Other"
+    -> plant_cat
   | _ ->
       print_string
         "You have entered an invalid category. Please enter a valid\n\
