@@ -152,7 +152,7 @@ let print_plant (plant : t) =
 (**OVER LINE COUNT BY 5 *)
 let create_plant plant_name n : t =
   let plant_type1 =
-    { height = 0; life = true; hydration = 25; name = n; price = 0.0 }
+    { height = 0; life = true; hydration = 2; name = n; price = 0.0 }
   in
   match plant_name with
   | "Daisy" -> ({ plant_type1 with price = 3.0 }, Daisy)
