@@ -541,10 +541,10 @@ let all_recipes =
     (7, "Chocolate Chip Cookie", Recipe.cookie_recipe);
     (8, "Sandwich", Recipe.sandwich_recipe);
     (9, "Salad", Recipe.salad_recipe);
-    (10, "Strawberry\n   Cake", Recipe.strawberry_cake_recipe);
-    (11, "Flower Bouquet", Recipe.bouquet_recipe);
+    (10, "Strawberry Cake", Recipe.strawberry_cake_recipe);
+    (11, "Bouquet", Recipe.bouquet_recipe);
     (12, "Curry", Recipe.curry_recipe);
-    (13, "Chicken\n   Soup", Recipe.chicken_soup_recipe);
+    (13, "Chicken Soup", Recipe.chicken_soup_recipe);
     (14, "Hamburger", Recipe.hamburger_recipe);
     (15, "Smoothie", Recipe.smoothie_recipe);
   ]
