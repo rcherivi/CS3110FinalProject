@@ -212,8 +212,9 @@ let buy_plant_helper func n inv garden =
     let () = print_endline (Store.print_store new_store acc_plant_cat) in
     print_endline
       "Plants will be added to garden, and other items will be added to the \
-       inventory";
-    print_string "What is the name of item you want to buy: ";
+       inventory. \n\
+       What is the name of item you want to buy (Press X to go back to the \
+       Menu): ";
     let item = read_line () in
     if item = "X" || item = "x" then exit count func n inv garden
     else
