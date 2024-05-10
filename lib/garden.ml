@@ -188,26 +188,24 @@ let count_plant plant_type garden =
                   if
                     Plant.get_type plant = plant_type
                     && Plant.get_height plant > 5
-                  then (* let () = print_endline "hi" in *)
-                    count := !count + 1
+                  then (* let () = print_endline "hi" in *) count := !count + 1
                   else ()
               | _ -> ())
             row)
         cells;
-      (* print_endline (string_of_int !count); *)
-      !count
+      (* print_endline (string_of_int !count); *) !count
 
 let remove_plant plant_type garden =
   match garden with
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
       let new_cells =
         Array.map
-          (Array.map (fun x ->
-               match x with
-               | Plant plant
-                 when Plant.get_type plant = plant_type
-                      && Plant.get_height plant > 5 -> Empty
-               | _ -> x))
+          (Array.map (function
+            | Plant plant
+              when Plant.get_type plant = plant_type
+                   && Plant.get_height plant >= Plant.max_height plant_type ->
+                Empty
+            | x -> x))
           cells
       in
       { cells = new_cells; money = m; plant_count = p; lucky = l; defense = d }
@@ -311,7 +309,7 @@ let print garden =
     print_string "| ";
     for j = 0 to 9 do
       match garden.cells.(i).(j) with
-      | Empty -> print_string "  "
+      | Empty -> print_string " "
       | Plant plant -> print_string (Plant.print_plant plant)
     done;
     print_endline "|"
@@ -345,8 +343,8 @@ let print_plant plant =
   let height = Plant.get_height plant in
   let price = Plant.get_price plant in
   let hydration = Plant.get_hydration plant in
-  Printf.printf "| %-10s| %-8s| %-11s| %-7d| %-8.2f| %-9d |\n" name visual_rep
-    ptype height price hydration;
+  Printf.printf "| %-10s| %-8s| %-11s| %-7d|\n   %-8.2f| %-9d |\n" name
+    visual_rep ptype height price hydration;
   ()
 
 let print_footer () =
@@ -365,8 +363,7 @@ let print_plants_in_category category garden =
   let print_header () =
     Printf.printf
       "+------------+---------+------------+--------+---------+-----------+\n";
-    Printf.printf
-      "|    Name    | Visual  |   Type     | Height |  Price  | Hydration |\n";
+    Printf.printf "| Name | Visual | Type | Height | Price | Hydration |\n";
     Printf.printf
       "+------------+---------+------------+--------+---------+-----------+\n"
   in
@@ -389,8 +386,8 @@ let pollinate garden =
   let () =
     print_endline
       "\n\
-       Some bees came through and pollinated your plants, helping them grow. 🐝 \
-       🐝"
+      \ Some bees came through and\n\
+      \   pollinated your plants, helping them grow. 🐝  🐝"
   in
   for i = 0 to Array.length garden.cells - 1 do
     for j = 0 to Array.length garden.cells.(0) - 1 do
@@ -405,7 +402,7 @@ let nothing (garden : t) = garden
 
 let drought garden =
   let () =
-    print_endline "\n☀️ There has been a drought!! Plants have lost water. ☀️"
+    print_endline "\n☀️ There has been a drought!!\n   Plants have lost water. ☀️"
   in
 
   for i = 0 to Array.length garden.cells - 1 do
@@ -421,8 +418,8 @@ let stampede garden =
   let () =
     print_endline
       "\n\
-       There has been a stampede of buffallo! Some plants may have been \
-       trampled. 🦬 🦬"
+      \ There has been a stampede\n\
+      \   of buffallo! Some plants may have been  trampled. 🦬 🦬"
   in
 
   for i = 0 to Array.length garden.cells - 1 do
@@ -443,8 +440,8 @@ let dragon garden =
   let () =
     print_endline
       "\n\
-       An angry dragon has swept through your garden! Some of your plants have \
-       been torched. 🐉"
+      \ An angry dragon has swept\n\
+      \   through your garden! Some of your plants have  been torched. 🐉"
   in
 
   for i = 0 to Array.length garden.cells - 1 do
@@ -460,9 +457,11 @@ let unicorn garden =
   let () =
     print_endline
       "\n\
-       Your garden was visited by a friendly unicorn! The unicorn added some \n\
-      \       \n\
-      \ magic to the soil to help your plants grow! 🦄₊˚⊹"
+      \ Your garden was visited by a\n\
+      \   friendly unicorn! The unicorn added some \n\
+      \  \n\
+      \  magic to the soil to\n\
+      \   help your plants grow! 🦄₊˚⊹"
   in
 
   for i = 0 to Array.length garden.cells - 1 do
@@ -478,8 +477,8 @@ let ice garden =
   let () =
     print_endline
       "\n\
-       ☃️ Elsa stormed through your garden, your plants have shriveled in the \
-       cold ☃️"
+      \ ☃️ Elsa stormed through your\n\
+      \   garden, your plants have shriveled in the  cold ☃️"
   in
 
   for i = 0 to Array.length garden.cells - 1 do
@@ -495,9 +494,9 @@ let fairies garden =
   let () =
     print_endline
       "\n\
-       .｡*ﾟ+.*.｡ Some fairies floated through and scattered some pixie dust on \
-       your plants, \n\
-      \      \n\
+      \ .｡*ﾟ+.*.｡ Some fairies\n\
+      \   floated through and scattered some pixie dust on  your plants, \n\
+      \  \n\
       \ making them more valuable! ﾟ+..｡*ﾟ+ ."
   in
   for i = 0 to Array.length garden.cells - 1 do

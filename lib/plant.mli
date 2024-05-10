@@ -80,3 +80,7 @@ val unicorn : t -> t
 
 val fairies : t -> t
 (** [fairies] returns a plant with a higher price.*)
+
+val max_height : string -> int
+(** [max_height x] returns a integer associated with plant [x] when it is
+    matured *)

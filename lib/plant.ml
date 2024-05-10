@@ -268,3 +268,27 @@ let fairies (plant : t) : t =
 let is_alive (plant : t) =
   match plant with
   | { life = l; _ }, _ -> l = true
+
+let max_height (plant : string) =
+  match plant with
+  | "Daisy" -> 3
+  | "Sunflower" -> 6
+  | "Rose" -> 4
+  | "Tulip" -> 5
+  | "Tomato" -> 7
+  | "Apple" -> 7
+  | "Onion" -> 4
+  | "Potato" -> 6
+  | "Wheat" -> 5
+  | "Rice" -> 4
+  | "Peach" -> 7
+  | "Strawberry" -> 7
+  | "Corn" -> 7
+  | "Cactus" -> 7
+  | "Lettuce" -> 4
+  | "Lemon" -> 4
+  | "Mango" -> 6
+  | "Pineapple" -> 4
+  | "Clover" -> 1
+  | "Bell Pepper" -> 4
+  | _ -> failwith "Our store doesn't have this plant yet. Please try again."
