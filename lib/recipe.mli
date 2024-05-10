@@ -40,6 +40,15 @@ val sell_recipe :
   string -> int -> Inventory.t -> Garden.t -> Inventory.t * Garden.t
 (** [sell_recipe] sells the recipe from the inventory.*)
 
+val insert_recipe : string -> int -> t -> t
+(** [insert_recipe] inserts ingredients into recipe.*)
+
+val add_recipe : string -> t -> t
+(** [add_recipe] adds ingredients to recipe.*)
+
+val lookup_recipe : string -> t -> int
+(** [lookup_recipe] lookups up the associated quantity with an ingredient. *)
+
 val tomato_soup_recipe : string
 (** [tomato_soup_recipe] returns the tomato soup recipe.*)
 

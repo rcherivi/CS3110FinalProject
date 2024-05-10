@@ -192,6 +192,25 @@ let add_border recipe =
   in
   String.concat "\n" ([ border ] @ padded_lines @ [ border ])
 
+let rec lookup_recipe key assoc_list =
+  match assoc_list with
+  | Recipe [] -> failwith "Not found"
+  | Recipe ((k, v) :: lst) ->
+      if key = k then v else lookup_recipe key (Recipe lst)
+
+let insert_recipe key value (assoc_list : t) =
+  match assoc_list with
+  | Recipe alist -> Recipe ((key, value) :: alist)
+
+let add_recipe item inv =
+  match inv with
+  | Recipe lst ->
+      if List.mem_assoc item lst then
+        Recipe
+          ((item, lookup_recipe item (Recipe lst) + 1)
+          :: List.remove_assoc item lst)
+      else insert_recipe item 1 inv
+
 let string_tomato_soup_recipe =
   "\n\
   \  Tomato Soup Recipe: 🥫\n\n\

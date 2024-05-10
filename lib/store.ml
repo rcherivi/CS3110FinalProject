@@ -361,4 +361,19 @@ let has_item item_name =
   | "Lady Bug" -> true
   | "Beef" -> true
   | "Bell Pepper" -> true
+  | "Apple Pie" -> true
+  | "Tomato Soup" -> true
+  | "Bread" -> true
+  | "Apple Juice" -> true
+  | "Popcorn" -> true
+  | "French Fries" -> true
+  | "Chocolate Chip Cookie" -> true
+  | "Sandwich" -> true
+  | "Salad" -> true
+  | "Strawberry Cake" -> true
+  | "Bouquet" -> true
+  | "Curry" -> true
+  | "Chicken Soup" -> true
+  | "Hamburger" -> true
+  | "Smoothie" -> true
   | _ -> false

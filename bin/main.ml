@@ -322,6 +322,21 @@ let sell_numb_to_name numb =
   | "29" -> "Ladybug"
   | "30" -> "Beef"
   | "31" -> "Chicken"
+  | "32" -> "Apple Pie"
+  | "33" -> "Tomato Soup"
+  | "34" -> "Bread"
+  | "35" -> "Apple Juice"
+  | "36" -> "Popcorn"
+  | "37" -> "French Fries"
+  | "38" -> "Chocolate Chip Cookie"
+  | "39" -> "Sandwich"
+  | "40" -> "Salad"
+  | "41" -> "Strawberry Cake"
+  | "42" -> "Bouquet"
+  | "43" -> "Curry"
+  | "44" -> "Chicken Soup"
+  | "45" -> "Hamburger"
+  | "46" -> "Smoothie"
   | _ -> "Invalid item number"
 
 let sell_helper func n inv garden =
@@ -329,7 +344,7 @@ let sell_helper func n inv garden =
   let () =
     print_endline
       "\n\
-      \ What type of item do you want to sell from your inventory: \n\
+      \ What type of other item do you want to sell from your inventory: \n\
       \ [1] Daisy         [2] Sunflower     [3] Rose        [4] Tulip \n\
       \ [5] Lemon         [6] Pineapple     [7] Apple       [8] Peach \n\
       \ [9] Strawberry    [10] Mango        [11] Tomato     [12] Lettuce \n\
@@ -337,19 +352,29 @@ let sell_helper func n inv garden =
       \ [17] Wheat        [18] Corn         [19] Clover     [20] Cactus     \n\
       \ [21] Cheese       [22] Eggs         [23] Milk       [24] Water      \n\
       \ [25] Butter       [26] Sugar        [27] Chocolate  [28] Plant Food \n\
-      \ [29] LadyBug      [30] Beef         [31] Chicken    [X] Menu"
+      \ [29] LadyBug      [30] Beef         [31] Chicken    [32] Apple Pie \n\
+      \ [33] Tomato Soup  [34] Bread        [35] Apple Juice \n\
+      \ [36] Popcorn      [37] French Fries [38] Chocolate Chip Cookie \n\
+      \ [39] Sandwich     [40] Salad        [41] Strawberry Cake \n\
+      \ [42] Bouquet      [43] Curry        [44] Chicken Soup \n\
+      \ [45] Hamburger    [46] Smoothie"
   in
   let attempts = ref 0 in
   let item = read_line () in
-  if item = "X" || item = "x" then exit count func n inv garden
-  else
-    let name = sell_numb_to_name item in
-    let acc_item = get_valid_item_with_attempts name attempts in
+  let name = sell_numb_to_name item in
+  let acc_item = get_valid_item_with_attempts name attempts in
+  if int_of_string item >= 32 && int_of_string item <= 46 then (
+    print_string ("How many " ^ acc_item ^ " do you want to sell: ");
+    let qty = int_of_string (read_line ()) in
+    let new_inv, new_garden = Recipe.sell_recipe acc_item qty inv garden in
+    Garden.print new_garden;
+    func (n + 1) new_inv new_garden)
+  else (
     print_string ("How many " ^ acc_item ^ " do you want to sell: ");
     let qty = int_of_string (read_line ()) in
     let new_inv, new_garden = Inventory.sell acc_item qty inv garden in
     Garden.print new_garden;
-    func (n + 1) new_inv new_garden
+    func (n + 1) new_inv new_garden)
 
 let view_inv_helper func n inv garden =
   let () = Inventory.print inv in
