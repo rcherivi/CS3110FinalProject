@@ -344,7 +344,7 @@ let sell_helper func n inv garden =
   let () =
     print_endline
       "\n\
-      \ What type of other item do you want to sell from your inventory: \n\
+      \ What type of item do you want to sell from your inventory: \n\
       \ [1] Daisy         [2] Sunflower     [3] Rose        [4] Tulip \n\
       \ [5] Lemon         [6] Pineapple     [7] Apple       [8] Peach \n\
       \ [9] Strawberry    [10] Mango        [11] Tomato     [12] Lettuce \n\
@@ -357,24 +357,26 @@ let sell_helper func n inv garden =
       \ [36] Popcorn      [37] French Fries [38] Chocolate Chip Cookie \n\
       \ [39] Sandwich     [40] Salad        [41] Strawberry Cake \n\
       \ [42] Bouquet      [43] Curry        [44] Chicken Soup \n\
-      \ [45] Hamburger    [46] Smoothie"
+      \ [45] Hamburger    [46] Smoothie     [X] Menu"
   in
   let attempts = ref 0 in
   let item = read_line () in
-  let name = sell_numb_to_name item in
-  let acc_item = get_valid_item_with_attempts name attempts in
-  if int_of_string item >= 32 && int_of_string item <= 46 then (
-    print_string ("How many " ^ acc_item ^ " do you want to sell: ");
-    let qty = int_of_string (read_line ()) in
-    let new_inv, new_garden = Recipe.sell_recipe acc_item qty inv garden in
-    Garden.print new_garden;
-    func (n + 1) new_inv new_garden)
-  else (
-    print_string ("How many " ^ acc_item ^ " do you want to sell: ");
-    let qty = int_of_string (read_line ()) in
-    let new_inv, new_garden = Inventory.sell acc_item qty inv garden in
-    Garden.print new_garden;
-    func (n + 1) new_inv new_garden)
+  if item = "X" || item = "x" then exit count func n inv garden
+  else
+    let name = sell_numb_to_name item in
+    let acc_item = get_valid_item_with_attempts name attempts in
+    if int_of_string item >= 32 && int_of_string item <= 46 then (
+      print_string ("How many " ^ acc_item ^ " do you want to sell: ");
+      let qty = int_of_string (read_line ()) in
+      let new_inv, new_garden = Recipe.sell_recipe acc_item qty inv garden in
+      Garden.print new_garden;
+      func (n + 1) new_inv new_garden)
+    else (
+      print_string ("How many " ^ acc_item ^ " do you want to sell: ");
+      let qty = int_of_string (read_line ()) in
+      let new_inv, new_garden = Inventory.sell acc_item qty inv garden in
+      Garden.print new_garden;
+      func (n + 1) new_inv new_garden)
 
 let view_inv_helper func n inv garden =
   let () = Inventory.print inv in
