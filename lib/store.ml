@@ -377,38 +377,3 @@ let has_item item_name =
   | "Hamburger" -> true
   | "Smoothie" -> true
   | _ -> false
-
-let get_price item_name =
-  match item_name with
-  | "Daisy"
-  | "Strawberry"
-  | "Sunflower"
-  | "Rose"
-  | "Tulip"
-  | "Tomato"
-  | "Lemon"
-  | "Pineapple"
-  | "Onion"
-  | "Potato"
-  | "Wheat"
-  | "Apple"
-  | "Corn"
-  | "Peach"
-  | "Cactus"
-  | "Clover"
-  | "Rice"
-  | "Lettuce"
-  | "Bell Pepper"
-  | "Mango" -> Plant.get_price (Plant.create_plant item_name "")
-  | "Cheese" -> usual.cheese_price
-  | "Eggs" -> usual.eggs_price
-  | "Milk" -> usual.milk_price
-  | "Water" -> usual.water_price
-  | "Butter" -> usual.butter_price
-  | "Chicken" -> usual.chicken_price
-  | "Sugar" -> usual.sugar_price
-  | "Chocolate" -> usual.chocolate_price
-  | "Plant Food" -> usual.plant_food_price
-  | "Lady Bug" -> usual.ladybug_price
-  | "Beef" -> usual.beef_price
-  | _ -> 0.0

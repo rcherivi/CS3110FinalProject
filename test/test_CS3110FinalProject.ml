@@ -4,9 +4,6 @@ open CS3110FinalProject
 let new_inv = Inventory.create_inventory
 let garden = Garden.create_garden ()
 let test_store = Store.create_store
-
-(**)
-
 let daisy = Plant.create_plant "Daisy" "Sam"
 let sunflower = Plant.create_plant "Sunflower" "Emily"
 let rose = Plant.create_plant "Rose" "Julie"
@@ -570,21 +567,6 @@ let plant_tests =
          feed_tests;
          neglect_tests;
        ]
-
-(* inventory.ml tests *)
-(* let test_sell_existing_plant_with_enough_quantity _ = let inv_with_daisy =
-   Inventory.insert "Daisy" 5 new_inv in let inv_with_rose = Inventory.insert
-   "Rose" 3 inv_with_daisy in
-
-   let updated_inv, updated_garden = Inventory.sell "Daisy" 2 inv_with_rose
-   garden in
-
-   let expected_inv = Inventory.insert "Daisy" 3 new_inv in let expected_inv2 =
-   Inventory.insert "Rose" 3 expected_inv in
-
-   assert_equal expected_inv2 updated_inv;
-
-   assert_equal 66.0 (Garden.get_money updated_garden) *)
 
 let add_eggs = Inventory.add "Eggs" new_inv
 let add_milk = Inventory.add "Milk" new_inv

@@ -1,8 +1,6 @@
 open CS3110FinalProject
 
-(**add a string for instructions*)
 let count = ref 0
-
 let my_garden = Garden.create_garden ()
 let my_inventory = Inventory.create_inventory
 
