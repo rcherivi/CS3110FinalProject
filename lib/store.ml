@@ -123,7 +123,7 @@ let discount_general price name =
   | "Chocolate" -> if price < usual.chocolate_price then "[DISCOUNT] 💸" else ""
   | "Plant Food" ->
       if price < usual.plant_food_price then "[DISCOUNT] 💸" else ""
-  | "Lady Bug" -> if price < usual.ladybug_price then "[DISCOUNT] 💸" else ""
+  | "Ladybug" -> if price < usual.ladybug_price then "[DISCOUNT] 💸" else ""
   | "Beef" -> if price < usual.beef_price then "[DISCOUNT] 💸" else ""
   | "Chicken" -> if price < usual.chicken_price then "[DISCOUNT] 💸" else ""
   | _ -> ""
@@ -282,7 +282,7 @@ let buy_item item_name store inv garden =
     | "Sugar" -> store.sugar_price
     | "Chocolate" -> store.chocolate_price
     | "Plant Food" -> store.plant_food_price
-    | "Lady Bug" -> store.ladybug_price
+    | "Ladybug" -> store.ladybug_price
     | "Beef" -> store.beef_price
     | "Bell Pepper" -> store.bell_pepper_price
     | _ -> 0.0 (* Default price for unknown items *)
@@ -301,7 +301,7 @@ let buy_item item_name store inv garden =
     | "Beef" ->
         ( Inventory.add item_name inv,
           Garden.inc_money_amt (-1.0 *. price) garden )
-    | "Lady Bug" -> (Inventory.add item_name inv, Garden.incr_luck garden)
+    | "Ladybug" -> (Inventory.add item_name inv, Garden.incr_luck garden)
     | "Cactus" | "Clover" ->
         let () = print_endline "Name of Plant? (i.e. Benjamin)" in
         let name = read_line () in
@@ -353,7 +353,7 @@ let item_list2 =
     "Sugar";
     "Chocolate";
     "Plant Food";
-    "Lady Bug";
+    "Ladybug";
     "Beef";
   ]
 
