@@ -334,7 +334,7 @@ let print garden =
     print_string "| ";
     for j = 0 to 9 do
       match garden.cells.(i).(j) with
-      | Empty -> print_string " "
+      | Empty -> print_string "  "
       | Plant plant -> print_string (Plant.print_plant plant)
     done;
     print_endline "|"
@@ -368,8 +368,8 @@ let print_plant plant =
   let height = Plant.get_height plant in
   let price = Plant.get_price plant in
   let hydration = Plant.get_hydration plant in
-  Printf.printf "| %-10s| %-8s| %-11s| %-7d|\n   %-8.2f| %-9d |\n" name
-    visual_rep ptype height price hydration;
+  Printf.printf "| %-10s| %-8s| %-11s| %-7d| %-8.2f| %-9d |\n" name visual_rep
+    ptype height price hydration;
   ()
 
 let print_footer () =
@@ -388,7 +388,8 @@ let print_plants_in_category category garden =
   let print_header () =
     Printf.printf
       "+------------+---------+------------+--------+---------+-----------+\n";
-    Printf.printf "| Name | Visual | Type | Height | Price | Hydration |\n";
+    Printf.printf
+      "|    Name    | Visual  |   Type     | Height |  Price  | Hydration |\n";
     Printf.printf
       "+------------+---------+------------+--------+---------+-----------+\n"
   in
