@@ -19,21 +19,46 @@ let create_garden () =
     defense = 0;
   }
 
-(**FIX THIS*)
-let inc_money plant_type garden =
+let get_store_price item_name =
+  match item_name with
+  | "Daisy"
+  | "Strawberry"
+  | "Sunflower"
+  | "Rose"
+  | "Tulip"
+  | "Tomato"
+  | "Lemon"
+  | "Pineapple"
+  | "Onion"
+  | "Potato"
+  | "Wheat"
+  | "Apple"
+  | "Corn"
+  | "Peach"
+  | "Cactus"
+  | "Clover"
+  | "Rice"
+  | "Lettuce"
+  | "Bell Pepper"
+  | "Mango" -> Plant.get_price (Plant.create_plant item_name "")
+  | "Cheese" -> 5.0
+  | "Eggs" -> 3.0
+  | "Milk" -> 5.0
+  | "Water" -> 1.0
+  | "Butter" -> 2.0
+  | "Chicken" -> 5.50
+  | "Sugar" -> 1.5
+  | "Chocolate" -> 3.20
+  | "Plant Food" -> 2.0
+  | "Lady Bug" -> 8.0
+  | "Beef" -> 6.0
+  | _ -> 0.0
+
+let inc_money (plant_type : string) (garden : t) : t =
+  let price = get_store_price plant_type in
   match garden with
-  | { cells; money = m; plant_count; lucky; defense } -> (
-      match plant_type with
-      | "Flower" -> { cells; money = m +. 2.00; plant_count; lucky; defense }
-      | "Peach" -> { cells; money = m +. 7.00; plant_count; lucky; defense }
-      | "Strawberry" ->
-          { cells; money = m +. 5.00; plant_count; lucky; defense }
-      | "Cactus" -> { cells; money = m +. 3.00; plant_count; lucky; defense }
-      | _ -> { cells; money = m +. 7.00; plant_count; lucky; defense })
-(* let inc_money (plant_type : Plant.t) garden = match garden with | { cells;
-   money = m } -> if plant_type = Plant.get_type plant_type then { cells; money
-   = m +. Plant.get_sale_price plant_type +. 2.00 } else { cells; money = m +.
-   7.00 } *)
+  | { cells; money = m; plant_count; lucky; defense } ->
+      { cells; money = m +. price +. 2.0; plant_count; lucky; defense }
 
 let get_garden_cell garden = garden.cells
 let get_garden_lucky garden = garden.lucky
@@ -187,7 +212,7 @@ let count_plant plant_type garden =
               | Plant plant ->
                   if
                     Plant.get_type plant = plant_type
-                    && Plant.get_height plant > 5
+                    && Plant.get_height plant >= Plant.max_height plant_type
                   then (* let () = print_endline "hi" in *) count := !count + 1
                   else ()
               | _ -> ())

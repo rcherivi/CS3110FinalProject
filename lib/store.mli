@@ -14,6 +14,3 @@ val buy_item : string -> t -> Inventory.t -> Garden.t -> Inventory.t * Garden.t
 
 val has_item : string -> bool
 (** [has_item item] checks if the item that user enters is in the store *)
-
-val get_price : string -> float
-(** [get_price item] gets the sale price of the item*)
