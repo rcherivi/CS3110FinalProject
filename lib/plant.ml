@@ -130,7 +130,7 @@ let print_plant (plant : t) =
       match species with
       | Daisy -> get_plant_emoji h 3 "🌱" "🌼"
       | Sunflower -> get_plant_emoji h 6 "🌱" "🌻"
-      | Rose -> get_plant_emoji h 4 "🌱" "🌹tu"
+      | Rose -> get_plant_emoji h 4 "🌱" "🌹"
       | Tulip -> get_plant_emoji h 5 "🌱" "🌷"
       | Tomato -> get_plant_emoji h 3 "🌱" (if h < 7 then "🪴" else "🍅")
       | Lettuce -> get_plant_emoji h 4 "🌱" "🥬"
