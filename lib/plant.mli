@@ -60,6 +60,9 @@ val get_life : t -> bool
 val stampede : float -> t -> t
 (** [stampede x] returns a dead plant*)
 
+val rain : t -> t
+(** [rain x] returns a plant with higher hydration level*)
+
 val drought : t -> t
 (** [drought x] returns a plant with a lower hydration level*)
 

@@ -225,6 +225,11 @@ let pollinate (plant : t) : t =
       ( { height = h + 2; life = l; hydration = w + 1; name = n; price = p },
         species )
 
+let rain(plant : t) : t =
+  match plant with
+  | { height = h; life = l; hydration = w; name = n; price = p }, species ->
+      ({ height = h; life = l; hydration = w + 3; name = n; price = p }, species)
+
 let drought (plant : t) : t =
   match plant with
   | { height = h; life = l; hydration = w; name = n; price = p }, species ->

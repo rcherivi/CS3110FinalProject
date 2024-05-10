@@ -426,6 +426,17 @@ let pollinate garden =
 
 let nothing (garden : t) = garden
 
+let rain garden =
+  let () = print_endline "\n There was a rain storm last night!\n 🌧️🌧️🌧️" in
+  for i = 0 to Array.length garden.cells - 1 do
+    for j = 0 to Array.length garden.cells.(0) - 1 do
+      match garden.cells.(i).(j) with
+      | Empty -> ()
+      | Plant plant -> garden.cells.(i).(j) <- Plant (Plant.rain plant)
+    done
+  done;
+  filter_dead garden
+
 let drought garden =
   let () =
     print_endline "\n☀️ There has been a drought!!\n   Plants have lost water. ☀️"
@@ -543,6 +554,7 @@ let apply_event event_name garden =
   | "ice" -> ice garden
   | "dragon" -> dragon garden
   | "fairies" -> fairies garden
+  | "rain" -> rain garden
   | _ -> nothing garden
 
 let night_change n garden =
@@ -552,7 +564,7 @@ let night_change n garden =
     let rand_val = Random.float 1.0 in
     if rand_val < 0.6 then apply_event "nothing" garden
     else
-      let bad_events_lst = [ "stampede"; "drought"; "ice"; "dragon" ] in
+      let bad_events_lst = [ "stampede"; "drought"; "ice"; "dragon"; "rain" ] in
       let good_events_lst = [ "pollinate"; "unicorn"; "fairies" ] in
       let event_type = Random.float 1.0 in
       if event_type < determine_threshold (get_luck garden) then
