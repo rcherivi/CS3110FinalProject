@@ -430,8 +430,8 @@ let rec display_and_handle_recipe recipe_func food_name recipe_name func n inv
     \  [X] Go back to main menu ";
   match read_line () with
   | "1" ->
-      ignore (Recipe.create_recipe food_name inv);
-      missing_ingredient_message recipe_func func n inv garden count day
+      let updated_inv = Recipe.create_recipe food_name inv in
+      missing_ingredient_message recipe_func func n updated_inv garden count day
   | "2" -> recipe_func func n inv garden count day
   | "X" | "x" -> func n inv garden count day
   | _ ->

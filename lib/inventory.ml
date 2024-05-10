@@ -62,6 +62,10 @@ let add item inv =
         Inv ((item, lookup item (Inv lst) + 1) :: List.remove_assoc item lst)
       else insert item 1 inv
 
+let remove (item : string) (inv : t) : t =
+  match inv with
+  | Inv lst -> Inv (List.filter (fun (key, _) -> key <> item) lst)
+
 let get_length inv =
   match inv with
   | Inv lst -> List.length lst

@@ -18,6 +18,9 @@ val recipe_ingredients : recipe_type -> t
 val price : recipe_type -> float
 (** [price] matches each recipe type with its associated price. *)
 
+val create : t
+(** [create] creates a new recipe. *)
+
 val get_missing_ingredients :
   (string * int) list -> t -> Inventory.t -> (string * int) list
 (** [get_missing_ingredients] returns all the missing ingredients if the
@@ -26,6 +29,9 @@ val get_missing_ingredients :
 val have_ingredients : Inventory.t -> t -> string
 (** [have_ingredients] checks whether the inventory has enough ingredients to
     make the recipe*)
+
+val update_inventory : Inventory.t -> t -> Inventory.t
+(** [update_inventory] updates the inventory after creating a recipe.*)
 
 val create_recipe : string -> Inventory.t -> Inventory.t
 (** [create_recipe] creates a recipe and adds it to the inventory.*)

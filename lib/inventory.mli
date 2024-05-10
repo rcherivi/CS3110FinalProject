@@ -31,5 +31,8 @@ val print : t -> unit
 val add : string -> t -> t
 (** [add] adds an item to the inventory.*)
 
+val remove : string -> t -> t
+(** [remove] removes an item from the inventory. *)
+
 val get_length : t -> int
 (** [get_length] gets the length of the inventory.*)

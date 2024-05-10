@@ -1,4 +1,4 @@
-type t = (string * int) list
+type t = Recipe of (string * int) list
 
 type recipe_type =
   | ApplePie
@@ -7,7 +7,7 @@ type recipe_type =
   | AppleJuice
   | Popcorn
   | FrenchFries
-  | Cookie
+  | ChocolateChipCookie
   | Sandwich
   | Salad
   | StrawberryCake
@@ -24,7 +24,7 @@ let recipe_type_of_string = function
   | "Apple Juice" -> Some AppleJuice
   | "Popcorn" -> Some Popcorn
   | "French Fries" -> Some FrenchFries
-  | "Cookie" -> Some Cookie
+  | "Chocolate Chip Cookie" -> Some ChocolateChipCookie
   | "Sandwich" -> Some Sandwich
   | "Salad" -> Some Salad
   | "Strawberry Cake" -> Some StrawberryCake
@@ -35,51 +35,58 @@ let recipe_type_of_string = function
   | "Smoothie" -> Some Smoothie
   | _ -> None
 
-(**LINE COUNT OVER*)
 let recipe_ingredients = function
-  | ApplePie -> [ ("Apple", 5); ("Water", 1); ("Eggs", 2); ("Butter", 1) ]
-  | TomatoSoup -> [ ("Tomato", 3); ("Water", 1) ]
-  | Bread -> [ ("Wheat", 3); ("Water", 1) ]
-  | AppleJuice -> [ ("Apple", 2); ("Sugar", 2); ("Water", 4) ]
-  | Popcorn -> [ ("Corn", 3); ("Butter", 1); ("Salt", 1) ]
-  | FrenchFries -> [ ("Potato", 3); ("Butter", 1); ("Salt", 1) ]
-  | Cookie ->
-      [
-        ("Milk", 2);
-        ("Egg", 1);
-        ("Butter", 1);
-        ("Chocolate", 1);
-        ("Sugar", 1);
-        ("Wheat", 2);
-      ]
-  | Sandwich -> [ ("Bread", 1); ("Tomato", 1); ("Lettuce", 2); ("Cheese", 1) ]
-  | Salad -> [ ("Lettuce", 4); ("Tomato", 2); ("Bell Pepper", 1); ("Onion", 1) ]
+  | ApplePie ->
+      Recipe [ ("Apple", 5); ("Water", 1); ("Eggs", 2); ("Butter", 1) ]
+  | TomatoSoup -> Recipe [ ("Tomato", 3); ("Water", 1) ]
+  | Bread -> Recipe [ ("Wheat", 3); ("Water", 1) ]
+  | AppleJuice -> Recipe [ ("Apple", 2); ("Sugar", 2); ("Water", 4) ]
+  | Popcorn -> Recipe [ ("Corn", 3); ("Butter", 1); ("Salt", 1) ]
+  | FrenchFries -> Recipe [ ("Potato", 3); ("Butter", 1); ("Salt", 1) ]
+  | ChocolateChipCookie ->
+      Recipe
+        [
+          ("Milk", 2);
+          ("Eggs", 1);
+          ("Butter", 1);
+          ("Chocolate", 1);
+          ("Sugar", 1);
+          ("Wheat", 2);
+        ]
+  | Sandwich ->
+      Recipe [ ("Bread", 1); ("Tomato", 1); ("Lettuce", 2); ("Cheese", 1) ]
+  | Salad ->
+      Recipe [ ("Lettuce", 4); ("Tomato", 2); ("Bell Pepper", 1); ("Onion", 1) ]
   | StrawberryCake ->
-      [ ("Strawberry", 4); ("Butter", 1); ("Sugar", 2); ("Milk", 2) ]
+      Recipe [ ("Strawberry", 4); ("Butter", 1); ("Sugar", 2); ("Milk", 2) ]
   | Bouquet ->
-      [ ("Yellow Flower", 2); ("Rose", 2); ("Tulip", 3); ("Sunflower", 2) ]
-  | Curry -> [ ("Rice", 2); ("Curry Powder", 2); ("Water", 2) ]
+      Recipe
+        [ ("Yellow Flower", 2); ("Rose", 2); ("Tulip", 3); ("Sunflower", 2) ]
+  | Curry -> Recipe [ ("Rice", 2); ("Curry Powder", 2); ("Water", 2) ]
   | ChickenSoup ->
-      [
-        ("Bell Pepper", 2);
-        ("Salt", 1);
-        ("Chicken", 1);
-        ("Milk", 1);
-        ("Tomato", 2);
-        ("Water", 5);
-      ]
+      Recipe
+        [
+          ("Bell Pepper", 2);
+          ("Salt", 1);
+          ("Chicken", 1);
+          ("Milk", 1);
+          ("Tomato", 2);
+          ("Water", 5);
+        ]
   | Hamburger ->
-      [
-        ("Bread", 1); ("Tomato", 1); ("Lettuce", 1); ("Cheese", 1); ("Beef", 1);
-      ]
+      Recipe
+        [
+          ("Bread", 1); ("Tomato", 1); ("Lettuce", 1); ("Cheese", 1); ("Beef", 1);
+        ]
   | Smoothie ->
-      [
-        ("Strawberry", 2);
-        ("Peach", 2);
-        ("Lemon", 1);
-        ("Pineapple", 1);
-        ("Mango", 3);
-      ]
+      Recipe
+        [
+          ("Strawberry", 2);
+          ("Peach", 2);
+          ("Lemon", 1);
+          ("Pineapple", 1);
+          ("Mango", 3);
+        ]
 
 let price = function
   | ApplePie -> 10.0
@@ -88,7 +95,7 @@ let price = function
   | AppleJuice -> 2.0
   | Popcorn -> 1.0
   | FrenchFries -> 2.50
-  | Cookie -> 3.0
+  | ChocolateChipCookie -> 3.0
   | Sandwich -> 7.0
   | Salad -> 6.0
   | StrawberryCake -> 15.0
@@ -98,16 +105,18 @@ let price = function
   | Hamburger -> 7.70
   | Smoothie -> 5.0
 
+let create = Recipe []
+
 let rec get_missing_ingredients missing (recipe : t) (inventory : Inventory.t) =
   match recipe with
-  | [] -> missing
-  | (ingredient, recipe_qty) :: tl ->
+  | Recipe [] -> missing
+  | Recipe ((ingredient, recipe_qty) :: tl) ->
       let m =
         match Inventory.lookup_option ingredient inventory with
         | Some inv_qty when inv_qty >= recipe_qty -> missing
         | _ -> (ingredient, recipe_qty) :: missing
       in
-      get_missing_ingredients m tl inventory
+      get_missing_ingredients m (Recipe tl) inventory
 
 let have_ingredients (inventory : Inventory.t) (recipe : t) =
   let missing_ingredients = get_missing_ingredients [] recipe inventory in
@@ -120,26 +129,26 @@ let have_ingredients (inventory : Inventory.t) (recipe : t) =
            (fun (ingredient, qty) -> ingredient ^ ": " ^ string_of_int qty)
            missing_ingredients)
 
-(**LINE COUNT OVER*)
+let rec update_inventory inv ingredients =
+  match ingredients with
+  | Recipe [] -> inv
+  | Recipe ((ingred, quantity) :: tl) ->
+      let current_quantity = Inventory.lookup ingred inv in
+      let new_qty = current_quantity - quantity in
+      let inv_without_prev = Inventory.remove ingred inv in
+      let inv_with_new_qty = Inventory.insert ingred new_qty inv_without_prev in
+      update_inventory inv_with_new_qty (Recipe tl)
+
 let create_recipe recipe_name (inventory : Inventory.t) =
   match recipe_type_of_string recipe_name with
   | Some recipe_type -> (
       let ingredients = recipe_ingredients recipe_type in
       match have_ingredients inventory ingredients with
       | "We have all the ingredients necessary for the recipe." ->
-          let updated_inv =
-            List.fold_left
-              (fun inv (ingred, quantity) ->
-                let current_quantity = Inventory.lookup ingred inv in
-                let new_qty = current_quantity - quantity in
-                Inventory.insert ingred new_qty inv)
-              inventory ingredients
-          in
-          let updated_inv_with_recipe =
-            Inventory.insert recipe_name 1 updated_inv
-          in
+          let updated_inv = Inventory.add recipe_name inventory in
+          let updated_inv = update_inventory updated_inv ingredients in
           Printf.printf "You have crafted 1 %s!\n" recipe_name;
-          updated_inv_with_recipe
+          updated_inv
       | msg ->
           print_endline msg;
           inventory)
