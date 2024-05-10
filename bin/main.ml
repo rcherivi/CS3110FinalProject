@@ -16,6 +16,8 @@ let menu_options =
   \  [7] View Inventory\n\
   \  [8] Sell \n\
   \  [9] Create Recipe\n\
+  \  [10] View Menu Guide and Explanation \n\
+  \  [11] View Items Explanation\n\
   \  Enter your option number: "
 
 let check_attempts attempts =
@@ -211,13 +213,27 @@ let buy_plant_helper func n inv garden =
     print_endline
       "Plants will be added to garden, and other items will be added to the \
        inventory";
-    print_endline "";
     print_string "What is the name of item you want to buy: ";
     let item = read_line () in
-    let acc_item = get_valid_item item in
-    let new_inv, new_garden = Store.buy_item acc_item new_store inv garden in
-    Garden.print new_garden;
-    func (n + 1) new_inv new_garden
+    if item = "X" || item = "x" then exit count func n inv garden
+    else
+      let acc_item = get_valid_item item in
+      let new_inv, new_garden = Store.buy_item acc_item new_store inv garden in
+      Garden.print new_garden;
+      func (n + 1) new_inv new_garden
+
+(* let buy_plant_helper func n inv garden = let new_store = Store.create_store
+   in print_endline "What category of plants do you want to buy?\n\ \ [1]
+   Flowers [2] Fruits [3] Vegetables \n\ \ [4] Grains [5] Defensive Items [6]
+   Other\n\ \ [X] Menu"; let plant_cat = read_line () in if plant_cat = "X" ||
+   plant_cat = "x" then exit count func n inv garden else let acc_plant_cat =
+   get_valid_category plant_cat in let () = print_endline (Store.print_store
+   new_store acc_plant_cat) in print_endline "Plants will be added to garden,
+   and other items will be added to the \ inventory"; print_endline "";
+   print_string "What is the name of item you want to buy: "; let item =
+   read_line () in let acc_item = get_valid_item item in let new_inv, new_garden
+   = Store.buy_item acc_item new_store inv garden in Garden.print new_garden;
+   func (n + 1) new_inv new_garden *)
 
 let harvest_numb_to_name number =
   match number with
@@ -287,7 +303,8 @@ let harvest_helper func n inv garden =
    acc_item ^ "do\n you want to sell: "); let qty = int_of_string (read_line ())
    in let new_inv, new_garden = Inventory.sell acc_item qty inv garden in
    Garden.print new_garden; func (n + 1) new_inv new_garden *)
-let sell_numb_to_name numb =
+
+let first_numb_to_name numb =
   match numb with
   | "1" -> "Daisy"
   | "2" -> "Sunflower"
@@ -304,6 +321,10 @@ let sell_numb_to_name numb =
   | "13" -> "Bell Pepper"
   | "14" -> "Onion"
   | "15" -> "Potato"
+  | _ -> "Invalid"
+
+let second_numb_to_name numb =
+  match numb with
   | "16" -> "Rice"
   | "17" -> "Wheat"
   | "18" -> "Corn"
@@ -319,6 +340,10 @@ let sell_numb_to_name numb =
   | "28" -> "Plant Food"
   | "29" -> "Ladybug"
   | "30" -> "Beef"
+  | _ -> "Invalid"
+
+let third_numb_to_name numb =
+  match numb with
   | "31" -> "Chicken"
   | "32" -> "Apple Pie"
   | "33" -> "Tomato Soup"
@@ -335,28 +360,51 @@ let sell_numb_to_name numb =
   | "44" -> "Chicken Soup"
   | "45" -> "Hamburger"
   | "46" -> "Smoothie"
-  | _ -> "Invalid item number"
+  | _ -> "Invalid"
+
+let sell_numb_to_name numb =
+  if int_of_string numb < 16 then first_numb_to_name numb
+  else if int_of_string numb >= 16 && int_of_string numb < 31 then
+    second_numb_to_name numb
+  else if int_of_string numb >= 31 && int_of_string numb <= 46 then
+    third_numb_to_name numb
+  else "Invalid item number"
+(* let sell_numb_to_name numb = match numb with | "1" -> "Daisy" | "2" ->
+   "Sunflower" | "3" -> "Rose" | "4" -> "Tulip" | "5" -> "Lemon" | "6" ->
+   "Pineapple" | "7" -> "Apple" | "8" -> "Peach" | "9" -> "Strawberry" | "10" ->
+   "Mango" | "11" -> "Tomato" | "12" -> "Lettuce" | "13" -> "Bell Pepper" | "14"
+   -> "Onion" | "15" -> "Potato" | "16" -> "Rice" | "17" -> "Wheat" | "18" ->
+   "Corn" | "19" -> "Clover" | "20" -> "Cactus" | "21" -> "Cheese" | "22" ->
+   "Eggs" | "23" -> "Milk" | "24" -> "Water" | "25" -> "Butter" | "26" ->
+   "Sugar" | "27" -> "Chocolate" | "28" -> "Plant Food" | "29" -> "Ladybug" |
+   "30" -> "Beef" | "31" -> "Chicken" | "32" -> "Apple Pie" | "33" -> "Tomato
+   Soup" | "34" -> "Bread" | "35" -> "Apple Juice" | "36" -> "Popcorn" | "37" ->
+   "French Fries" | "38" -> "Chocolate Chip Cookie" | "39" -> "Sandwich" | "40"
+   -> "Salad" | "41" -> "Strawberry Cake" | "42" -> "Bouquet" | "43" -> "Curry"
+   | "44" -> "Chicken Soup" | "45" -> "Hamburger" | "46" -> "Smoothie" | _ ->
+   "Invalid item number" *)
+
+let sell_items () =
+  print_endline
+    "\n\
+    \ What type of item do you want to sell from your inventory: \n\
+    \ [1] Daisy         [2] Sunflower     [3] Rose        [4] Tulip \n\
+    \ [5] Lemon         [6] Pineapple     [7] Apple       [8] Peach \n\
+    \ [9] Strawberry    [10] Mango        [11] Tomato     [12] Lettuce \n\
+    \ [13] Bell Pepper  [14] Onion        [15] Potato     [16] Rice       \n\
+    \ [17] Wheat        [18] Corn         [19] Clover     [20] Cactus     \n\
+    \ [21] Cheese       [22] Eggs         [23] Milk       [24] Water      \n\
+    \ [25] Butter       [26] Sugar        [27] Chocolate  [28] Plant Food \n\
+    \ [29] LadyBug      [30] Beef         [31] Chicken    [32] Apple Pie \n\
+    \ [33] Tomato Soup  [34] Bread        [35] Apple Juice \n\
+    \ [36] Popcorn      [37] French Fries [38] Chocolate Chip Cookie \n\
+    \ [39] Sandwich     [40] Salad        [41] Strawberry Cake \n\
+    \ [42] Bouquet      [43] Curry        [44] Chicken Soup \n\
+    \ [45] Hamburger    [46] Smoothie     [X] Menu"
 
 let sell_helper func n inv garden =
   print_string "You only have 3 chances to type the right item";
-  let () =
-    print_endline
-      "\n\
-      \ What type of item do you want to sell from your inventory: \n\
-      \ [1] Daisy         [2] Sunflower     [3] Rose        [4] Tulip \n\
-      \ [5] Lemon         [6] Pineapple     [7] Apple       [8] Peach \n\
-      \ [9] Strawberry    [10] Mango        [11] Tomato     [12] Lettuce \n\
-      \ [13] Bell Pepper  [14] Onion        [15] Potato     [16] Rice       \n\
-      \ [17] Wheat        [18] Corn         [19] Clover     [20] Cactus     \n\
-      \ [21] Cheese       [22] Eggs         [23] Milk       [24] Water      \n\
-      \ [25] Butter       [26] Sugar        [27] Chocolate  [28] Plant Food \n\
-      \ [29] LadyBug      [30] Beef         [31] Chicken    [32] Apple Pie \n\
-      \ [33] Tomato Soup  [34] Bread        [35] Apple Juice \n\
-      \ [36] Popcorn      [37] French Fries [38] Chocolate Chip Cookie \n\
-      \ [39] Sandwich     [40] Salad        [41] Strawberry Cake \n\
-      \ [42] Bouquet      [43] Curry        [44] Chicken Soup \n\
-      \ [45] Hamburger    [46] Smoothie     [X] Menu"
-  in
+  sell_items ();
   let attempts = ref 0 in
   let item = read_line () in
   if item = "X" || item = "x" then exit count func n inv garden
@@ -523,6 +571,81 @@ let create_recipe_helper func n inv garden =
 let day = ref 1
 let check_terminated garden = Garden.get_money garden <= 0.0
 
+let print_in_box text padding =
+  let lines = String.split_on_char '\n' text in
+  let max_length =
+    List.fold_left (fun acc line -> max acc (String.length line)) 0 lines
+  in
+  let box_length = max_length + (2 * padding) in
+  let thick_border = "+" ^ String.make box_length '=' ^ "+" in
+  Printf.printf "%s\n" thick_border;
+  for _ = 1 to padding do
+    Printf.printf "%s\n" (String.make box_length ' ')
+  done;
+  List.iter
+    (fun line ->
+      let padding_left = String.make padding ' ' in
+      let padding_right =
+        String.make (box_length - String.length line - padding) ' '
+      in
+      Printf.printf "%s%s%s\n" padding_left line padding_right)
+    lines;
+  for _ = 1 to padding do
+    Printf.printf "%s\n" (String.make box_length ' ')
+  done;
+  Printf.printf "%s\n" thick_border
+
+let string_menu_guide () =
+  print_endline
+    "Menu Option Explanation:\n\
+     [1] Buy Plant/Item: In order to start your garden you need to buy a plant \
+     seed. You can also buy other objects such as defensive items for your \
+     garden that protect your garden from random events, and special \
+     ingredients to use in recipes.\n\n\
+     [2] Feed Plants: In order for your plants to grow you need to feed them. \
+     You can feed them using food bought from the Buy Plant/Item option\n\n\
+     [3] Water Plants: If the hydration level of your plants gets too low, \
+     your plant will die, remember to water your plants\n\n\
+     [4] Neglect Plant: If your low on resources, or the plants hydration \
+     level is fine you can neglect the plant \n\n\
+     [5] Harvest: Once a plant has reached its maximum height you can harvest \
+     it and it will be added to your inventory\n\n\
+     [6] Observe Garden: View the garden and see what your plants are looking \
+     like right now\n\n\
+     [7] View Inventory: view all the items you have bought or harvested\n\n\
+     [8] Sell: Sell off plants and recipe items to make more money!\n\n\
+     [9] Create Recipe: Check out all the available recipes, and craft your \
+     own which will be added to your inventory."
+
+let string_view_items () =
+  print_endline
+    "You will have the opportunity to buy plants for your garden and add items \
+     to your inventory! \n\n\
+    \ Here are plants you can add do your garden: \n\
+    \    [1] Daisy        [2] Sunflower   [3] Rose        [4] Tulip \n\
+    \    [5] Lemon        [6] Pineapple   [7] Apple       [8] Peach \n\
+    \    [9] Strawberry   [10] Mango      [11] Tomato     [12] Lettuce \n\
+    \    [13] Bell Pepper [14] Onion      [15] Potato     [16] Rice \n\
+    \    [17] Wheat       [18] Corn       [19] Clover     [20] Cactus\n\n\
+    \ You can harvest these plants when they reach a height of 5! \n\
+    \ Once a plant is harvested, it is placed in the inventory!\n\n\
+     --------------------------------------------------------------------------------\n\
+    \ Here are items you can buy and put directly in your inventory: \n\
+    \    [1] Cheese        [2] Eggs      [3] Milk        [4] Water \n\
+    \    [5] Butter        [6] Sugar     [7] Chocolate   [8] Plant Food \n\
+    \    [9] Beef          [10] Chicken\n\
+     --------------------------------------------------------------------------------\n\
+    \ Here are defensive items that you can buy to defend your garden from \
+     tragedies:\n\
+    \    [1] Cactus        [2] Clover       [3] Ladybug\n\
+     --------------------------------------------------------------------------------\n\
+    \  Select the following number to continue: \n\
+    \    [1] Back to Homepage\n\
+    \    [2] Play the game!"
+
+let continue_message () =
+  print_endline "Scroll up to go back to the Menu and continue playing!"
+
 let func_helper choice func n inv garden count day =
   if choice = "2" then feed_garden_helper func n inv garden count day
   else if choice = "1" then buy_plant_helper func n inv garden count day
@@ -533,6 +656,14 @@ let func_helper choice func n inv garden count day =
   else if choice = "7" then view_inv_helper func n inv garden count day
   else if choice = "8" then sell_helper func n inv garden count day
   else if choice = "9" then create_recipe_helper func n inv garden count day
+  else if choice = "10" then (
+    string_menu_guide ();
+    continue_message ();
+    func n inv garden count day)
+  else if choice = "11" then (
+    string_view_items ();
+    continue_message ();
+    func n inv garden count day)
   else (
     print_endline "Invalid option";
     func (n + 1) inv garden count day)
@@ -580,83 +711,47 @@ let rec func n inv garden count day =
    create_recipe_helper func n inv garden count day else ( print_endline
    "Invalid option"; func (n + 1) inv garden count day) *)
 
-let print_in_box text padding =
-  let lines = String.split_on_char '\n' text in
-  let max_length =
-    List.fold_left (fun acc line -> max acc (String.length line)) 0 lines
-  in
-  let box_length = max_length + (2 * padding) in
-  let thick_border = "+" ^ String.make box_length '=' ^ "+" in
-  Printf.printf "%s\n" thick_border;
-  for _ = 1 to padding do
-    Printf.printf "%s\n" (String.make box_length ' ')
-  done;
-  List.iter
-    (fun line ->
-      let padding_left = String.make padding ' ' in
-      let padding_right =
-        String.make (box_length - String.length line - padding) ' '
-      in
-      Printf.printf "%s%s%s\n" padding_left line padding_right)
-    lines;
-  for _ = 1 to padding do
-    Printf.printf "%s\n" (String.make box_length ' ')
-  done;
-  Printf.printf "%s\n" thick_border
-
 let print_title =
   let text =
     " 🌷🌷🌷  Garden Gameplay  🌷🌷🌷 \nPress 'P' to Play or 'R' to View Rules"
   in
   print_in_box text 5
 
-let string_menu_guide () =
-  print_endline
-    "Menu Option Explanation:\n\
-     [1] Buy Plant/Item: In order to start your garden you need to buy a plant \
-     seed. You can also buy other objects such as defensive items for your \
-     garden that protect your garden from random events, and special \
-     ingredients to use in recipes.\n\
-     [2] Feed Plants: In order for your plants to grow you need to feed them. \
-     You can feed them using food bought from the Buy Plant/Item option\n\
-     [3] Water Plants: If the hydration level of your plants gets too low, \
-     your plant will die, remember to water your plants\n\
-     [4] Neglect Plant: If your low on resources, or the plants hydration \
-     level is fine you can neglect the plant \n\
-     [5] Harvest: Once a plant has reached its maximum height you can harvest \
-     it and it will be added to your inventory\n\
-     [6] Observe Garden: View the garden and see what your plants are looking \
-     like right now\n\
-     [7] View Inventory: view all the items you have bought or harvested\n\
-     [8] Sell: Sell off plants and recipe items to make more money!\n\
-     [9] Create Recipe: Check out all the available recipes, and craft your \
-     own which will be added to your inventory."
+(* let string_menu_guide () = print_endline "Menu Option Explanation:\n\ [1] Buy
+   Plant/Item: In order to start your garden you need to buy a plant \ seed. You
+   can also buy other objects such as defensive items for your \ garden that
+   protect your garden from random events, and special \ ingredients to use in
+   recipes.\n\n\ [2] Feed Plants: In order for your plants to grow you need to
+   feed them. \ You can feed them using food bought from the Buy Plant/Item
+   option\n\n\ [3] Water Plants: If the hydration level of your plants gets too
+   low, \ your plant will die, remember to water your plants\n\n\ [4] Neglect
+   Plant: If your low on resources, or the plants hydration \ level is fine you
+   can neglect the plant \n\n\ [5] Harvest: Once a plant has reached its maximum
+   height you can harvest \ it and it will be added to your inventory\n\n\ [6]
+   Observe Garden: View the garden and see what your plants are looking \ like
+   right now\n\n\ [7] View Inventory: view all the items you have bought or
+   harvested\n\n\ [8] Sell: Sell off plants and recipe items to make more
+   money!\n\n\ [9] Create Recipe: Check out all the available recipes, and craft
+   your \ own which will be added to your inventory." *)
 
-let string_view_items () =
-  print_endline
-    "You will have the opportunity to buy plants for your garden and add items \
-     to your inventory! \n\n\
-    \ Here are plants you can add do your garden: \n\
-    \    [1] Daisy        [2] Sunflower   [3] Rose        [4] Tulip \n\
-    \    [5] Lemon        [6] Pineapple   [7] Apple       [8] Peach \n\
-    \    [9] Strawberry   [10] Mango      [11] Tomato     [12] Lettuce \n\
-    \    [13] Bell Pepper [14] Onion      [15] Potato     [16] Rice \n\
-    \    [17] Wheat       [18] Corn       [19] Clover     [20] Cactus\n\n\
-    \ You can harvest these plants when they reach a height of 5! \n\
-    \ Once a plant is harvested, it is placed in the inventory!\n\n\
-     --------------------------------------------------------------------------------\n\
-    \ Here are items you can buy and put directly in your inventory: \n\
-    \    [1] Cheese        [2] Eggs      [3] Milk        [4] Water \n\
-    \    [5] Butter        [6] Sugar     [7] Chocolate   [8] Plant Food \n\
-    \    [9] Beef          [10] Chicken\n\
-     --------------------------------------------------------------------------------\n\
-    \ Here are defensive items that you can buy to defend your garden from \
-     tragedies:\n\
-    \    [1] Cactus        [2] Clover       [3] Ladybug\n\
-     --------------------------------------------------------------------------------\n\
-    \  Select the following number to continue: \n\
-    \    [1] Back to Homepage\n\
-    \    [2] Play the game!"
+(* let string_view_items () = print_endline "You will have the opportunity to
+   buy plants for your garden and add items \ to your inventory! \n\n\ \ Here
+   are plants you can add do your garden: \n\ \ [1] Daisy [2] Sunflower [3] Rose
+   [4] Tulip \n\ \ [5] Lemon [6] Pineapple [7] Apple [8] Peach \n\ \ [9]
+   Strawberry [10] Mango [11] Tomato [12] Lettuce \n\ \ [13] Bell Pepper [14]
+   Onion [15] Potato [16] Rice \n\ \ [17] Wheat [18] Corn [19] Clover [20]
+   Cactus\n\n\ \ You can harvest these plants when they reach a height of 5! \n\
+   \ Once a plant is harvested, it is placed in the inventory!\n\n\
+   --------------------------------------------------------------------------------\n\
+   \ Here are items you can buy and put directly in your inventory: \n\ \ [1]
+   Cheese [2] Eggs [3] Milk [4] Water \n\ \ [5] Butter [6] Sugar [7] Chocolate
+   [8] Plant Food \n\ \ [9] Beef [10] Chicken\n\
+   --------------------------------------------------------------------------------\n\
+   \ Here are defensive items that you can buy to defend your garden from \
+   tragedies:\n\ \ [1] Cactus [2] Clover [3] Ladybug\n\
+   --------------------------------------------------------------------------------\n\
+   \ Select the following number to continue: \n\ \ [1] Back to Homepage\n\ \
+   [2] Play the game!" *)
 
 let rec string_rules_menu () =
   print_endline
@@ -664,11 +759,11 @@ let rec string_rules_menu () =
      your plants alive, and make as much money as you can in the next 50 days. \n\
     \ Select the following number to continue: \n\
     \     [1] Main Menu Guide and Explanation\n\
-    \     [2] View items \n\
+    \     [2] View items Explanations\n\
     \     [3] Play the game!";
   let input = read_line () in
   match input with
-  | "1" -> menu_guide_rules () (* Loop back to the guide *)
+  | "1" -> menu_guide_rules ()
   | "2" -> items_rules ()
   | "3" -> func 0 my_inventory my_garden count day
   | _ ->
