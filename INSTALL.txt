@@ -3,5 +3,5 @@
 3. Navigate to the CS3110FinalProject directory 
 4. In terminal, run dune build.
 5. To play the game run dune exec ./bin/main.exe
-  To feed the garden press "1" and to view the garden press "2" The user only has 6 times to select an option from the menu. 
+  You will be presented with a menu of options to play the game.
 6. Enjoy our garden game!
