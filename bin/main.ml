@@ -254,15 +254,18 @@ let harvest_helper func n inv garden =
       \ [5] Lemon        [6] Pineapple   [7] Apple       [8] Peach \n\
       \ [9] Strawberry   [10] Mango      [11] Tomato     [12] Lettuce \n\
       \ [13] Bell Pepper [14] Onion      [15] Potato     [16] Rice \n\
-      \ [17] Wheat       [18] Corn       [19] Clover     [20] Cactus"
+      \ [17] Wheat       [18] Corn       [19] Clover     [20] Cactus\n\
+      \ [X] Menu"
   in
   let attempts = ref 0 in
   let item = read_line () in
-  let real_item = harvest_numb_to_name item in
-  let item_name = get_valid_item_with_attempts real_item attempts in
-  let new_inv, new_garden = Inventory.harvest item_name inv garden in
-  Garden.print new_garden;
-  func (n + 1) new_inv new_garden
+  if item = "X" || item = "x" then exit count func n inv garden
+  else
+    let real_item = harvest_numb_to_name item in
+    let item_name = get_valid_item_with_attempts real_item attempts in
+    let new_inv, new_garden = Inventory.harvest item_name inv garden in
+    Garden.print new_garden;
+    func (n + 1) new_inv new_garden
 
 (* let harvest_helper func n inv (garden : Garden.t) = print_endline "You only
    have 3 chances to type the right type of plant"; let () = print_endline "What
@@ -334,17 +337,19 @@ let sell_helper func n inv garden =
       \ [17] Wheat        [18] Corn         [19] Clover     [20] Cactus     \n\
       \ [21] Cheese       [22] Eggs         [23] Milk       [24] Water      \n\
       \ [25] Butter       [26] Sugar        [27] Chocolate  [28] Plant Food \n\
-      \ [29] LadyBug      [30] Beef         [31] Chicken"
+      \ [29] LadyBug      [30] Beef         [31] Chicken    [X] Menu"
   in
   let attempts = ref 0 in
   let item = read_line () in
-  let name = sell_numb_to_name item in
-  let acc_item = get_valid_item_with_attempts name attempts in
-  print_string ("How many " ^ acc_item ^ " do you want to sell: ");
-  let qty = int_of_string (read_line ()) in
-  let new_inv, new_garden = Inventory.sell acc_item qty inv garden in
-  Garden.print new_garden;
-  func (n + 1) new_inv new_garden
+  if item = "X" || item = "x" then exit count func n inv garden
+  else
+    let name = sell_numb_to_name item in
+    let acc_item = get_valid_item_with_attempts name attempts in
+    print_string ("How many " ^ acc_item ^ " do you want to sell: ");
+    let qty = int_of_string (read_line ()) in
+    let new_inv, new_garden = Inventory.sell acc_item qty inv garden in
+    Garden.print new_garden;
+    func (n + 1) new_inv new_garden
 
 let view_inv_helper func n inv garden =
   let () = Inventory.print inv in
@@ -491,7 +496,7 @@ let create_recipe_helper func n inv garden =
 
 (* let count = ref 0 *)
 let day = ref 1
-let check_terminated garden = Garden.get_money garden = 0.0
+let check_terminated garden = Garden.get_money garden <= 0.0
 
 let rec func n inv garden count day =
   match !day with
