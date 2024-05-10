@@ -304,14 +304,7 @@ let buy_item item_name store inv garden =
         ( Inventory.add item_name inv,
           Garden.inc_money_amt (-1.0 *. price) garden )
     | "Lady Bug" -> (Inventory.add item_name inv, Garden.incr_luck garden)
-    | "Cactus" ->
-        let () = print_endline "Name of Plant? (i.e. Benjamin)" in
-        let name = read_line () in
-        let add_garden = Garden.add_plant item_name name garden in
-        ( inv,
-          Garden.incr_defense (Garden.inc_money_amt (-1.0 *. price) add_garden)
-        )
-    | "Clover" ->
+    | "Cactus" | "Clover" ->
         let () = print_endline "Name of Plant? (i.e. Benjamin)" in
         let name = read_line () in
         let add_garden = Garden.add_plant item_name name garden in
@@ -328,52 +321,64 @@ let buy_item item_name store inv garden =
   (new_inv, new_money)
 
 (**LINE COUNT OVER*)
+let item_list1 =
+  [
+    "Daisy";
+    "Strawberry";
+    "Sunflower";
+    "Rose";
+    "Tulip";
+    "Tomato";
+    "Lemon";
+    "Pineapple";
+    "Onion";
+    "Potato";
+    "Wheat";
+    "Apple";
+    "Corn";
+    "Peach";
+    "Cactus";
+  ]
+
+let item_list2 =
+  [
+    "Clover";
+    "Rice";
+    "Lettuce";
+    "Mango";
+    "Cheese";
+    "Eggs";
+    "Milk";
+    "Water";
+    "Butter";
+    "Chicken";
+    "Sugar";
+    "Chocolate";
+    "Plant Food";
+    "Lady Bug";
+    "Beef";
+  ]
+
+let item_list3 =
+  [
+    "Bell Pepper";
+    "Apple Pie";
+    "Tomato Soup";
+    "Bread";
+    "Apple Juice";
+    "Popcorn";
+    "French Fries";
+    "Chocolate Chip Cookie";
+    "Sandwich";
+    "Salad";
+    "Strawberry Cake";
+    "Bouquet";
+    "Curry";
+    "Chicken Soup";
+    "Hamburger";
+  ]
+
 let has_item item_name =
-  match item_name with
-  | "Daisy" -> true
-  | "Strawberry" -> true
-  | "Sunflower" -> true
-  | "Rose" -> true
-  | "Tulip" -> true
-  | "Tomato" -> true
-  | "Lemon" -> true
-  | "Pineapple" -> true
-  | "Onion" -> true
-  | "Potato" -> true
-  | "Wheat" -> true
-  | "Apple" -> true
-  | "Corn" -> true
-  | "Peach" -> true
-  | "Cactus" -> true
-  | "Clover" -> true
-  | "Rice" -> true
-  | "Lettuce" -> true
-  | "Mango" -> true
-  | "Cheese" -> true
-  | "Eggs" -> true
-  | "Milk" -> true
-  | "Water" -> true
-  | "Butter" -> true
-  | "Chicken" -> true
-  | "Sugar" -> true
-  | "Chocolate" -> true
-  | "Plant Food" -> true
-  | "Lady Bug" -> true
-  | "Beef" -> true
-  | "Bell Pepper" -> true
-  | "Apple Pie" -> true
-  | "Tomato Soup" -> true
-  | "Bread" -> true
-  | "Apple Juice" -> true
-  | "Popcorn" -> true
-  | "French Fries" -> true
-  | "Chocolate Chip Cookie" -> true
-  | "Sandwich" -> true
-  | "Salad" -> true
-  | "Strawberry Cake" -> true
-  | "Bouquet" -> true
-  | "Curry" -> true
-  | "Chicken Soup" -> true
-  | "Hamburger" -> true
-  | "Smoothie" -> true
-  | _ -> false
+  List.mem item_name item_list1
+  || List.mem item_name item_list2
+  || List.mem item_name item_list3
