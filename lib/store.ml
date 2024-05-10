@@ -1,5 +1,3 @@
-(* let print_store = "Flower: ($2.0)\n\ Peach: ($3.0)\n\ Strawberry: ($5.0)\n\
-   Cactus: ($4.0)\n\ Cheese: ($5.0)\n\ Eggs: ($3.0)\n\ Milk: ($5.0)" *)
 let () = Random.self_init ()
 
 type t = {
@@ -71,10 +69,10 @@ let usual =
   }
 
 (**LINE COUNT OVER*)
+let create_plant_and_get_price name =
+  Plant.get_price (Plant.apply_discount (Plant.create_plant name ""))
+
 let create_store =
-  let create_plant_and_get_price name =
-    Plant.get_price (Plant.apply_discount (Plant.create_plant name ""))
-  in
   {
     daisy_price = create_plant_and_get_price "Daisy";
     strawberry_price = create_plant_and_get_price "Strawberry";
