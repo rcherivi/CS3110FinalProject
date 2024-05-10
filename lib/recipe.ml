@@ -163,13 +163,13 @@ let sell_recipe recipe_name (quantity : int) (inv : Inventory.t)
       match Inventory.lookup_option recipe_name inv with
       | Some current_quantity when current_quantity >= quantity ->
           let new_quantity = current_quantity - quantity in
-          let updated_inventory =
-            if new_quantity = 0 then inv
-            else Inventory.insert recipe_name new_quantity inv
+          let inv_without_prev = Inventory.remove recipe_name inv in
+          let inv_with_new_qty =
+            Inventory.insert recipe_name new_quantity inv_without_prev
           in
           let revenue = price recipe_type *. float_of_int quantity in
           let updated_garden = Garden.inc_money_amt revenue garden in
-          (updated_inventory, updated_garden)
+          (inv_with_new_qty, updated_garden)
       | _ ->
           print_endline "Not enough items in inventory";
           (inv, garden))
