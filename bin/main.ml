@@ -1,3 +1,6 @@
+(* @author Joanna Andrews(jda242), Jessica Andrews(jda375), Jeana Han (jjh358),
+   Rishika Cheivirala (rrc87), Mishita Kaja (mhk225) *)
+
 open CS3110FinalProject
 
 let count = ref 0
