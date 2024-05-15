@@ -607,7 +607,7 @@ let inventory_tests =
 let purchased_eggs = Store.buy_item "Eggs" test_store new_inv garden
 let purchased_milk = Store.buy_item "Milk" test_store new_inv garden
 let purchased_cheese = Store.buy_item "Cheese" test_store new_inv garden
-let purchased_ladybug = Store.buy_item "Lady Bug" test_store new_inv garden
+let purchased_ladybug = Store.buy_item "Ladybug" test_store new_inv garden
 
 let garden_size_inc_eggs =
   Garden.get_plant_count (snd purchased_eggs) - Garden.get_plant_count garden
