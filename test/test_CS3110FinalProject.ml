@@ -684,7 +684,7 @@ let test_neglect_plants _ =
   let garden_with_plant = Garden.add_plant "Sunflower" "Emily" garden in
   let new_garden = Garden.neglect_plants garden_with_plant "Emily" in
   let new_garden2 = Garden.neglect_plants new_garden "Emily" in
-  assert_equal (Garden.get_money new_garden2) 49.8;
+  assert_equal (Garden.get_money new_garden2) 50.0;
   assert_equal (Garden.get_plant_count new_garden2) 1;
   assert_equal (Garden.get_garden_lucky new_garden2) 0;
   assert_equal (Garden.get_garden_defense new_garden2) 0

@@ -145,7 +145,6 @@ let add_plant plant_name name garden =
 let feed_plants garden name =
   match garden with
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
-      let money_lost = ref 0.0 in
       let new_cells =
         Array.map
           (Array.map (fun x ->
@@ -156,7 +155,7 @@ let feed_plants garden name =
       in
       {
         cells = new_cells;
-        money = m -. (0.1 *. !money_lost);
+        money = m -. 0.1;
         plant_count = p;
         lucky = l;
         defense = d;
@@ -165,7 +164,6 @@ let feed_plants garden name =
 let water_plants garden plant_name =
   match garden with
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
-      let money_lost = ref 0.0 in
       let new_cells =
         Array.map
           (Array.map (fun x ->
@@ -176,7 +174,7 @@ let water_plants garden plant_name =
       in
       {
         cells = new_cells;
-        money = m -. (0.1 *. !money_lost);
+        money = m -. 0.1;
         plant_count = p;
         lucky = l;
         defense = d;
