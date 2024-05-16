@@ -111,8 +111,7 @@ let tend_start_message () =
 let tend_question () =
   print_endline
     "\n\
-     What is the name of the plant do you want to tend? Please choose a unique \
-     name for your plant (No duplicate names)\n\
+     What is the name of the plant do you want to tend?\n\
      (Press X to go back to the Main Menu)"
 
 let tend_options () =

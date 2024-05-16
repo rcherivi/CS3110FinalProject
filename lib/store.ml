@@ -295,14 +295,22 @@ let buy_item item_name store inv garden =
           Garden.inc_money_amt (-1.0 *. price) garden )
     | "Ladybug" -> (Inventory.add item_name inv, Garden.incr_luck garden)
     | "Cactus" | "Clover" ->
-        let () = print_endline "Name of Plant? (i.e. Benjamin)" in
+        let () =
+          print_endline
+            "Name of Plant? Please choose a unique name (No Duplicates)! (i.e. \
+             Benjamin)"
+        in
         let name = read_line () in
         let add_garden = Garden.add_plant item_name name garden in
         ( inv,
           Garden.incr_defense (Garden.inc_money_amt (-1.0 *. price) add_garden)
         )
     | _ ->
-        let () = print_endline "Name of Plant? (i.e. Benjamin)" in
+        let () =
+          print_endline
+            "Name of Plant? Please choose a unique name (No Duplicates)! (i.e. \
+             Benjamin)"
+        in
         let name = read_line () in
         let new_money = Garden.inc_money_amt (-1.0 *. price) garden in
         (inv, Garden.add_plant item_name name new_money)
