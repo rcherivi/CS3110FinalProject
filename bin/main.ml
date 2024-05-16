@@ -574,7 +574,6 @@ let func_helper choice func n inv garden count day =
   else if choice = "7" then create_recipe_helper func n inv garden count day
   else if choice = "8" then (
     string_menu_guide ();
-    continue_message ();
     func n inv garden count day)
   else if choice = "9" then (
     string_view_items ();

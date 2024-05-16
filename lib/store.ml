@@ -284,7 +284,11 @@ let buy_item_for_recipe item_name inv garden store =
   (new_inv, new_money)
 
 let buy_defensive item_name inv garden store =
-  let () = print_endline "Name of Plant? (i.e. Benjamin)" in
+  let () =
+    print_endline
+      "Name of Plant? Please enter a unique name (no duplicates)! (i.e. \
+       Benjamin)"
+  in
   let name = read_line () in
   let add_garden = Garden.add_plant item_name name garden in
   ( inv,
@@ -292,7 +296,11 @@ let buy_defensive item_name inv garden store =
       (Garden.inc_money_amt (-1.0 *. get_price item_name store) add_garden) )
 
 let buy_item_plants item_name inv garden store =
-  let () = print_endline "Name of Plant? (i.e. Benjamin)" in
+  let () =
+    print_endline
+      "Name of Plant? Please enter a unique name (no duplicates)! (i.e. \
+       Benjamin)"
+  in
   let name = read_line () in
   let new_money =
     Garden.inc_money_amt (-1.0 *. get_price item_name store) garden
