@@ -542,7 +542,8 @@ let string_menu_guide () =
      [5] View Inventory: view all the items you have bought or harvested\n\n\
      [6] Sell: Sell off plants and recipe items to make more money!\n\n\
      [7] Create Recipe: Check out all the available recipes, and craft your \
-     own which will be added to your inventory."
+     own which will be added to your inventory.\n\
+    \ "
 
 let string_view_items () =
   print_endline
@@ -570,6 +571,30 @@ let string_view_items () =
     \    [1] Back to Homepage\n\
     \    [2] Play the game!"
 
+let string_view_items_two () =
+  print_endline
+    "You will have the opportunity to buy plants for your garden and add items \
+     to your inventory! \n\n\
+    \ Here are plants you can add do your garden: \n\
+    \    [1] Daisy        [2] Sunflower   [3] Rose        [4] Tulip \n\
+    \    [5] Lemon        [6] Pineapple   [7] Apple       [8] Peach \n\
+    \    [9] Strawberry   [10] Mango      [11] Tomato     [12] Lettuce \n\
+    \    [13] Bell Pepper [14] Onion      [15] Potato     [16] Rice \n\
+    \    [17] Wheat       [18] Corn       [19] Clover     [20] Cactus\n\n\
+    \ You can harvest these plants when they reach maturity! \n\
+    \ Once a plant is harvested, it is placed in the inventory!\n\n\
+     --------------------------------------------------------------------------------\n\
+    \ Here are items you can buy and put directly in your inventory: \n\
+    \    [1] Cheese        [2] Eggs      [3] Milk        [4] Water \n\
+    \    [5] Butter        [6] Sugar     [7] Chocolate   [8] Plant Food \n\
+    \    [9] Beef          [10] Chicken\n\
+     --------------------------------------------------------------------------------\n\
+    \ Here are defensive items that you can buy to defend your garden from \
+     tragedies:\n\
+    \    [1] Cactus        [2] Clover       [3] Ladybug\n\
+     --------------------------------------------------------------------------------\n\
+    \ Select an option in the menu to continue playing: "
+
 let func_helper choice func n inv garden count day =
   if choice = "2" then tend_garden_helper func n inv garden count day
   else if choice = "1" then buy_plant_helper func n inv garden count day
@@ -582,7 +607,7 @@ let func_helper choice func n inv garden count day =
     string_menu_guide ();
     func n inv garden count day)
   else if choice = "9" then (
-    string_view_items ();
+    string_view_items_two ();
     func n inv garden count day)
   else (
     print_endline "Invalid option";
