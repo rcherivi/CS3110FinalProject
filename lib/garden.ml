@@ -118,7 +118,8 @@ let get_money garden =
   | { cells = _; money = m; plant_count = _; lucky = _; defense = _ } -> m
 
 (*adapted from ChatGPT*)
-let add_plant plant_name name garden = function
+let add_plant plant_name name garden =
+  match garden with
   | { cells; money = m; plant_count = p; lucky = l; defense = d } -> (
       let rec find_next_empty_cell i j =
         if i >= Array.length cells then None
@@ -141,7 +142,8 @@ let add_plant plant_name name garden = function
             defense = d;
           })
 
-let feed_plants name = function
+let feed_plants garden name =
+  match garden with
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
       let money_lost = ref 0.0 in
       let new_cells =
@@ -160,7 +162,8 @@ let feed_plants name = function
         defense = d;
       }
 
-let water_plants plant_name = function
+let water_plants garden plant_name =
+  match garden with
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
       let money_lost = ref 0.0 in
       let new_cells =

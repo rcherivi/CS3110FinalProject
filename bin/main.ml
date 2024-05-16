@@ -360,7 +360,7 @@ let observe_menu_options =
    print_endline ""; print_endline ("You have " ^ string_of_int (10 - my_int) ^
    " actions left!"); Garden.print new_garden) else if choice = "2" then ( let
    new_garden = Garden.get_fruits garden in let my_int = !count in print_endline
-   ""; print_endline ("You have " ^ string_of_int (10 - my_int) ^ " actions
+   ""; print_endline ("You have " ^ string_of_int (10 - my_int) ^ " actions\n
    left!"); Garden.print new_garden) else if choice = "3" then ( let new_garden
    = Garden.get_vegetables garden in let my_int = !count in print_endline "";
    print_endline ("You have " ^ string_of_int (10 - my_int) ^ " actions left!");
@@ -372,12 +372,13 @@ let observe_menu_options =
    print_endline ("You have " ^ string_of_int (10 - my_int) ^ " actions left!");
    Garden.print new_garden) else if choice = "6" then Garden.print garden else
    func (n + 1) inv garden count day; func (n + 1) inv garden count day *)
+
 let print_menu () = print_endline observe_menu_options
 
 let print_remaining_actions count =
   let action_left = 10 - count in
   print_endline "";
-  print_endline ("You have " ^ string_of_int action_left ^ " actions left!")
+  print_endline ("You have " ^ string_of_int action_left ^ "\n   actions left!")
 
 let handle_choice garden_getter garden count =
   let new_garden = garden_getter garden in
@@ -390,16 +391,17 @@ let observe_garden_helper func n inv garden count day =
     read_line ()
   in
   count := !count + 1;
-  match choice with
-  | "1" -> handle_choice Garden.get_flowers garden !count
-  | "2" -> handle_choice Garden.get_fruits garden !count
-  | "3" -> handle_choice Garden.get_vegetables garden !count
-  | "4" -> handle_choice Garden.get_grains garden !count
-  | "5" -> handle_choice Garden.get_defensive_items garden !count
-  | "6" -> Garden.print garden
-  | _ ->
-      func (n + 1) inv garden count day;
-      func (n + 1) inv garden count day
+  let _ =
+    match choice with
+    | "1" -> handle_choice Garden.get_flowers garden !count
+    | "2" -> handle_choice Garden.get_fruits garden !count
+    | "3" -> handle_choice Garden.get_vegetables garden !count
+    | "4" -> handle_choice Garden.get_grains garden !count
+    | "5" -> handle_choice Garden.get_defensive_items garden !count
+    | "6" -> Garden.print garden
+    | _ -> func (n + 1) inv garden count day
+  in
+  func (n + 1) inv garden count day
 
 let recipe_menu =
   "\n\
