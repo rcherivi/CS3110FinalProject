@@ -111,8 +111,9 @@ let tend_start_message () =
 let tend_question () =
   print_endline
     "\n\
-     What is the name of the plant do you want to tend?(Press X to go back to \
-     the Main Menu )"
+     What is the name of the plant do you want to tend? Please choose a unique \
+     name for your plant (No duplicate names)\n\
+     (Press X to go back to the Main Menu)"
 
 let tend_options () =
   print_endline
@@ -554,7 +555,9 @@ let rec print_recipe_helper func n inv garden count day =
     display_and_handle_recipe print_recipe_helper name recipe_details func n inv
       garden count day
   with
-  | Failure _ -> print_endline "Please enter a number."
+  | Failure _ ->
+      print_endline "Please enter a number.";
+      print_recipe_helper func n inv garden count day
   | Not_found ->
       print_endline "Invalid selection, please enter a valid number.";
       print_recipe_helper func n inv garden count day
