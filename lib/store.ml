@@ -67,7 +67,6 @@ let usual =
     chicken_price = 5.50;
   }
 
-(**LINE COUNT OVER*)
 let create_plant_and_get_price name =
   Plant.get_price (Plant.apply_discount (Plant.create_plant name ""))
 
@@ -243,79 +242,78 @@ let print_store store category =
   | "6" -> print_other store
   | _ -> "Invalid input"
 
-let buy_item item_name store inv garden =
-  let price =
-    match item_name with
-    | "Daisy" -> store.daisy_price
-    | "Strawberry" -> store.strawberry_price
-    | "Sunflower" -> store.sunflower_price
-    | "Rose" -> store.rose_price
-    | "Tulip" -> store.tulip_price
-    | "Tomato" -> store.tomato_price
-    | "Lemon" -> store.lemon_price
-    | "Pineapple" -> store.pineapple_price
-    | "Onion" -> store.onion_price
-    | "Potato" -> store.potato_price
-    | "Wheat" -> store.wheat_price
-    | "Apple" -> store.apple_price
-    | "Corn" -> store.corn_price
-    | "Peach" -> store.peach_price
-    | "Cactus" -> store.cactus_price
-    | "Clover" -> store.clover_price
-    | "Rice" -> store.rice_price
-    | "Lettuce" -> store.lettuce_price
-    | "Mango" -> store.mango_price
-    | "Cheese" -> store.cheese_price
-    | "Eggs" -> store.eggs_price
-    | "Milk" -> store.milk_price
-    | "Water" -> store.water_price
-    | "Butter" -> store.butter_price
-    | "Chicken" -> store.chicken_price
-    | "Sugar" -> store.sugar_price
-    | "Chocolate" -> store.chocolate_price
-    | "Plant Food" -> store.plant_food_price
-    | "Ladybug" -> store.ladybug_price
-    | "Beef" -> store.beef_price
-    | "Bell Pepper" -> store.bell_pepper_price
-    | _ -> 0.0
-  in
-  let new_inv, new_money =
-    match item_name with
-    | "Milk"
-    | "Eggs"
-    | "Water"
-    | "Cheese"
-    | "Butter"
-    | "Chicken"
-    | "Sugar"
-    | "Chocolate"
-    | "Plant Food"
-    | "Beef" ->
-        ( Inventory.add item_name inv,
-          Garden.inc_money_amt (-1.0 *. price) garden )
-    | "Ladybug" -> (Inventory.add item_name inv, Garden.incr_luck garden)
-    | "Cactus" | "Clover" ->
-        let () =
-          print_endline
-            "Name of Plant? Please choose a unique name (No Duplicates)! (i.e. \
-             Benjamin)"
-        in
-        let name = read_line () in
-        let add_garden = Garden.add_plant item_name name garden in
-        ( inv,
-          Garden.incr_defense (Garden.inc_money_amt (-1.0 *. price) add_garden)
-        )
-    | _ ->
-        let () =
-          print_endline
-            "Name of Plant? Please choose a unique name (No Duplicates)! (i.e. \
-             Benjamin)"
-        in
-        let name = read_line () in
-        let new_money = Garden.inc_money_amt (-1.0 *. price) garden in
-        (inv, Garden.add_plant item_name name new_money)
-  in
+let get_price item_name store =
+  match item_name with
+  | "Daisy" -> store.daisy_price
+  | "Strawberry" -> store.strawberry_price
+  | "Sunflower" -> store.sunflower_price
+  | "Rose" -> store.rose_price
+  | "Tulip" -> store.tulip_price
+  | "Tomato" -> store.tomato_price
+  | "Lemon" -> store.lemon_price
+  | "Pineapple" -> store.pineapple_price
+  | "Onion" -> store.onion_price
+  | "Potato" -> store.potato_price
+  | "Wheat" -> store.wheat_price
+  | "Apple" -> store.apple_price
+  | "Corn" -> store.corn_price
+  | "Peach" -> store.peach_price
+  | "Cactus" -> store.cactus_price
+  | "Clover" -> store.clover_price
+  | "Rice" -> store.rice_price
+  | "Lettuce" -> store.lettuce_price
+  | "Mango" -> store.mango_price
+  | "Cheese" -> store.cheese_price
+  | "Eggs" -> store.eggs_price
+  | "Milk" -> store.milk_price
+  | "Water" -> store.water_price
+  | "Butter" -> store.butter_price
+  | "Chicken" -> store.chicken_price
+  | "Sugar" -> store.sugar_price
+  | "Chocolate" -> store.chocolate_price
+  | "Plant Food" -> store.plant_food_price
+  | "Ladybug" -> store.ladybug_price
+  | "Beef" -> store.beef_price
+  | "Bell Pepper" -> store.bell_pepper_price
+  | _ -> 0.0
+
+let buy_item_for_recipe item_name inv garden store =
+  let price = get_price item_name store in
+  let new_inv = Inventory.add item_name inv in
+  let new_money = Garden.inc_money_amt (-1.0 *. price) garden in
   (new_inv, new_money)
+
+let buy_defensive item_name inv garden store =
+  let () = print_endline "Name of Plant? (i.e. Benjamin)" in
+  let name = read_line () in
+  let add_garden = Garden.add_plant item_name name garden in
+  ( inv,
+    Garden.incr_defense
+      (Garden.inc_money_amt (-1.0 *. get_price item_name store) add_garden) )
+
+let buy_item_plants item_name inv garden store =
+  let () = print_endline "Name of Plant? (i.e. Benjamin)" in
+  let name = read_line () in
+  let new_money =
+    Garden.inc_money_amt (-1.0 *. get_price item_name store) garden
+  in
+  (inv, Garden.add_plant item_name name new_money)
+
+let buy_item item_name store inv garden =
+  match item_name with
+  | "Milk"
+  | "Eggs"
+  | "Water"
+  | "Cheese"
+  | "Butter"
+  | "Chicken"
+  | "Sugar"
+  | "Chocolate"
+  | "Plant Food"
+  | "Beef" -> buy_item_for_recipe item_name inv garden store
+  | "Ladybug" -> (Inventory.add item_name inv, Garden.incr_luck garden)
+  | "Cactus" | "Clover" -> buy_defensive item_name inv garden store
+  | _ -> buy_item_plants item_name inv garden store
 
 let item_list1 =
   [
