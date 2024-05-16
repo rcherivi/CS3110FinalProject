@@ -1,3 +1,36 @@
+commit db1cd8df0c9c4ad55460eabb3c0f3117ef9dcd24
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Thu May 16 15:17:35 2024 -0400
+
+    Minor changes
+    jjh358
+
+commit 3beed6532256fb8aadee68db10279d017cac762f
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Thu May 16 15:01:48 2024 -0400
+
+    Polish Solution
+    
+    -mhk225;mhkk25@cornell.edu
+
+commit 1c139df28c029e537632d8398e782925a061efa0
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Thu May 16 14:25:20 2024 -0400
+
+    Fixed store option
+    
+    -mhk225;mhk225@cornell.edu
+    -Fixed the store start message to include other items
+
+commit 609dd1090d7618e12ff52d298dc5a33c947dd679
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Thu May 16 00:12:00 2024 -0400
+
+    Added Git Log
+    
+    -mhk225; mhk225@cornell.edu
+    -Git Log Added
+
 commit 4081f1184208f3cc257f194eae007564112dd3bf
 Author: Jeana Han <jjh358@cornell.edu>
 Date:   Wed May 15 23:48:19 2024 -0400
