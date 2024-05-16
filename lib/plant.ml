@@ -63,7 +63,6 @@ let apply_discount (plant : t) : t =
       in
       ({ plant_type with price = new_price }, species)
 
-(**OVER LINE COUNT BY 3 *)
 let get_type (plant : t) =
   match plant with
   | _, species -> (
@@ -123,7 +122,6 @@ let neglect (type_of_plant : t) plant_name : t =
 let get_plant_emoji height threshold emoji_if_true emoji_if_false =
   if height < threshold then emoji_if_true else emoji_if_false
 
-(**OVER LINE COUNT BY 3 *)
 let print_plant (plant : t) =
   match plant with
   | { height = h; life = _; hydration = _; name = _; price = _ }, species -> (
@@ -149,7 +147,6 @@ let print_plant (plant : t) =
       | Bell_Pepper -> get_plant_emoji h 4 "🌱" "🫑"
       | Corn -> get_plant_emoji h 4 "🌱" (if h < 7 then "🪴" else "🌽"))
 
-(**OVER LINE COUNT BY 5 *)
 let create_plant plant_name n : t =
   let plant_type1 =
     { height = 0; life = true; hydration = 2; name = n; price = 0.0 }
@@ -208,11 +205,9 @@ let check_status (plant : t) =
       else plant
 
 let stampede rand_val (plant : t) : t =
-  (* let rand_val = Random.float 1.0 in *)
   match plant with
   | { height = h; life = _; hydration = w; name = n; price = p }, species ->
       if rand_val < 0.2 then
-        (*0.5 - defense_val*)
         ( { height = h; life = false; hydration = w; name = n; price = p },
           species )
       else
@@ -225,7 +220,7 @@ let pollinate (plant : t) : t =
       ( { height = h + 2; life = l; hydration = w + 1; name = n; price = p },
         species )
 
-let rain(plant : t) : t =
+let rain (plant : t) : t =
   match plant with
   | { height = h; life = l; hydration = w; name = n; price = p }, species ->
       ({ height = h; life = l; hydration = w + 3; name = n; price = p }, species)
@@ -242,7 +237,6 @@ let dragon (plant : t) : t =
   match plant with
   | { height = h; life = _; hydration = w; name = n; price = p }, species ->
       if rand_val < 0.3 then
-        (*0.5 - defense_val*)
         ( { height = h; life = false; hydration = w; name = n; price = p },
           species )
       else
@@ -274,8 +268,7 @@ let is_alive (plant : t) =
   match plant with
   | { life = l; _ }, _ -> l = true
 
-let max_height (plant : string) =
-  match plant with
+let max_height = function
   | "Daisy" -> 3
   | "Sunflower" -> 6
   | "Rose" -> 4

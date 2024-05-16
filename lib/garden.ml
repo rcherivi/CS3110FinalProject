@@ -19,40 +19,47 @@ let create_garden () =
     defense = 0;
   }
 
+let store_item_names =
+  [|
+    "Daisy";
+    "Strawberry";
+    "Sunflower";
+    "Rose";
+    "Tulip";
+    "Tomato";
+    "Lemon";
+    "Pineapple";
+    "Onion";
+    "Potato";
+    "Wheat";
+    "Apple";
+    "Corn";
+    "Peach";
+    "Cactus";
+    "Clover";
+    "Rice";
+    "Lettuce";
+    "Bell Pepper";
+    "Mango";
+  |]
+
 let get_store_price item_name =
-  match item_name with
-  | "Daisy"
-  | "Strawberry"
-  | "Sunflower"
-  | "Rose"
-  | "Tulip"
-  | "Tomato"
-  | "Lemon"
-  | "Pineapple"
-  | "Onion"
-  | "Potato"
-  | "Wheat"
-  | "Apple"
-  | "Corn"
-  | "Peach"
-  | "Cactus"
-  | "Clover"
-  | "Rice"
-  | "Lettuce"
-  | "Bell Pepper"
-  | "Mango" -> Plant.get_price (Plant.create_plant item_name "")
-  | "Cheese" -> 5.0
-  | "Eggs" -> 3.0
-  | "Milk" -> 5.0
-  | "Water" -> 1.0
-  | "Butter" -> 2.0
-  | "Chicken" -> 5.50
-  | "Sugar" -> 1.5
-  | "Chocolate" -> 3.20
-  | "Plant Food" -> 2.0
-  | "Lady Bug" -> 8.0
-  | "Beef" -> 6.0
-  | _ -> 0.0
+  if Array.mem item_name store_item_names then
+    Plant.get_price (Plant.create_plant item_name "")
+  else
+    match item_name with
+    | "Cheese" -> 5.0
+    | "Eggs" -> 3.0
+    | "Milk" -> 5.0
+    | "Water" -> 1.0
+    | "Butter" -> 2.0
+    | "Chicken" -> 5.50
+    | "Sugar" -> 1.5
+    | "Chocolate" -> 3.20
+    | "Plant Food" -> 2.0
+    | "Lady Bug" -> 8.0
+    | "Beef" -> 6.0
+    | _ -> 0.0
 
 let inc_money (plant_type : string) (garden : t) : t =
   let price = get_store_price plant_type in
@@ -111,8 +118,7 @@ let get_money garden =
   | { cells = _; money = m; plant_count = _; lucky = _; defense = _ } -> m
 
 (*adapted from ChatGPT*)
-let add_plant plant_name name garden =
-  match garden with
+let add_plant plant_name name garden = function
   | { cells; money = m; plant_count = p; lucky = l; defense = d } -> (
       let rec find_next_empty_cell i j =
         if i >= Array.length cells then None
@@ -135,14 +141,9 @@ let add_plant plant_name name garden =
             defense = d;
           })
 
-(* let feed_plants garden plant_name = match garden with | { cells; money = m }
-   -> let new_cells = Array.map (Array.map (fun x -> match x with | Plant plant
-   -> Plant (Plant.feed plant plant_name) | Empty -> Empty)) cells in { cells =
-   new_cells; money = m -. 0.1 } *)
-
-let feed_plants garden name =
-  match garden with
+let feed_plants name = function
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
+      let money_lost = ref 0.0 in
       let new_cells =
         Array.map
           (Array.map (fun x ->
@@ -153,16 +154,15 @@ let feed_plants garden name =
       in
       {
         cells = new_cells;
-        money = m -. 0.1;
+        money = m -. (0.1 *. !money_lost);
         plant_count = p;
         lucky = l;
         defense = d;
       }
 
-(**idk money cost for water*)
-let water_plants garden plant_name =
-  match garden with
+let water_plants plant_name = function
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
+      let money_lost = ref 0.0 in
       let new_cells =
         Array.map
           (Array.map (fun x ->
@@ -173,13 +173,12 @@ let water_plants garden plant_name =
       in
       {
         cells = new_cells;
-        money = m -. 0.1;
+        money = m -. (0.1 *. !money_lost);
         plant_count = p;
         lucky = l;
         defense = d;
       }
 
-(**idk money cost for water*)
 let neglect_plants garden plant_name =
   match garden with
   | { cells; money = m; plant_count = p; lucky = l; defense = d } ->
@@ -191,13 +190,7 @@ let neglect_plants garden plant_name =
                | Empty -> Empty))
           cells
       in
-      {
-        cells = new_cells;
-        money = m -. 0.1;
-        plant_count = p;
-        lucky = l;
-        defense = d;
-      }
+      { cells = new_cells; money = m; plant_count = p; lucky = l; defense = d }
 
 (*adapted from ChatGPT*)
 let count_plant plant_type garden =
@@ -213,12 +206,12 @@ let count_plant plant_type garden =
                   if
                     Plant.get_type plant = plant_type
                     && Plant.get_height plant >= Plant.max_height plant_type
-                  then (* let () = print_endline "hi" in *) count := !count + 1
+                  then count := !count + 1
                   else ()
               | _ -> ())
             row)
         cells;
-      (* print_endline (string_of_int !count); *) !count
+      !count
 
 let remove_plant plant_type garden =
   match garden with

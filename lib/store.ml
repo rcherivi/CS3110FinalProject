@@ -33,7 +33,6 @@ type t = {
   beef_price : float;
   chicken_price : float;
 }
-(**LINE COUNT OVER*)
 
 type prices = {
   cheese_price : float;
@@ -244,13 +243,6 @@ let print_store store category =
   | "6" -> print_other store
   | _ -> "Invalid input"
 
-(* add seedling -> goes into garden *)
-(* add other item -> goes into inventory *)
-
-(*discounts / item of the day *)
-(* let buy_item name = Inventory. *)
-
-(**LINE COUNT OVER*)
 let buy_item item_name store inv garden =
   let price =
     match item_name with
@@ -285,7 +277,7 @@ let buy_item item_name store inv garden =
     | "Ladybug" -> store.ladybug_price
     | "Beef" -> store.beef_price
     | "Bell Pepper" -> store.bell_pepper_price
-    | _ -> 0.0 (* Default price for unknown items *)
+    | _ -> 0.0
   in
   let new_inv, new_money =
     match item_name with
@@ -312,13 +304,11 @@ let buy_item item_name store inv garden =
     | _ ->
         let () = print_endline "Name of Plant? (i.e. Benjamin)" in
         let name = read_line () in
-        (* let new_inv = Inventory.add item_name inv in *)
         let new_money = Garden.inc_money_amt (-1.0 *. price) garden in
         (inv, Garden.add_plant item_name name new_money)
   in
   (new_inv, new_money)
 
-(**LINE COUNT OVER*)
 let item_list1 =
   [
     "Daisy";
