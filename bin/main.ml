@@ -430,7 +430,9 @@ let missing_ingredient_message recipe_function func n inv garden count day =
   match read_line () with
   | "1" -> recipe_function func n inv garden count day
   | "X" | "x" -> func n inv garden count day
-  | _ -> print_endline "Invalid option"
+  | _ ->
+      print_endline "Invalid option";
+      func (n + 1) inv garden count day
 
 let rec display_and_handle_recipe recipe_func food_name recipe_name func n inv
     garden count day =
@@ -552,7 +554,7 @@ let string_view_items () =
     \    [9] Strawberry   [10] Mango      [11] Tomato     [12] Lettuce \n\
     \    [13] Bell Pepper [14] Onion      [15] Potato     [16] Rice \n\
     \    [17] Wheat       [18] Corn       [19] Clover     [20] Cactus\n\n\
-    \ You can harvest these plants when they reach a height of 5! \n\
+    \ You can harvest these plants when they reach maturity! \n\
     \ Once a plant is harvested, it is placed in the inventory!\n\n\
      --------------------------------------------------------------------------------\n\
     \ Here are items you can buy and put directly in your inventory: \n\
@@ -568,9 +570,6 @@ let string_view_items () =
     \    [1] Back to Homepage\n\
     \    [2] Play the game!"
 
-let continue_message () =
-  print_endline "Scroll up to go back to the Menu and continue playing!"
-
 let func_helper choice func n inv garden count day =
   if choice = "2" then tend_garden_helper func n inv garden count day
   else if choice = "1" then buy_plant_helper func n inv garden count day
@@ -584,7 +583,6 @@ let func_helper choice func n inv garden count day =
     func n inv garden count day)
   else if choice = "9" then (
     string_view_items ();
-    continue_message ();
     func n inv garden count day)
   else (
     print_endline "Invalid option";

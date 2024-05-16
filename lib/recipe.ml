@@ -229,7 +229,7 @@ let string_bread_recipe =
   \  \n\
   \   Instructions: \n\
   \     1) Mix wet and dry ingredients in a bowl \n\
-  \     2) Placce mixture in a baking pan and bake in oven at 350 degrees for \
+  \     2) Place mixture in a baking pan and bake in oven at 350 degrees for \
    30 minutes \n\
   \     3) Serve and enjoy!"
 
