@@ -161,9 +161,16 @@ let display_store_and_prompt_purchase new_store acc_plant_cat =
      What is the type of item you want to buy (Press X to go back to the \
      Menu): "
 
+let buy_start_message () =
+  print_endline
+    "What category of plants do you want to tend to? Choose a number:\n\
+    \ [1] Flowers           [2] Fruits \n\
+    \ [3] Vegetables        [4] Grains \n\
+    \ [5] Defensive Items   [6] Other   [X] Main Menu"
+
 let buy_plant_helper func n inv garden =
   let new_store = Store.create_store in
-  tend_start_message ();
+  buy_start_message ();
   let plant_cat = read_line () in
   if plant_cat = "X" || plant_cat = "x" then exit count func n inv garden
   else
