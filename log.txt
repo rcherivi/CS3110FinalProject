@@ -1,0 +1,1056 @@
+commit 4081f1184208f3cc257f194eae007564112dd3bf
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Wed May 15 23:48:19 2024 -0400
+
+    Minor Changes
+    jjh358
+
+commit 4bb27c7fb9fdeb5169969bd9c1f64c6a373591be
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed May 15 23:20:48 2024 -0400
+
+    Deleted files
+    
+    -mhk225; mhk225@cornell.edu
+
+commit e424dd0d92812a5da474686233847ca4e227f6c9
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed May 15 23:11:19 2024 -0400
+
+    Refractor and Polish Code
+    
+    -mhk225;mhk225@cornell.edu
+    -Removed comments and refractored code in store
+
+commit f529339bc64513f4876a06f3eac14b8926b98ae4
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Wed May 15 22:47:12 2024 -0400
+
+    Minor Changes
+    jjh358
+    
+    - Added test plan
+    - Made small changes
+
+commit 229108dac8afbe28450303cb52f45e28ee2dc2da
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Wed May 15 22:25:07 2024 -0400
+
+    Revised test cases
+    
+    rrc87, rrc87@cornell.edu
+
+commit 4a5331dc112cbba194dbd6217d155c56c5c65eca
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Wed May 15 22:09:29 2024 -0400
+
+    Minor changes to main
+    jjh358
+
+commit 15b82bd5d39c819ae5cd8fb05d4e581b5a858b3c
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Wed May 15 21:47:16 2024 -0400
+
+    Refactored long functions
+    jjh358
+    jjh558@cornell.edu
+
+commit f0147d94b17e85a62ec8f6174f3a1e6b9488a00e
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed May 15 21:24:00 2024 -0400
+
+    Fixed Bugs
+    
+    -mhk225;mhk225@cornell.edu
+    -Refractored code
+    -fixed pattern matching in garden
+
+commit 52d87064f1f2689dc9eaee98b6d9fd9786542150
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed May 15 21:13:50 2024 -0400
+
+    Polish Solution
+    
+    -mhk225; mhk225@cornell.edu
+    -Refractored observe_garden_helper
+    -Fixed feed and water
+    -Removed comments
+
+commit 2bfcdaa8f49a6adcc88203bc75f78b2f66508155
+Author: Jessica Andrews <jaa375@cornell.edu>
+Date:   Wed May 15 01:54:40 2024 -0400
+
+    Combined feed,water,and plant into one menu option, Added action counter to top of garden, added garden visual for harvesting, added inventory visual for selling, updated menu option explanation, fixed minor formatting issues. jaa375 jaa375@cornell.edu
+
+commit c609b0efc387924d18425eaf183dbc182705af50
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Wed May 15 01:25:04 2024 -0400
+
+    Update test case
+    jda242@cornell.edu
+    jda242
+
+commit 424f1e009388336a276cb26b61d41ed91789f52a
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 16:29:22 2024 -0400
+
+    Fixed all_recipes in main
+    
+    rrc87, rrc87@cornell.edu
+
+commit 27a3d7f130efd7cf5176c7a84845633e48e2188c
+Author: Jessica Andrews <jaa375@cornell.edu>
+Date:   Fri May 10 16:01:52 2024 -0400
+
+    tragedies jaa375 jaa375@cornell.edu
+
+commit 5f30e11cb09533ae685f137d401f78561600d3e0
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 15:48:21 2024 -0400
+
+    Added test plan
+    rrc87, rrc87@cornell.edu
+
+commit cef5c4fe53cbdf3d14fb0faaee2fb0f0de85f75e
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri May 10 15:45:10 2024 -0400
+
+    Added video
+    jjh358
+    
+    - Added YouTube link in YAML file
+
+commit 300d719da1621318c117d848b456c453274805f7
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 15:39:33 2024 -0400
+
+    changed ladybug name
+    
+    rrc87, rrc87@cornell.edu
+
+commit 4818304b59a32fed34dfbd2631e4ab6bed7028e6
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri May 10 15:30:10 2024 -0400
+
+    Added Report and fixed INSTALL and YAML
+    
+    -Added Report
+    -Fixed instructions
+    -Made project public
+
+commit 37200730fe9f853483f3197589566babca9051e4
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri May 10 15:19:04 2024 -0400
+
+    Polish solution
+    
+    -mhk225; mhk225@cornell.edu
+
+commit c140ba37c5d70c8b696b3b5eca8f83f84641b981
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri May 10 15:11:13 2024 -0400
+
+    Minor change to buy
+    jjh358
+    jjh358@cornell.edu
+    
+    - Made a minor change in adding a message to exit when buying
+
+commit db6e74c282db7d2d5a9a30af4bc967fc7de41a8f
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri May 10 15:03:22 2024 -0400
+
+    Minor Changes
+    jjh358
+    jjh358@cornell.edu
+
+commit a4b5c599cc727e3bbd3ad75a6c343ed4ce185357
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri May 10 14:58:42 2024 -0400
+
+    Changes to main
+    jjh358
+    jjh358@cornell.edu
+    
+    - Added option to view rules while playing game
+    - Added exit when buying a plant
+    - Refactored functions
+
+commit 0395b42a5e0b6184241aec15436838c8b7a5f7df
+Merge: 0fabeeb 3cfe6d9
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 14:48:34 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:mhk225/CS3110FinalProject
+    merge#
+
+commit 0fabeeb1b6695b190ec509a76d02b8182f239858
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 14:42:40 2024 -0400
+
+    Refactored recipe_ingredients
+    
+    rrc87, rrc87@cornell.edu
+
+commit 3cfe6d99a3f2d8bdbc8f759b71e1e5074c2c1312
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri May 10 14:37:08 2024 -0400
+
+    Polish Solution
+    
+    -mhk225@cornell.edu; mhk225
+    -Refractor code
+
+commit 4fe9f8ad003736d2852f29f3576d0411d4a8d8ad
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri May 10 14:30:49 2024 -0400
+
+    Removed Function and Teast Cases
+    
+    -mhk225; mhk225@cornell.edu
+    -Moved function to garden
+    - Removed test cases
+
+commit d2f4563249d0c42d5fbc023246f1b66d2bbcd1d0
+Merge: e7033cc dbe187e
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri May 10 14:25:44 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:mhk225/CS3110FinalProject
+
+commit e7033cc1ab0ffdf423e2ef8f1db4c566a4289e12
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri May 10 14:25:38 2024 -0400
+
+    Fixed Sell and count_plant
+    
+    -mhk225; mhk225@cornell.edu
+    - Added new functionality
+
+commit dbe187e76867db74e769cccb67ecc1c6d7ddd7ec
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 14:19:23 2024 -0400
+
+    Fixed printing of plant
+    rrc87, rrc87@cornell.edu
+
+commit 43df0b5eb9c66159f9717f13d7a442d115a4ae45
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 14:04:02 2024 -0400
+
+    Fixed printing of garden
+    
+    rrc87, rrc87@cornell.edu
+
+commit 1982b386e486ba9d7e8cd5f3175e70fecb3d33cc
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 13:22:18 2024 -0400
+
+    Edited sell_recipe in recipe.ml
+    
+    rrc87, rrc87@cornell.edu
+
+commit 266b67c69fd904e0e8c4b19c31c7cfceaa963500
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Fri May 10 13:17:55 2024 -0400
+
+    Add get price to store
+    jda242@cornell.edu
+    jda242
+
+commit afb5b134493e332426a5be1e3bae07f5e0e79882
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 13:00:21 2024 -0400
+
+    Edited sell_helper in main
+    
+    - rrc87, rrc87@cornell.edu
+
+commit 33379305b156392cec6e80113d4cbf1d1f642914
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri May 10 12:51:38 2024 -0400
+
+    Added changes to main
+    jjh358
+    jjh358@cornell.edu
+    
+    - Added a homepage and title to the game
+    - Refactored main func function
+
+commit d70f6195d30ca780640195bfa9954a9c14aafbb9
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 12:48:43 2024 -0400
+
+    Added new functions in recipe.ml
+    
+    - Edited sell_helper in main
+    - Added new test cases
+
+commit af9c63efc6e197e50de5c97349dd74a25a2a0d97
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri May 10 12:34:44 2024 -0400
+
+    Fixed the harvest function
+    
+    -mhk225;mhk225@cornell.edu
+    -Created a new function which returns the height of when plant matures
+
+commit aef98ea42909f8d226df4370ad5c03dbb1fea8b5
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Fri May 10 11:25:36 2024 -0400
+
+    Updated menu options
+    jda242
+    jda242@cornell.edu
+
+commit d27b137836418fe04912c7f5bc5ad70ea64d1e17
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri May 10 00:44:05 2024 -0400
+
+    Revised recipe.ml
+    
+    - Added remove function in Inventory.ml
+    - Revised display_and_handle_recipe in main
+    rrc87, rrc87@cornell.edu
+
+commit 48f2c29fd6ea85b86f3e2969cf34651af32d0dad
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Thu May 9 18:17:49 2024 -0400
+
+    Change initial hydration
+
+commit 1aa79216a8040f84887d88a4ddc666289785fd50
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Thu May 9 18:12:52 2024 -0400
+
+    Minor string edits
+    jjh358
+    jjh358@cornell.edu
+    
+    -Made minor edits to strings
+
+commit daf515e79fd33abaa80b9a8cf4c2e1e97cfdf11c
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Thu May 9 18:01:32 2024 -0400
+
+    Modified user input options
+    jjh358
+    jjh358@cornell.edu
+    
+    - Made changes to main so the user can input numbers instead of typing name of plants
+    - Edited recipes
+    - Added border to recipes
+
+commit ffd9ca811bfbecd57a313a400691adf2e1e81ddd
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Thu May 9 17:15:17 2024 -0400
+
+    Update store
+    jda242
+    jda242@cornell.edu
+
+commit 769e61ed88c365f078ea94449c8bc77959db88d9
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Thu May 9 16:58:47 2024 -0400
+
+    Fixed harvest in main
+    
+    -mhk225; mhk225@cornell.edu
+    - Updated the function in main
+
+commit 4f18ec41957c6a9e6dfdfcb1c0ce2029eea002a7
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Thu May 9 16:22:15 2024 -0400
+
+    Updated tragedies
+    jda242
+    jda242@cornell.edu
+
+commit 9ebd9f9de519f75502d5073601ff2c3ec3fc0d44
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Thu May 9 15:36:59 2024 -0400
+
+    Fixed store
+    
+    jda242@cornell.edu
+    jda242
+
+commit 15096e80dc32c5d431660c013ee760f93ae751b4
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Tue May 7 12:25:34 2024 -0400
+
+    Changed Feed in plant
+    
+    -mhk225; mhk225@cornell.edu
+    -Increase price of plant when fed
+
+commit 05ebb89088a87fd48d1d728b2bed2cb8cc282e2a
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Mon May 6 18:26:40 2024 -0400
+
+    Added specifications to recipe.ml and inventory.ml
+    
+    rrc87, rrc87@cornell.edu
+
+commit 8fd232ac8d73c038351bd246009da95d8c5606fa
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon May 6 18:22:24 2024 -0400
+
+    Wrote Specs for Store
+    
+    - mhk225; mhk225@cornell.edu
+    - Implemented specifications for store
+
+commit 764bd5ca6093ee2eb438c5e625856185fa30b9fb
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Mon May 6 17:42:54 2024 -0400
+
+    Added specs to plant.mli and garden.mli
+    
+    rrc87, rrc87@cornell.edu
+
+commit 40753205c97fc1ae066c61a80f597a55481f5625
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Mon May 6 17:27:08 2024 -0400
+
+    Revised garden.mli and test cases
+    
+    rrc87, rrc87@cornell.edu
+
+commit a78f8bcbf904e42ff899752ff032b65d7a99d7f2
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Mon May 6 17:25:26 2024 -0400
+
+    Added test cases
+    
+    - Added get functions to garden.ml
+    - Added specifications to garden.mli
+    
+    rrc87, rrc87@cornell.edu
+
+commit 460878f28542107f4ab03944375612e79a08de27
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Mon May 6 17:14:34 2024 -0400
+
+    Add store test cases
+    
+    jda242@cornell.edu
+    jda242
+
+commit ab686cb7efb5e7f4a426161ce6f07a380faae9cf
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat May 4 23:53:33 2024 -0400
+
+    Fixed printing store
+    
+    -mhk225@cornell.edu; mhk225
+    -Rewrote type defination
+    -Fixed main to accodomate category
+
+commit 8fe8b0e7e6d371837215102f932f08f19c5c327d
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat May 4 01:55:53 2024 -0400
+
+    Polish files
+    
+    -mhk225; mhk225@cornell.edu
+    -Wrote specifications for plant and garden files
+    -Refractored code
+    -Fixed bugs
+
+commit e386a3a56f7ea2f02b500ec592e6268d4c1ed9de
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Fri May 3 18:12:27 2024 -0400
+
+    add ability to return to menu
+    
+    jda242
+    jda242@cornell.edu
+
+commit c3fde7efa995f33793110b7b6092102f44d87a5d
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri May 3 17:23:40 2024 -0400
+
+    Changes to main
+    jjh358
+    jjh358@cornell.edu
+    
+    - Made changes to create recipe option
+    - Made changes to printing the store
+
+commit ebed196733b273db5437d96df50919c62025d2dc
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Mon Apr 29 15:46:12 2024 -0400
+
+    Add random events
+    
+    Update menu and add inventory tests
+    jda242
+    jda242@cornell.edu
+
+commit 263d64adf2b56f9e351e0a6203fb154adb1bd281
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri Apr 26 19:03:30 2024 -0400
+
+    Added test cases
+    
+    -Revised create function
+    - rrc87, rrc87@cornell.edu
+
+commit 1e4af43a5d36f2886c87de5da0810b373feba675
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri Apr 26 18:52:56 2024 -0400
+
+    Implemented Test Cases
+    
+    -mhk225; mhk225@cornell.edu
+    -Changed main to be more concise
+    -Added has_item and has_plant
+
+commit 25b00f272dedcfeb2a822ba23cf8acbedb801023
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri Apr 26 18:20:43 2024 -0400
+
+    Made changes to main.ml
+    jjh358
+    jjh358@cornell.edu
+    
+    - Added another option to the menu
+    - Added all the recipes in main
+
+commit fb32ac8b163879c44fe761c61d01cad2393a3db5
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri Apr 19 18:12:33 2024 -0400
+
+    Fixed strings
+    
+    -mhk225; mhk225@cornell.edu
+    - Made the strings more clearer
+
+commit a348b3c32207eede0e2fe700a3a111ca4460f200
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri Apr 19 17:58:28 2024 -0400
+
+    Changed plant Bell Pepper
+    
+    -mhk225; mhk225@cornell.edu
+    - Removed symbol to make main work
+
+commit 8804b0378f4a9410aca7c654ac430fca4aa7d153
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri Apr 19 17:52:46 2024 -0400
+
+    Added the new types
+    
+    -mhk225; mhk225@cornell.edu
+    -Added new types
+    -Implemented them in other functions in store
+    - Made functions shorter
+
+commit ceec713e77a8fbbafa571787d87329624ac133af
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Fri Apr 19 17:49:20 2024 -0400
+
+    Changed print function
+    
+    -mhk225; mhk225@cornell.edu
+    -Made it simpler and produce correct output
+
+commit 8d71f35df41032bcd8b3601f3de140b94cd1e2b2
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri Apr 19 17:42:29 2024 -0400
+
+    Implemented create_recipe and sell_recipe in recipe.ml
+    
+    - Added new recupe_type
+    - rrc87, rrc87@cornell.edu
+
+commit e201d1ee1a029b8d155af6efa16aea0e15126dbe
+Merge: 7edf970 61df100
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri Apr 19 17:14:42 2024 -0400
+
+    Added Recipes
+    jjh358
+    jjh358@cornell.edu
+    
+    - Added food recipes to recipe.ml
+
+commit 7edf970cd7be93bfd43f17b3b1fa9ea4903f3970
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri Apr 19 17:10:59 2024 -0400
+
+    Added Recipes to recipe.ml
+    jjh358
+    jjh358@cornell.edu
+    
+    - Added string recipes in recipe.ml
+
+commit 61df10054261bd0da22889112f73a118c863b118
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Sat Apr 13 18:17:08 2024 -0400
+
+    Implement random tragedies
+    
+    update menu
+    jda242@cornell.edu
+    jda242
+
+commit f449a9df7041d741f7f0130664b0d25c4e529104
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat Apr 13 17:12:41 2024 -0400
+
+    Revised Create_Store
+    
+    -Revised water_price
+    -mhk225; mhk225@cornell.edu
+
+commit 2e5f021244ca7a852306e04c309d7be268da069c
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat Apr 13 17:09:21 2024 -0400
+
+    Add more items
+    
+    - Added water
+    - Revised body functions
+    -mhk225; mhk225@cornell.edu
+
+commit 9be2663c9f27c75bae1f6a4039695590c9694700
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat Apr 13 16:57:26 2024 -0400
+
+    Added New Plants
+    
+    -Removed plants that don't exist
+    -mhk225; mhk225@cornell.edu
+
+commit ed2e36cdc7b34196ca78f4b5196c48094c20f026
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat Apr 13 16:49:10 2024 -0400
+
+    Implemented function to print
+    
+    -Implemented function to print plant and attributes
+    -Revised interface
+    -mhk225; mhk225@cornell.edu
+
+commit fc720cf6957bf9305917b0373589ebc68532652c
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat Apr 13 16:45:07 2024 -0400
+
+    Implement new type t
+    
+    -Made a new type t
+    - Revised body functions
+
+commit 6b916767488381bc046d2f7f8536c1231b0fead1
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat Apr 13 16:42:10 2024 -0400
+
+    Implemented Main
+    
+    -Implemented count of number of actions
+    -Implemented count of days
+    -Implemented more Menu options
+    - Gave user more information about garden
+    -mhk225; mhk225@cornell.edu
+
+commit 9fae8f1601598f6815a6ceaf75300e3fc074f942
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Fri Apr 12 17:27:26 2024 -0400
+
+    Added functions to implement recipes
+    jjh358
+    jjh358@cornell.edu
+    
+    - Added get functions to access certain types of plants
+    - Added recipes for users to view
+    - Updated main
+
+commit 9417537469ea91bdc528565f91a53db20b85d675
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Fri Apr 12 17:17:13 2024 -0400
+
+    Implemented recipe.ml
+    
+    - Implemented lookup_option in inventory.ml
+    - Implemented have_ingredients and get_missing_ingredients in recipe.ml
+    - rrc87@cornell.edu, rrc87
+
+commit 998d0c5bddfb8d27cff113a050ed42233dae3fbe
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Fri Apr 12 01:20:36 2024 -0400
+
+    Add store interface and implementation files
+    
+    added functionality for selling items
+    jda242@cornell.edu
+    jda242
+
+commit 3c62a3117f1323c18ea6bd4408ed65016b445634
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Wed Apr 10 17:47:49 2024 -0400
+
+    Add to observe options
+    
+    jda242
+    jda242@cornell.edu
+
+commit 4bc5e999bcf065a8895426ce8beff7eefb247448
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Wed Apr 10 14:29:34 2024 -0400
+
+    Fix spacing issues in inventory
+    
+    jda242
+    jda242@cornell.edu
+
+commit 89e58ed4c09ccf6cbb8b0156e3d25906d5af4cee
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Mon Apr 8 15:54:17 2024 -0400
+
+    Update plant names
+    
+    improve main function
+    jda242
+    jda242@cornell.edu
+
+commit 8d71fe11c7226e0323daf653bd14e1d344211e8d
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Sat Apr 6 11:23:29 2024 -0400
+
+    Implemented new print function
+    
+    - Implemented cell type in garden.ml
+    - Revised all functions in garden.ml to account for new type
+    - rrc87, rrc87@cornell.edu
+
+commit 8228ea0f5f5a2cc9eba3ad1257174d2b49bdaf48
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Sat Apr 6 10:44:42 2024 -0400
+
+    Implemented name and price
+    
+    -Added more plant types and defined them
+    -Added function to name plants in main
+    -mhk225; mhk225@cornell.edu
+
+commit f3809d7d43698f5836f23b221bcc1f8496fa6b4e
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Sat Apr 6 10:28:28 2024 -0400
+
+    Updated main.ml and garden.ml
+    jjh358
+    jjh358@cornell.edu
+    
+    - Extracted helper functions in main
+    - Implemented two functions in garden.ml
+    - Updated observe function in main
+
+commit 83acd5a29737c52ea6701b6dcf61dd82578e3822
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Wed Apr 3 17:44:47 2024 -0400
+
+    Update inventory files
+    
+    updated sell function
+    jda242
+    jda242@cornell.edu
+
+commit 5ac8a7b4cffdea6ec90cffb29e80283ef4a1c04e
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Wed Apr 3 17:20:17 2024 -0400
+
+    Revised Sell function in inventory.ml
+    
+    -rrc87, rrc87@cornell.edu
+
+commit 279b9f0f3c9d302331db176aba9694b0cc74ba8b
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Wed Apr 3 17:08:01 2024 -0400
+
+    Add inventory interface and implementation files
+    
+    updated main
+    jda242
+    jda242@cornell.edu
+
+commit 3bbc8f0b1c4cba61719b4f7f2532d93a50348b02
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed Apr 3 16:28:05 2024 -0400
+
+    Implemented plant attribute
+    
+    -Implemented life attribute
+    -Implemented neglect function
+    - Wrote function to check life of plant
+    -mhk225 mhk225@cornell.edu
+
+commit 8cb0eb51dcea0b789d79035f7dd030bab91341d1
+Merge: c1e85ab 49eeecc
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Wed Apr 3 15:52:19 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:mhk225/CS3110FinalProject
+    merge
+
+commit c1e85ab72284b5d80d8b013d23a11cde5a34d152
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Wed Apr 3 15:48:52 2024 -0400
+
+    Implemented water function
+    jjh358
+    jjh358@cornell.edu
+    
+    - Added a hydration attribute for plants
+    - Implemented water function
+
+commit 49eeecce51b759f33f79bf88b021ae78bb93f033
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed Mar 27 11:26:54 2024 -0400
+
+    Add Git Log
+    
+    - History of commits provided
+    -mhk225
+    -mhk225@cornell.edu
+
+commit 1fb49073e1372670f27d52b85a0f414b2f003427
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed Mar 27 11:22:59 2024 -0400
+
+    Revise Install
+    
+    -Added more directions
+    -mhk225
+    -mhk225@cornell.edu
+
+commit be96f0a35082ddd519783ad36bcf22d1e2f06ee1
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Wed Mar 27 00:01:14 2024 -0400
+
+    Polish file
+    
+    -Removed uneccary lines
+    mhk225
+    -mhk225@cornell.edu
+
+commit 4f0c5c47f2305b7496734f543b5cb58fee04f103
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Tue Mar 26 23:55:49 2024 -0400
+
+    Add MS2 report
+    
+    -mhk225
+    -mhk225@cornell.edu
+
+commit 649d131e07931a85387a99c81b945554d5ce5841
+Author: Jessica Andrews <jaa375@cornell.edu>
+Date:   Mon Mar 25 19:21:26 2024 -0400
+
+    Add Step to Install File
+    
+    jaa375
+    jaa375@cornell.edu
+
+commit 1ab8f9c1e8c958d5366dee370c4c96e97b3386e1
+Author: Jessica Andrews <jaa375@cornell.edu>
+Date:   Mon Mar 25 19:18:07 2024 -0400
+
+    Update Install File
+    
+    jaa375
+    jaa375@cornell.edu
+
+commit 740932b112e56c46df5d2f8facc2b3d423f73cad
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 19:05:34 2024 -0400
+
+    Revised YAML
+    
+    -mhk225
+    -mhk225@cornell.edu
+
+commit 7b176c0028c6050bd601f87232ff25d7a66f1490
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 19:03:00 2024 -0400
+
+    Polish INSTALL file
+    
+    -mhk225
+    -mhk225@cornell.edu
+
+commit 8ff0d3abe018971e898b65104829fab2be92e399
+Author: rcherivi <rishika.cherivirala@gmail.com>
+Date:   Mon Mar 25 19:01:27 2024 -0400
+
+    Update Install.txt
+    rrc87
+    rrc87@cornell.edu
+    
+    - Revised Install file.
+
+commit 7b47e7e3e61d25c8b83868e3add82433dbeb27a6
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Mon Mar 25 18:59:16 2024 -0400
+
+    Update the Install File
+    jjh358
+    jjh358@cornell.edu
+    
+    - Made changes to the install.txt file
+
+commit 6f136f5d49c8546041da10fc16e3fdc06be65ead
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Mon Mar 25 18:56:45 2024 -0400
+
+    Update Install file
+    
+    jda242
+    jda242@cornell.edu
+
+commit 729b11ba9bf3b5e782ad704fd55a3ca8ccf4b913
+Merge: 77c3a4d 46e022b
+Author: mhk225 <14572+mhk225@users.noreply.github.coecis.cornell.edu>
+Date:   Mon Mar 25 18:48:39 2024 -0400
+
+    Merge pull request #3 from mhk225/mishita-dev1
+    
+    Add Install instructions
+
+commit 46e022bdd556bfe8d823f30477824b23085ca255
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 18:47:57 2024 -0400
+
+    Add Install instructions
+
+commit 77c3a4d4072833161415b928b41aef908eff4974
+Merge: 1b97c5c f69eaef
+Author: mhk225 <14572+mhk225@users.noreply.github.coecis.cornell.edu>
+Date:   Mon Mar 25 18:38:50 2024 -0400
+
+    Merge pull request #2 from mhk225/mishita-dev
+    
+    Mishita dev
+
+commit f69eaef178e40d680b4080d12062225f8fcaf187
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 18:38:08 2024 -0400
+
+    Polish solution1
+
+commit 495f10a79200e9256a1cf868f4678bf064c3e414
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 18:36:40 2024 -0400
+
+    polished solution
+
+commit 1b97c5cfa5ab2220af5f085e8cc2ffd9b2e5ef82
+Merge: 2a9205d dd7c5ff
+Author: jda242 <16800+jda242@users.noreply.github.coecis.cornell.edu>
+Date:   Mon Mar 25 18:32:30 2024 -0400
+
+    Merge pull request #1 from mhk225/joanna-dev
+    
+    Update yaml
+
+commit dd7c5ff12bc22a16a996940a78016f93109f662b
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Mon Mar 25 18:30:55 2024 -0400
+
+    Update yaml
+
+commit 2a9205d46cd5e69e7cdbc5005c9a9a1b450bf32e
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 18:13:01 2024 -0400
+
+    Commands
+
+commit 28102f49359fc1b249e18b43e5a0dd8443376558
+Merge: 8952d0c 88c71b5
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 18:02:51 2024 -0400
+
+    Merge branch 'main' of github.coecis.cornell.edu:mhk225/CS3110FinalProject
+
+commit 8952d0c521ae8b08ae7a851f91708fe52d979fdc
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 17:59:10 2024 -0400
+
+    Test
+
+commit 88c71b50a880686983455fcc8807e353bc12e4f5
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Mon Mar 25 17:54:54 2024 -0400
+
+    YAML YouTube Video Added
+    
+    - Added a link to the YouTube demo video to the YAML file
+
+commit 7f8a260e7d353569f530ed95d4b6f4979b2a7521
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Mon Mar 25 17:40:48 2024 -0400
+
+    Add YAML file
+    
+    - Included members and PM
+
+commit 86a0fd35c9c7b2d43a7c42ecd585a9fa1d626754
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Mon Mar 25 17:20:04 2024 -0400
+
+    Implement main
+    
+    implemented function to print garden from main
+
+commit ba309dd09dc9281f3ae98f5c29196954a92e0129
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Mon Mar 25 17:15:17 2024 -0400
+
+    Add Initial Demo Code
+    
+    Implemented function to feed and print out plants
+
+commit 6211df824f314c0aa9112894fbbec62c45bfa81d
+Author: jda242 <16800+jda242@users.noreply.github.coecis.cornell.edu>
+Date:   Sun Mar 10 20:44:40 2024 -0400
+
+    Update README.md
+
+commit 1239631f81cbf728a365d335a4abca63e8734f51
+Author: Joanna Andrews <jda242@cornell.edu>
+Date:   Thu Mar 7 21:38:44 2024 -0500
+
+    Add new member
+    
+    add Joanna Andrews
+
+commit 689ca4583b9dcebb426902eee7ef3cd1f004da1d
+Author: Jeana Han <jjh358@cornell.edu>
+Date:   Thu Mar 7 20:21:42 2024 -0500
+
+    Add Member
+    
+    - Added Jeana
+
+commit c400c63acf5acf80da00a52d474fb935ea25a227
+Author: Rishika Cherivirala <rrc87@cornell.edu>
+Date:   Thu Mar 7 20:10:33 2024 -0500
+
+    Added Member
+    
+    - Added Rishika
+
+commit bd2cd767e45b904d1e1b25ae2bafd78a6cd1157e
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Thu Mar 7 20:01:44 2024 -0500
+
+    Add README file
+    
+    -Mishita committed
+
+commit 500349349e139b8b9f963b8005b4cc342dc1d433
+Author: Mishita Kaja <mhk225@cornell.edu>
+Date:   Thu Mar 7 19:52:41 2024 -0500
+
+    Initial commit
