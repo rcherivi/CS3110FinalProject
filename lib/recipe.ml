@@ -35,35 +35,6 @@ let recipe_type_of_string = function
   | "Smoothie" -> Some Smoothie
   | _ -> None
 
-let chicken_recipe =
-  [
-    ("Bell Pepper", 2);
-    ("Salt", 1);
-    ("Chicken", 1);
-    ("Tomato", 2);
-    ("Milk", 1);
-    ("Water", 5);
-  ]
-
-let cookie_list =
-  [
-    ("Milk", 2);
-    ("Eggs", 1);
-    ("Butter", 1);
-    ("Chocolate", 1);
-    ("Sugar", 1);
-    ("Wheat", 2);
-  ]
-
-let hamburger_list =
-  [ ("Bread", 1); ("Tomato", 1); ("Lettuce", 1); ("Cheese", 1); ("Beef", 1) ]
-
-let smoothie_list =
-  [ ("Strawberry", 2); ("Peach", 2); ("Pineapple", 1); ("Mango", 3) ]
-
-let bouquet_list =
-  [ ("Yellow Flower", 2); ("Rose", 2); ("Tulip", 3); ("Sunflower", 2) ]
-
 let recipe_ingredients = function
   | ApplePie ->
       Recipe [ ("Apple", 5); ("Water", 1); ("Eggs", 2); ("Butter", 1) ]
@@ -72,18 +43,50 @@ let recipe_ingredients = function
   | AppleJuice -> Recipe [ ("Apple", 2); ("Sugar", 2); ("Water", 4) ]
   | Popcorn -> Recipe [ ("Corn", 3); ("Butter", 1); ("Salt", 1) ]
   | FrenchFries -> Recipe [ ("Potato", 3); ("Butter", 1); ("Salt", 1) ]
-  | ChocolateChipCookie -> Recipe cookie_list
+  | ChocolateChipCookie ->
+      Recipe
+        [
+          ("Milk", 2);
+          ("Eggs", 1);
+          ("Butter", 1);
+          ("Chocolate", 1);
+          ("Sugar", 1);
+          ("Wheat", 2);
+        ]
   | Sandwich ->
       Recipe [ ("Bread", 1); ("Tomato", 1); ("Lettuce", 2); ("Cheese", 1) ]
   | Salad ->
       Recipe [ ("Lettuce", 4); ("Tomato", 2); ("Bell Pepper", 1); ("Onion", 1) ]
   | StrawberryCake ->
       Recipe [ ("Strawberry", 4); ("Butter", 1); ("Sugar", 2); ("Milk", 2) ]
-  | Bouquet -> Recipe bouquet_list
+  | Bouquet ->
+      Recipe
+        [ ("Yellow Flower", 2); ("Rose", 2); ("Tulip", 3); ("Sunflower", 2) ]
   | Curry -> Recipe [ ("Rice", 2); ("Curry Powder", 2); ("Water", 2) ]
-  | ChickenSoup -> Recipe chicken_recipe
-  | Hamburger -> Recipe hamburger_list
-  | Smoothie -> Recipe smoothie_list
+  | ChickenSoup ->
+      Recipe
+        [
+          ("Bell Pepper", 2);
+          ("Salt", 1);
+          ("Chicken", 1);
+          ("Tomato", 2);
+          ("Milk", 1);
+          ("Water", 5);
+        ]
+  | Hamburger ->
+      Recipe
+        [
+          ("Bread", 1); ("Tomato", 1); ("Lettuce", 1); ("Cheese", 1); ("Beef", 1);
+        ]
+  | Smoothie ->
+      Recipe
+        [
+          ("Strawberry", 2);
+          ("Peach", 2);
+          ("Pineapple", 1);
+          ("Mango", 3);
+          ("Lemon", 1);
+        ]
 
 let price = function
   | ApplePie -> 10.0
@@ -110,8 +113,12 @@ let rec get_missing_ingredients missing (recipe : t) (inventory : Inventory.t) =
   | Recipe ((ingredient, recipe_qty) :: tl) ->
       let m =
         match Inventory.lookup_option ingredient inventory with
-        | Some inv_qty when inv_qty >= recipe_qty -> missing
-        | _ -> (ingredient, recipe_qty) :: missing
+        | Some inv_qty when inv_qty >= recipe_qty ->
+            get_missing_ingredients missing (Recipe tl) inventory
+        | Some inv_qty ->
+            let remaining_qty = recipe_qty - inv_qty in
+            (ingredient, remaining_qty) :: missing
+        | None -> (ingredient, recipe_qty) :: missing
       in
       get_missing_ingredients m (Recipe tl) inventory
 
@@ -229,7 +236,7 @@ let string_bread_recipe =
   \  \n\
   \   Instructions: \n\
   \     1) Mix wet and dry ingredients in a bowl \n\
-  \     2) Place mixture in a baking pan and bake in oven at 350 degrees for \
+  \     2) Placce mixture in a baking pan and bake in oven at 350 degrees for \
    30 minutes \n\
   \     3) Serve and enjoy!"
 
